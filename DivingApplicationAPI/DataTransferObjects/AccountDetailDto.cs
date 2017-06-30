@@ -1,11 +1,11 @@
-﻿using CrankBankAPI.Entity;
+﻿using DivingApplicationAPI.Entity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrankBankAPI.DataTransferObjects
+namespace DivingApplicationAPI.DataTransferObjects
 {
     public class AccountDetailDto
     {

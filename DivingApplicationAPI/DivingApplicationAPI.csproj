@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\net461\win7-x86\CrankBankAPI.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\net461\win7-x86\DivingApplicationAPI.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

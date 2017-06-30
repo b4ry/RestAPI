@@ -1,7 +1,7 @@
-﻿using CrankBankAPI.Mappings;
+﻿using DivingApplicationAPI.Mappings;
 using Microsoft.AspNetCore.Builder;
 
-namespace CrankBankAPI.Extensions
+namespace DivingApplicationAPI.Extensions
 {
     public static class AppBuilderExtension
     {

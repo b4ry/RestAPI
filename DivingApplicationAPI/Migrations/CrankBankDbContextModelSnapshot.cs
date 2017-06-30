@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using CrankBankAPI.DatabaseContext;
-using CrankBankAPI.Entity;
+using DivingApplicationAPI.DatabaseContext;
+using DivingApplicationAPI.Entity;
 
-namespace CrankBankAPI.Migrations
+namespace DivingApplicationAPI.Migrations
 {
-    [DbContext(typeof(CrankBankDbContext))]
-    partial class CrankBankDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DivingApplicationDbContext))]
+    partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace CrankBankAPI.Migrations
                 .HasAnnotation("ProductVersion", "1.1.1")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CrankBank.Entity.AccountDetail", b =>
+            modelBuilder.Entity("DivingApplication.Entity.AccountDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -31,7 +31,7 @@ namespace CrankBankAPI.Migrations
                     b.ToTable("AccountDetails");
                 });
 
-            modelBuilder.Entity("CrankBank.Entity.AccountSummary", b =>
+            modelBuilder.Entity("DivingApplication.Entity.AccountSummary", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -51,7 +51,7 @@ namespace CrankBankAPI.Migrations
                     b.ToTable("AccountSummaries");
                 });
 
-            modelBuilder.Entity("CrankBank.Entity.AccountTransaction", b =>
+            modelBuilder.Entity("DivingApplication.Entity.AccountTransaction", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -72,17 +72,17 @@ namespace CrankBankAPI.Migrations
                     b.ToTable("AccountTransactions");
                 });
 
-            modelBuilder.Entity("CrankBank.Entity.AccountDetail", b =>
+            modelBuilder.Entity("DivingApplication.Entity.AccountDetail", b =>
                 {
-                    b.HasOne("CrankBank.Entity.AccountSummary", "AccountSummary")
+                    b.HasOne("DivingApplication.Entity.AccountSummary", "AccountSummary")
                         .WithMany()
                         .HasForeignKey("AccountSummaryId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CrankBank.Entity.AccountTransaction", b =>
+            modelBuilder.Entity("DivingApplication.Entity.AccountTransaction", b =>
                 {
-                    b.HasOne("CrankBank.Entity.AccountDetail")
+                    b.HasOne("DivingApplication.Entity.AccountDetail")
                         .WithMany("AccountTransactions")
                         .HasForeignKey("AccountDetailId");
                 });

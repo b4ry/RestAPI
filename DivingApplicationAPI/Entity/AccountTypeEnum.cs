@@ -1,4 +1,4 @@
-﻿namespace CrankBankAPI.Entity
+﻿namespace DivingApplicationAPI.Entity
 {
     public enum AccountTypeEnum
     {

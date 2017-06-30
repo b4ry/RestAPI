@@ -1,12 +1,12 @@
-﻿using CrankBankAPI.DatabaseContext;
-using CrankBankAPI.Entity;
+﻿using DivingApplicationAPI.DatabaseContext;
+using DivingApplicationAPI.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrankBankAPI.Commands
+namespace DivingApplicationAPI.Commands
 {
     public class AddAccountSummaryHandler : IHandleCommand<AddAccountSummaryCommand>
     {

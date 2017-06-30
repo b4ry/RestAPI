@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using CrankBankAPI.DataTransferObjects;
-using CrankBankAPI.Entity;
+using DivingApplicationAPI.DataTransferObjects;
+using DivingApplicationAPI.Entity;
 
-namespace CrankBankAPI.Mappings
+namespace DivingApplicationAPI.Mappings
 {
     internal class AccountDetailProfile : Profile
     {

@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using CrankBankAPI.Entity;
-using CrankBankAPI.DatabaseContext;
+using DivingApplicationAPI.Entity;
+using DivingApplicationAPI.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using AutoMapper;
-using CrankBankAPI.DataTransferObjects;
-using CrankBankAPI.Queries;
-using CrankBankAPI.Commands;
+using DivingApplicationAPI.DataTransferObjects;
+using DivingApplicationAPI.Queries;
+using DivingApplicationAPI.Commands;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace CrankBankAPI.Controllers
+namespace DivingApplicationAPI.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]

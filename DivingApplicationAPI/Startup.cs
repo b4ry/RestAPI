@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using CrankBankAPI.DatabaseContext;
+using DivingApplicationAPI.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
-using CrankBankAPI.Extensions;
-using CrankBankAPI.DependencyInjection;
+using DivingApplicationAPI.Extensions;
+using DivingApplicationAPI.DependencyInjection;
 using Autofac;
 using System;
 using Autofac.Extensions.DependencyInjection;
@@ -14,7 +14,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.Extensions.PlatformAbstractions;
 using System.IO;
 
-namespace CrankBankAPI
+namespace DivingApplicationAPI
 {
     public class Startup
     {
@@ -34,7 +34,7 @@ namespace CrankBankAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CrankBankDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("CrankBank")));
+            services.AddDbContext<DivingApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DivingApplication")));
             // Add framework services.
             services.AddMvc();
 
@@ -50,13 +50,13 @@ namespace CrankBankAPI
                 c.SwaggerDoc("v1", 
                     new Info
                     {
-                        Title = "CrankBank API",
-                        Description = "CrankBank API description",
+                        Title = "DivingApplication API",
+                        Description = "DivingApplication API description",
                         Version = "v1"
                     });
 
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "CrankBankApi.xml");
+                var xmlPath = Path.Combine(basePath, "DivingApplicationAPI.xml");
                 c.IncludeXmlComments(xmlPath);
             });
 
@@ -101,7 +101,7 @@ namespace CrankBankAPI
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "CrankBank API V1.1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DivingApplication API V1.1");
             });
 
             appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());

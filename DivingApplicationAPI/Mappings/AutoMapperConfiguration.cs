@@ -3,7 +3,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace CrankBankAPI.Mappings
+namespace DivingApplicationAPI.Mappings
 {
     public class AutoMapperConfiguration
     {

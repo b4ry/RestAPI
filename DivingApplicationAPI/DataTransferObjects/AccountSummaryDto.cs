@@ -1,7 +1,7 @@
-﻿using CrankBankAPI.Entity;
+﻿using DivingApplicationAPI.Entity;
 using System.ComponentModel.DataAnnotations;
 
-namespace CrankBankAPI.DataTransferObjects
+namespace DivingApplicationAPI.DataTransferObjects
 {
     public class AccountSummaryDto
     {

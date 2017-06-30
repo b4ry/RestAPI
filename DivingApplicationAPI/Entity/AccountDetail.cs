@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CrankBankAPI.Entity
+namespace DivingApplicationAPI.Entity
 {
     [Table("AccountDetails")]
     public class AccountDetail : BaseEntity

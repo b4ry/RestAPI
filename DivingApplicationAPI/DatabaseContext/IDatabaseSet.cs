@@ -1,7 +1,7 @@
-﻿using CrankBankAPI.Entity;
+﻿using DivingApplicationAPI.Entity;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrankBankAPI.DatabaseContext
+namespace DivingApplicationAPI.DatabaseContext
 {
     public interface IDatabaseSet
     {

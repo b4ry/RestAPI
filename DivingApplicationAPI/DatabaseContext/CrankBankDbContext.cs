@@ -1,14 +1,14 @@
-﻿using CrankBankAPI.Entity;
+﻿using DivingApplicationAPI.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace CrankBankAPI.DatabaseContext
+namespace DivingApplicationAPI.DatabaseContext
 {
-    public class CrankBankDbContext : DbContext
+    public class DivingApplicationDbContext : DbContext
     {
-        public CrankBankDbContext(DbContextOptions options):base(options)
+        public DivingApplicationDbContext(DbContextOptions options):base(options)
         {
 
         }

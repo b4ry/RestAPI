@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CrankBankAPI.Entity
+namespace DivingApplicationAPI.Entity
 {
     [Table("AccountSummaries")]
     public class AccountSummary : BaseEntity

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CrankBankAPI.Migrations
+namespace DivingApplicationAPI.Migrations
 {
     public partial class init : Migration
     {

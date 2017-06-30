@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CrankBankAPI.Entity;
-using CrankBankAPI.DatabaseContext;
+using DivingApplicationAPI.Entity;
+using DivingApplicationAPI.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace CrankBankAPI.Queries
+namespace DivingApplicationAPI.Queries
 {
     public class AccountQuery : IAccountQuery
     {

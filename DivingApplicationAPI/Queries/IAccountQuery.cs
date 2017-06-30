@@ -1,10 +1,10 @@
-﻿using CrankBankAPI.Entity;
+﻿using DivingApplicationAPI.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrankBankAPI.Queries
+namespace DivingApplicationAPI.Queries
 {
     public interface IAccountQuery : IQuery
     {

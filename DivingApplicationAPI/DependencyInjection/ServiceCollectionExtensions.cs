@@ -2,10 +2,10 @@
 using Autofac;
 using Microsoft.Extensions.DependencyInjection;
 using Autofac.Extensions.DependencyInjection;
-using CrankBankAPI.Queries;
-using CrankBankAPI.DatabaseContext;
+using DivingApplicationAPI.Queries;
+using DivingApplicationAPI.DatabaseContext;
 
-namespace CrankBankAPI.DependencyInjection
+namespace DivingApplicationAPI.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {

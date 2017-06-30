@@ -1,17 +1,17 @@
-﻿using CrankBankAPI.Entity;
+﻿using DivingApplicationAPI.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CrankBankAPI.DatabaseContext
+namespace DivingApplicationAPI.DatabaseContext
 {
     public class DatabaseSet : IDatabaseSet
     {
-        private readonly CrankBankDbContext _databaseContext;
+        private readonly DivingApplicationDbContext _databaseContext;
 
-        public DatabaseSet(CrankBankDbContext databaseContext)
+        public DatabaseSet(DivingApplicationDbContext databaseContext)
         {
             _databaseContext = databaseContext;
         }

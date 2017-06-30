@@ -1,12 +1,12 @@
 ﻿using Autofac;
-using CrankBankAPI.DatabaseContext;
-using CrankBankAPI.Queries;
+using DivingApplicationAPI.DatabaseContext;
+using DivingApplicationAPI.Queries;
 using System.Linq;
 using System.Reflection;
 using System;
-using CrankBankAPI.Commands;
+using DivingApplicationAPI.Commands;
 
-namespace CrankBankAPI.DependencyInjection
+namespace DivingApplicationAPI.DependencyInjection
 {
     public class InjectionModule : Autofac.Module
     {
