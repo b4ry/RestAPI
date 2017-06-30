@@ -1,0 +1,4 @@
+#Ignore files built by Visual Studio
+[Bb]in
+[Dd]ebug*/
+obj/
