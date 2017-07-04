@@ -19,7 +19,7 @@ namespace DivingApplication.Services.CQRS.Commands
             UnitOfWork = unitOfWork;
         }
 
-        public void Handle(AddDivingGearCommand command)
+        public async void Handle(AddDivingGearCommand command)
         {
             AccountSummarySet.Add(new DivingGear()
             {
@@ -29,7 +29,7 @@ namespace DivingApplication.Services.CQRS.Commands
             }
             );
 
-            UnitOfWork.SaveAsync();
+            await UnitOfWork.SaveAsync();
         }
     }
 }

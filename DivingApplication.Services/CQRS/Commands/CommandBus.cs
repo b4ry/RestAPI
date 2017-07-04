@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace DivingApplication.Services.CQRS.Commands
@@ -12,11 +13,12 @@ namespace DivingApplication.Services.CQRS.Commands
             _handlersFactory = handlersFactory;
         }
 
-        public void Send<TCommand>(TCommand command) where TCommand : ICommand
+        public async void Send<TCommand>(TCommand command) where TCommand : ICommand
         {
-            var handler = (IHandleCommand<TCommand>)_handlersFactory(typeof(TCommand));
+            var handler = _handlersFactory(typeof(TCommand));
 
-            handler.Handle(command);
+            MethodInfo method = handler.GetType().GetMethod("Handle");
+            method.Invoke(handler, new object[] { command });
         }
     }
 }

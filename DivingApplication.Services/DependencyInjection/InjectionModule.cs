@@ -3,6 +3,8 @@ using DivingApplication.Services.CQRS.Commands;
 using DivingApplication.Services.CQRS.Queries;
 using DivingApplication.Services.DatabaseContext;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -15,10 +17,23 @@ namespace DivingApplication.Services.DependencyInjection
             RegisterQueries(builder);
             RegisterDatabaseSet(builder);
             RegisterCommands(builder);
+            RegisterCommandHandlers(builder);
             RegisterUnitOfWork(builder);
         }
 
         private void RegisterCommands(ContainerBuilder builder)
+        {
+            var commands = typeof(ICommand).GetTypeInfo().Assembly.GetTypes().Where(retCom => retCom.Name.EndsWith("Command") && !retCom.Name.StartsWith("I"));
+
+            foreach(var command in commands)
+            {
+                var interfaceType = command.GetInterfaces().FirstOrDefault();
+
+                builder.RegisterType(command).As(interfaceType).InstancePerLifetimeScope();
+            }
+        }
+
+        private void RegisterCommandHandlers(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(ThisAssembly)
             .Where(x => x.IsAssignableTo<IHandleCommand>())
@@ -45,6 +60,17 @@ namespace DivingApplication.Services.DependencyInjection
             return t =>
             {
                 var handlerType = typeof(IHandleCommand<>).MakeGenericType(t);
+
+                var commands = typeof(ICommand).GetTypeInfo().Assembly.GetTypes().Where(retCom => retCom.Name.EndsWith("Command") && !retCom.Name.StartsWith("I"));
+
+                foreach (var command in commands)
+                {
+                    if(command.GetInterfaces().Contains(t))
+                    {
+                        handlerType = typeof(IHandleCommand<>).MakeGenericType(command);
+                        break;
+                    }  
+                }
 
                 return (IHandleCommand)ctx.Resolve(handlerType);
             };

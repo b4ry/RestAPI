@@ -16,13 +16,14 @@ namespace DivingApplication.Api.Controllers
     [Route("api/[controller]")]
     public class DivingGearController : Controller
     {
-
         private readonly IDivingGearTypeQuery _divingGearTypeQuery;
+        private readonly IAddDivingGearCommand _addDivingGearCommand;
         private readonly ICommandBus _commandBus;
 
-        public DivingGearController(IDivingGearTypeQuery divingGearTypeQuery, ICommandBus commandBus)
+        public DivingGearController(IDivingGearTypeQuery divingGearTypeQuery, IAddDivingGearCommand addDivingGearCommand, ICommandBus commandBus)
         {
             _divingGearTypeQuery = divingGearTypeQuery;
+            _addDivingGearCommand = addDivingGearCommand;
             _commandBus = commandBus;
         }
 
@@ -35,15 +36,18 @@ namespace DivingApplication.Api.Controllers
         }
 
         [HttpPost("[action]")]
-        public void PostDivingGear([FromBody] DivingGearDto divingGearDto)
+        public async Task<IActionResult> PostDivingGear([FromBody] DivingGearDto divingGearDto)
         {
             if (ModelState.IsValid)
             {
                 DivingGear mappedDivingGear = Mapper.Map<DivingGear>(divingGearDto);
 
-                //_commandBus.Send(new AddDivingGearCommand(mappedDivingGear.Name, mappedDivingGear.DivingGearType));
-                
+                _commandBus.Send(_addDivingGearCommand);
+                //_commandBus.Send(new AddDivingGearCommand());
+
+                return new JsonResult("");
             }
+            return new JsonResult("");
         }
 
         /// <summary>
