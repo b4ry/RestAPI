@@ -1,12 +1,13 @@
 ﻿using DivingApplication.Entities.Entity;
+using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DivingApplication.Services.CQRS.Queries
 {
-    public interface IAccountQuery : IQuery
+    public interface IDivingGearTypeQuery
     {
-        Task<IList<AccountSummary>> GetAccountSummariesAsync();
-        Task<AccountDetail> GetAccountDetailByIdAsync(int id);
+        Task<IList<DivingGearType>> GetDivingGearTypesAsync();
     }
 }

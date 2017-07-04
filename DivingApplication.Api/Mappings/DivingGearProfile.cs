@@ -4,11 +4,11 @@ using DivingApplication.Entities.Entity;
 
 namespace DivingApplication.Api.Mappings
 {
-    internal class AccountSummaryProfile : Profile
+    internal class DivingGearProfile : Profile
     {
-        public AccountSummaryProfile()
+        public DivingGearProfile()
         {
-            CreateMap<AccountSummary, AccountSummaryDto>();
+            CreateMap<DivingGearDto, DivingGear>().ReverseMap();
         }
     }
 }

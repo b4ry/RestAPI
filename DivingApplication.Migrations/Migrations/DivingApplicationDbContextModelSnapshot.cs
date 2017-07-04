@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using DivingApplication.Services.DatabaseContext;
-using DivingApplication.Entities.Entity;
+using DivingApplication.Entities.Enum;
 
-namespace DivingApplication.Services.Migrations
+namespace DivingApplication.Migrations.Migrations
 {
     [DbContext(typeof(DivingApplicationDbContext))]
     partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
@@ -72,6 +72,40 @@ namespace DivingApplication.Services.Migrations
                     b.ToTable("AccountTransactions");
                 });
 
+            modelBuilder.Entity("DivingApplication.Entities.Entity.DivingGear", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("DivingGearTypeId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DivingGearTypeId");
+
+                    b.ToTable("DivingGears");
+                });
+
+            modelBuilder.Entity("DivingApplication.Entities.Entity.DivingGearType", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("DivingGearTypeEnum");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("DivingGearTypes");
+                });
+
             modelBuilder.Entity("DivingApplication.Entities.Entity.AccountDetail", b =>
                 {
                     b.HasOne("DivingApplication.Entities.Entity.AccountSummary", "AccountSummary")
@@ -85,6 +119,14 @@ namespace DivingApplication.Services.Migrations
                     b.HasOne("DivingApplication.Entities.Entity.AccountDetail")
                         .WithMany("AccountTransactions")
                         .HasForeignKey("AccountDetailId");
+                });
+
+            modelBuilder.Entity("DivingApplication.Entities.Entity.DivingGear", b =>
+                {
+                    b.HasOne("DivingApplication.Entities.Entity.DivingGearType", "DivingGearType")
+                        .WithMany()
+                        .HasForeignKey("DivingGearTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

@@ -15,6 +15,7 @@ namespace DivingApplication.Services.DependencyInjection
             RegisterQueries(builder);
             RegisterDatabaseSet(builder);
             RegisterCommands(builder);
+            RegisterUnitOfWork(builder);
         }
 
         private void RegisterCommands(ContainerBuilder builder)
@@ -51,7 +52,7 @@ namespace DivingApplication.Services.DependencyInjection
 
         private void RegisterQueries(ContainerBuilder builder)
         {
-            var repositoryAssembly = typeof(AccountQuery).GetTypeInfo().Assembly;
+            var repositoryAssembly = typeof(DivingGearQuery).GetTypeInfo().Assembly;
 
             builder.RegisterAssemblyTypes(repositoryAssembly)
                 .Where(t => t.Name.EndsWith("Query"))
@@ -63,6 +64,13 @@ namespace DivingApplication.Services.DependencyInjection
         {
             builder.RegisterType<DatabaseSet>()
                 .As<IDatabaseSet>()
+                .InstancePerLifetimeScope();
+        }
+
+        private void RegisterUnitOfWork(ContainerBuilder builder)
+        {
+            builder.RegisterType<UnitOfWork>()
+                .As<IUnitOfWork>()
                 .InstancePerLifetimeScope();
         }
     }

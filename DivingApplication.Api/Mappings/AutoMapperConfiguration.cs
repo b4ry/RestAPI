@@ -10,8 +10,7 @@ namespace DivingApplication.Api.Mappings
     {
         public static void Configure()
         {
-            var profiles = typeof(IStartup).GetTypeInfo().Assembly.GetTypes()
-                .Where(x => typeof(Profile).IsAssignableFrom(x));
+            var profiles = typeof(Startup).GetTypeInfo().Assembly.GetTypes().Where(x => typeof(Profile).IsAssignableFrom(x));
 
             Mapper.Initialize(
                 cfg =>
