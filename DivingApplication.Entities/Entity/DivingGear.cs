@@ -8,8 +8,14 @@ namespace DivingApplication.Entities.Entity
     public class DivingGear : BaseEntity
     {
         [Required]
-        [MaxLength(50)]
+        [MaxLength(10)]
         public string Name { get; set; }
+
+        [MaxLength(10)]
+        public string Brand { get; set; }
+
+        [MaxLength(10)]
+        public string Model { get; set; }
 
         [Required]
         public Guid DivingGearTypeId { get; set; }

@@ -9,9 +9,10 @@ using DivingApplication.Entities.Enum;
 namespace DivingApplication.Migrations.Migrations
 {
     [DbContext(typeof(DivingApplicationDbContext))]
-    partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20170706063924_New columns for DivingGear")]
+    partial class NewcolumnsforDivingGear
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
