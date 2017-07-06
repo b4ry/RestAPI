@@ -10,7 +10,6 @@ namespace DivingApplication.Services.CQRS.Queries
     {
         protected IDatabaseSet DatabaseSet { get; }
         protected DbSet<DivingGear> DivingGearSet { get; }
-        //protected DbSet<AccountDetail> AccountDetailSet { get; }
 
         public DivingGearQuery(IDatabaseSet databaseSet)
         {
@@ -22,10 +21,5 @@ namespace DivingApplication.Services.CQRS.Queries
         {
             return await DivingGearSet.ToListAsync();
         }
-
-        //public async Task<AccountDetail> GetAccountDetailByIdAsync(int id)
-        //{
-        //    return await AccountDetailSet.Include(x => x.AccountTransactions).SingleAsync(y => y.AccountSummary.Id == id);
-        //}
     }
 }

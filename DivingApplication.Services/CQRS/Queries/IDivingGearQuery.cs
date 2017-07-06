@@ -7,6 +7,5 @@ namespace DivingApplication.Services.CQRS.Queries
     public interface IDivingGearQuery : IQuery
     {
         Task<IList<DivingGear>> GetDivingGearsAsync();
-        //Task<AccountDetail> GetAccountDetailByIdAsync(int id);
     }
 }
