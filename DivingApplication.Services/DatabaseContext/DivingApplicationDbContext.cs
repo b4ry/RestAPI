@@ -1,11 +1,12 @@
 ﻿using DivingApplication.Entities.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
 
 namespace DivingApplication.Services.DatabaseContext
 {
-    public class DivingApplicationDbContext : DbContext
+    public class DivingApplicationDbContext : IdentityDbContext<User, Role, string>
     {
         public DivingApplicationDbContext(DbContextOptions options):base(options)
         {

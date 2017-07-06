@@ -29,8 +29,6 @@ namespace DivingApplication.Api.Controllers
         [HttpGet("[action]")]
         public async Task<IActionResult> GetDivingGearTypes()
         {
-            //_commandBus.Send(new AddAccountSummaryCommand { AccountNumber = "11111", Balance = 523, Name = "Command test", Type = AccountTypeEnum.Credit });
-
             return new JsonResult(await _divingGearTypeQuery.GetDivingGearTypesAsync());
         }
 

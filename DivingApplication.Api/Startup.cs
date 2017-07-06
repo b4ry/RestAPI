@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using DivingApplication.Api.Extensions;
+using DivingApplication.Entities.Entity;
 using DivingApplication.Services.DatabaseContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -36,6 +37,33 @@ namespace DivingApplication.Api
             services.AddDbContext<DivingApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DivingApplication"),
                 migr => migr.MigrationsAssembly("DivingApplication.Migrations")));
             // Add framework services.
+
+            services.AddIdentity<User, Role>()
+                .AddEntityFrameworkStores<DivingApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequiredLength = 8;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireLowercase = false;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+
+                // Cookie settings
+                options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
+                options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
+                options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOut";
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
+
             services.AddMvc();
 
             services.AddCors(options =>
@@ -82,17 +110,7 @@ namespace DivingApplication.Api
 
             app.UseCors("AllowSpecificOrigin");
             app.UseMvcWithDefaultRoute();
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute(
-            //        name: "default",
-            //        template: "{controller=Home}/{action=Index}/{id?}");
-
-            //    routes.MapSpaFallbackRoute(
-            //        name: "spa-fallback",
-            //        defaults: new { controller = "Home", action = "Index" });
-            //});
-
+            app.UseIdentity();
             app.UseAutoMapper();
 
             // Enable middleware to serve generated Swagger as a JSON endpoint.
