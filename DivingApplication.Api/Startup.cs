@@ -81,7 +81,7 @@ namespace DivingApplication.Api
             }
 
             app.UseCors("AllowSpecificOrigin");
-            app.UseMvcWithDefaultRoute();
+            app.UseMvc();
 
             app.UseAutoMapper();
 
