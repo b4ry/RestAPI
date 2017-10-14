@@ -9,8 +9,8 @@ using DivingApplication.Entities.Enum;
 namespace DivingApplication.Migrations.Migrations
 {
     [DbContext(typeof(DivingApplicationDbContext))]
-    [Migration("20170706063924_New columns for DivingGear")]
-    partial class NewcolumnsforDivingGear
+    [Migration("20171014051502_Scaffold")]
+    partial class Scaffold
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
