@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DivingApplication.Api\DivingApplication.Api.csproj" />
     <ProjectReference Include="..\DivingApplication.Services\DivingApplication.Services.csproj" />
   </ItemGroup>
 
