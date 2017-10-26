@@ -1,8 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DivingApplication.Entities.Entities
 {
+    [Table("Experiences")]
     public class Experience : BaseEntity
     {
         [Required]
@@ -14,6 +16,6 @@ namespace DivingApplication.Entities.Entities
         public string Position { get; set; }
 
         [Required]
-        public List<Project> Projects { get; set; }
+        public IList<Project> Projects { get; set; }
     }
 }

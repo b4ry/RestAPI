@@ -16,7 +16,7 @@ namespace DivingApplication.Entities.Entities
         public string Description { get; set; }
 
         [Required]
-        public List<Technology> Technologies { get; set; }
+        public IList<Technology> Technologies { get; set; }
 
         [Required]
         public DateTime StartTime { get; set; }
