@@ -1,4 +1,4 @@
-﻿using DivingApplication.Entities.Entity;
+﻿using DivingApplication.Entities.Entities;
 
 namespace DivingApplication.Services.CQRS.Commands
 {

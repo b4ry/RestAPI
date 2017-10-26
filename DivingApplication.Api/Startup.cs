@@ -33,7 +33,7 @@ namespace DivingApplication.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DivingApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("DivingApplication"),
+            services.AddDbContext<DivingApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("PortfolioApplication"),
                 migr => migr.MigrationsAssembly("DivingApplication.Migrations")));
             // Add framework services.
             services.AddMvc();

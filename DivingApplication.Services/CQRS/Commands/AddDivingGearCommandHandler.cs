@@ -1,8 +1,6 @@
-﻿using DivingApplication.Entities.Entity;
+﻿using DivingApplication.Entities.Entities;
 using DivingApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Threading.Tasks;
 
 namespace DivingApplication.Services.CQRS.Commands
 {
@@ -24,7 +22,6 @@ namespace DivingApplication.Services.CQRS.Commands
             AccountSummarySet.Add(new DivingGear()
             {
                 Name = command.Name,
-                Id = Guid.NewGuid(),
                 DivingGearType = command.DivingGearType
             }
             );

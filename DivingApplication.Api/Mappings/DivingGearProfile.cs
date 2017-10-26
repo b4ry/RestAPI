@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using DivingApplication.Api.DataTransferObjects;
-using DivingApplication.Entities.Entity;
+using DivingApplication.Entities.Entities;
 
 namespace DivingApplication.Api.Mappings
 {

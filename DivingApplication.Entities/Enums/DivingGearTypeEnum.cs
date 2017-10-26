@@ -1,4 +1,4 @@
-﻿namespace DivingApplication.Entities.Enum
+﻿namespace DivingApplication.Entities.Enums
 {
     public enum DivingGearTypeEnum
     {

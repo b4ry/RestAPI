@@ -9,9 +9,10 @@ using DivingApplication.Entities.Enums;
 namespace DivingApplication.Migrations.Migrations
 {
     [DbContext(typeof(DivingApplicationDbContext))]
-    partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171026093326_CoreEntitiesAdded")]
+    partial class CoreEntitiesAdded
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")

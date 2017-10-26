@@ -1,4 +1,4 @@
-﻿using DivingApplication.Entities.Entity;
+﻿using DivingApplication.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;

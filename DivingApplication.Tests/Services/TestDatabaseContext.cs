@@ -1,4 +1,4 @@
-﻿using DivingApplication.Entities.Entity;
+﻿using DivingApplication.Entities.Entities;
 using DivingApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;

@@ -1,8 +1,8 @@
-﻿using DivingApplication.Entities.Enum;
+﻿using DivingApplication.Entities.Enums;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DivingApplication.Entities.Entity
+namespace DivingApplication.Entities.Entities
 {
     [Table("DivingGearTypes")]
     public class DivingGearType : BaseEntity

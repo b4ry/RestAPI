@@ -1,4 +1,4 @@
-﻿using DivingApplication.Entities.Entity;
+﻿using DivingApplication.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace DivingApplication.Services.DatabaseContext

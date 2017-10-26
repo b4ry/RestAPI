@@ -1,4 +1,4 @@
-﻿using DivingApplication.Entities.Enum;
+﻿using DivingApplication.Entities.Enums;
 
 namespace DivingApplication.Api.DataTransferObjects
 {

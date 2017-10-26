@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using DivingApplication.Entities.Entity;
+using DivingApplication.Entities.Entities;
 using DivingApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
