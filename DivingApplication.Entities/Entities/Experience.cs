@@ -15,7 +15,7 @@ namespace DivingApplication.Entities.Entities
         [MaxLength(10)]
         public string Position { get; set; }
 
-        [Required]
+        [ForeignKey("ExperienceId")]
         public IList<Project> Projects { get; set; }
     }
 }

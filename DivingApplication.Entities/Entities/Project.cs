@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DivingApplication.Entities.Entities.JunctionEntities;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,8 +16,8 @@ namespace DivingApplication.Entities.Entities
         [Required]
         public string Description { get; set; }
 
-        [Required]
-        public IList<Technology> Technologies { get; set; }
+        [ForeignKey("ProjectId")]
+        public IList<ProjectTechnology> ProjectsTechnologies { get; set; }
 
         [Required]
         public DateTime StartTime { get; set; }
