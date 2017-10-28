@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DivingApplication.Entities.Entities
 {
     [Table("Projects")]
-    public class Project : BaseEntity
+    public class ProjectEntity : BaseEntity
     {
         [Required]
         [MaxLength(20)]
@@ -24,5 +24,11 @@ namespace DivingApplication.Entities.Entities
 
         [Required]
         public DateTime EndTime { get; set; }
+
+        [Required]
+        public int ProjectTypeId { get; set; }
+
+        [ForeignKey(nameof(ProjectTypeId))]
+        public ProjectTypeEntity ProjectType { get; set; }
     }
 }

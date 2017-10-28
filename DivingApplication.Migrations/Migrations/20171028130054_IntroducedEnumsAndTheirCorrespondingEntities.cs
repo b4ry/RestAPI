@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace DivingApplication.Migrations.Migrations
 {
-    public partial class RevisitCoreEntitiesRelations : Migration
+    public partial class IntroducedEnumsAndTheirCorrespondingEntities : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -38,16 +38,31 @@ namespace DivingApplication.Migrations.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Technologies",
+                name: "ProjectTypes",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: false)
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    ProjectTypeEnum = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Technologies", x => x.Id);
+                    table.PrimaryKey("PK_ProjectTypes", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TechnologyTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(maxLength: 50, nullable: false),
+                    TechnologyTypeEnum = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TechnologyTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -80,23 +95,50 @@ namespace DivingApplication.Migrations.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: false),
                     EndTime = table.Column<DateTime>(nullable: false),
+                    ExperienceId = table.Column<int>(nullable: true),
                     Name = table.Column<string>(maxLength: 20, nullable: false),
-                    ProjectId = table.Column<int>(nullable: true),
+                    ProjectTypeId = table.Column<int>(nullable: false),
                     StartTime = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Projects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Projects_Experiences_ProjectId",
-                        column: x => x.ProjectId,
+                        name: "FK_Projects_Experiences_ExperienceId",
+                        column: x => x.ExperienceId,
                         principalTable: "Experiences",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Projects_ProjectTypes_ProjectTypeId",
+                        column: x => x.ProjectTypeId,
+                        principalTable: "ProjectTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProjectTechnology",
+                name: "Technologies",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false),
+                    TechnologyTypeId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Technologies", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Technologies_TechnologyTypes_TechnologyTypeId",
+                        column: x => x.TechnologyTypeId,
+                        principalTable: "TechnologyTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProjectsTechnologies",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
@@ -106,15 +148,15 @@ namespace DivingApplication.Migrations.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ProjectTechnology", x => x.Id);
+                    table.PrimaryKey("PK_ProjectsTechnologies", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ProjectTechnology_Projects_ProjectId",
+                        name: "FK_ProjectsTechnologies_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ProjectTechnology_Technologies_TechnologyId",
+                        name: "FK_ProjectsTechnologies_Technologies_TechnologyId",
                         column: x => x.TechnologyId,
                         principalTable: "Technologies",
                         principalColumn: "Id",
@@ -127,19 +169,29 @@ namespace DivingApplication.Migrations.Migrations
                 column: "DivingGearTypeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectTechnology_ProjectId",
-                table: "ProjectTechnology",
+                name: "IX_ProjectsTechnologies_ProjectId",
+                table: "ProjectsTechnologies",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ProjectTechnology_TechnologyId",
-                table: "ProjectTechnology",
+                name: "IX_ProjectsTechnologies_TechnologyId",
+                table: "ProjectsTechnologies",
                 column: "TechnologyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_ProjectId",
+                name: "IX_Projects_ExperienceId",
                 table: "Projects",
-                column: "ProjectId");
+                column: "ExperienceId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Projects_ProjectTypeId",
+                table: "Projects",
+                column: "ProjectTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Technologies_TechnologyTypeId",
+                table: "Technologies",
+                column: "TechnologyTypeId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -148,7 +200,7 @@ namespace DivingApplication.Migrations.Migrations
                 name: "DivingGears");
 
             migrationBuilder.DropTable(
-                name: "ProjectTechnology");
+                name: "ProjectsTechnologies");
 
             migrationBuilder.DropTable(
                 name: "DivingGearTypes");
@@ -161,6 +213,12 @@ namespace DivingApplication.Migrations.Migrations
 
             migrationBuilder.DropTable(
                 name: "Experiences");
+
+            migrationBuilder.DropTable(
+                name: "ProjectTypes");
+
+            migrationBuilder.DropTable(
+                name: "TechnologyTypes");
         }
     }
 }

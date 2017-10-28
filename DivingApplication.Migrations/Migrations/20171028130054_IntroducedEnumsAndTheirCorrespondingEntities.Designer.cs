@@ -9,8 +9,8 @@ using DivingApplication.Entities.Enums;
 namespace DivingApplication.Migrations.Migrations
 {
     [DbContext(typeof(DivingApplicationDbContext))]
-    [Migration("20171028035624_RevisitCoreEntitiesRelations")]
-    partial class RevisitCoreEntitiesRelations
+    [Migration("20171028130054_IntroducedEnumsAndTheirCorrespondingEntities")]
+    partial class IntroducedEnumsAndTheirCorrespondingEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,7 +58,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("DivingGearTypes");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.Experience", b =>
+            modelBuilder.Entity("DivingApplication.Entities.Entities.ExperienceEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -91,10 +91,10 @@ namespace DivingApplication.Migrations.Migrations
 
                     b.HasIndex("TechnologyId");
 
-                    b.ToTable("ProjectTechnology");
+                    b.ToTable("ProjectsTechnologies");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.Project", b =>
+            modelBuilder.Entity("DivingApplication.Entities.Entities.ProjectEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -104,22 +104,42 @@ namespace DivingApplication.Migrations.Migrations
 
                     b.Property<DateTime>("EndTime");
 
+                    b.Property<int?>("ExperienceId");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(20);
 
-                    b.Property<int?>("ProjectId");
+                    b.Property<int>("ProjectTypeId");
 
                     b.Property<DateTime>("StartTime");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("ExperienceId");
+
+                    b.HasIndex("ProjectTypeId");
 
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.Technology", b =>
+            modelBuilder.Entity("DivingApplication.Entities.Entities.ProjectTypeEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("ProjectTypeEnum");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ProjectTypes");
+                });
+
+            modelBuilder.Entity("DivingApplication.Entities.Entities.TechnologyEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -127,9 +147,29 @@ namespace DivingApplication.Migrations.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.Property<int>("TechnologyTypeId");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("TechnologyTypeId");
+
                     b.ToTable("Technologies");
+                });
+
+            modelBuilder.Entity("DivingApplication.Entities.Entities.TechnologyTypeEntity", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.Property<int>("TechnologyTypeEnum");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TechnologyTypes");
                 });
 
             modelBuilder.Entity("DivingApplication.Entities.Entities.DivingGear", b =>
@@ -142,22 +182,35 @@ namespace DivingApplication.Migrations.Migrations
 
             modelBuilder.Entity("DivingApplication.Entities.Entities.JunctionEntities.ProjectTechnology", b =>
                 {
-                    b.HasOne("DivingApplication.Entities.Entities.Project")
+                    b.HasOne("DivingApplication.Entities.Entities.ProjectEntity")
                         .WithMany("ProjectsTechnologies")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DivingApplication.Entities.Entities.Technology")
+                    b.HasOne("DivingApplication.Entities.Entities.TechnologyEntity")
                         .WithMany("ProjectsTechnologies")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.Project", b =>
+            modelBuilder.Entity("DivingApplication.Entities.Entities.ProjectEntity", b =>
                 {
-                    b.HasOne("DivingApplication.Entities.Entities.Experience")
+                    b.HasOne("DivingApplication.Entities.Entities.ExperienceEntity")
                         .WithMany("Projects")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("ExperienceId");
+
+                    b.HasOne("DivingApplication.Entities.Entities.ProjectTypeEntity", "ProjectType")
+                        .WithMany()
+                        .HasForeignKey("ProjectTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DivingApplication.Entities.Entities.TechnologyEntity", b =>
+                {
+                    b.HasOne("DivingApplication.Entities.Entities.TechnologyTypeEntity", "TechnologyType")
+                        .WithMany()
+                        .HasForeignKey("TechnologyTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }

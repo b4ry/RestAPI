@@ -6,12 +6,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DivingApplication.Entities.Entities
 {
     [Table("Technologies")]
-    public class Technology : BaseEntity
+    public class TechnologyEntity : BaseEntity
     {
         [Required]
         public string Name { get; set; }
         
         [ForeignKey("TechnologyId")]
         public List<ProjectTechnology> ProjectsTechnologies { get; set; }
+
+        [Required]
+        public int TechnologyTypeId { get; set; }
+
+        [ForeignKey(nameof(TechnologyTypeId))]
+        public TechnologyTypeEntity TechnologyType { get; set; }
     }
 }

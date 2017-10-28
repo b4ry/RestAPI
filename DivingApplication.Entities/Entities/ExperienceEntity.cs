@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace DivingApplication.Entities.Entities
 {
     [Table("Experiences")]
-    public class Experience : BaseEntity
+    public class ExperienceEntity : BaseEntity
     {
         [Required]
         [MaxLength(10)]
@@ -16,6 +16,6 @@ namespace DivingApplication.Entities.Entities
         public string Position { get; set; }
 
         [ForeignKey("ExperienceId")]
-        public IList<Project> Projects { get; set; }
+        public IList<ProjectEntity> Projects { get; set; }
     }
 }
