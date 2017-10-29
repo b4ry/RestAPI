@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
-using DivingApplication.Entities.Entities;
-using DivingApplication.Services.DatabaseContext;
+using PortfolioApplication.Entities.Entities;
+using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace DivingApplication.Services.CQRS.Queries
+namespace PortfolioApplication.Services.CQRS.Queries
 {
     public class DivingGearTypeQuery : IDivingGearTypeQuery
     {

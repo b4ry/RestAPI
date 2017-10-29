@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace DivingApplication.Services.DatabaseContext
+namespace PortfolioApplication.Services.DatabaseContext
 {
     public class UnitOfWork : IUnitOfWork
     {

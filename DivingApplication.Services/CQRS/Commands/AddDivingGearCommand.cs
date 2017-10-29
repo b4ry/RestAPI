@@ -1,6 +1,6 @@
-﻿using DivingApplication.Entities.Entities;
+﻿using PortfolioApplication.Entities.Entities;
 
-namespace DivingApplication.Services.CQRS.Commands
+namespace PortfolioApplication.Services.CQRS.Commands
 {
     public class AddDivingGearCommand : ICommand
     {

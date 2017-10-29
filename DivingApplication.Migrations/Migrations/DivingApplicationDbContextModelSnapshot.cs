@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using DivingApplication.Services.DatabaseContext;
-using DivingApplication.Entities.Enums;
+using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Entities.Enums;
 
-namespace DivingApplication.Migrations.Migrations
+namespace PortfolioApplication.Migrations.Migrations
 {
     [DbContext(typeof(PortfolioApplicationDbContext))]
     partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace DivingApplication.Migrations.Migrations
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.DivingGear", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.DivingGear", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -41,7 +41,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("DivingGears");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.DivingGearType", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.DivingGearType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -57,7 +57,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("DivingGearTypes");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.ExperienceEntity", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.ExperienceEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -75,7 +75,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("Experiences");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.JunctionEntities.ProjectTechnology", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.JunctionEntities.ProjectTechnology", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -93,7 +93,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("ProjectsTechnologies");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.ProjectEntity", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.ProjectEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -122,7 +122,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("Projects");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.ProjectTypeEntity", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.ProjectTypeEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -138,7 +138,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("ProjectTypes");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.TechnologyEntity", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.TechnologyEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -155,7 +155,7 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("Technologies");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.TechnologyTypeEntity", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.TechnologyTypeEntity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -171,42 +171,42 @@ namespace DivingApplication.Migrations.Migrations
                     b.ToTable("TechnologyTypes");
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.DivingGear", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.DivingGear", b =>
                 {
-                    b.HasOne("DivingApplication.Entities.Entities.DivingGearType", "DivingGearType")
+                    b.HasOne("PortfolioApplication.Entities.Entities.DivingGearType", "DivingGearType")
                         .WithMany()
                         .HasForeignKey("DivingGearTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.JunctionEntities.ProjectTechnology", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.JunctionEntities.ProjectTechnology", b =>
                 {
-                    b.HasOne("DivingApplication.Entities.Entities.ProjectEntity")
+                    b.HasOne("PortfolioApplication.Entities.Entities.ProjectEntity")
                         .WithMany("ProjectsTechnologies")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DivingApplication.Entities.Entities.TechnologyEntity")
+                    b.HasOne("PortfolioApplication.Entities.Entities.TechnologyEntity")
                         .WithMany("ProjectsTechnologies")
                         .HasForeignKey("TechnologyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.ProjectEntity", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.ProjectEntity", b =>
                 {
-                    b.HasOne("DivingApplication.Entities.Entities.ExperienceEntity")
+                    b.HasOne("PortfolioApplication.Entities.Entities.ExperienceEntity")
                         .WithMany("Projects")
                         .HasForeignKey("ExperienceId");
 
-                    b.HasOne("DivingApplication.Entities.Entities.ProjectTypeEntity", "ProjectType")
+                    b.HasOne("PortfolioApplication.Entities.Entities.ProjectTypeEntity", "ProjectType")
                         .WithMany()
                         .HasForeignKey("ProjectTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DivingApplication.Entities.Entities.TechnologyEntity", b =>
+            modelBuilder.Entity("PortfolioApplication.Entities.Entities.TechnologyEntity", b =>
                 {
-                    b.HasOne("DivingApplication.Entities.Entities.TechnologyTypeEntity", "TechnologyType")
+                    b.HasOne("PortfolioApplication.Entities.Entities.TechnologyTypeEntity", "TechnologyType")
                         .WithMany()
                         .HasForeignKey("TechnologyTypeId")
                         .OnDelete(DeleteBehavior.Cascade);

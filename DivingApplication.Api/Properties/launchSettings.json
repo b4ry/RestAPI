@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "DivingApplication.Api": {
+    "PortfolioApplication.Api": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api/divinggear",

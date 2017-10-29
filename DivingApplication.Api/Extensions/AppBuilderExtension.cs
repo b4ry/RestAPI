@@ -1,7 +1,7 @@
-﻿using DivingApplication.Api.Mappings;
+﻿using PortfolioApplication.Api.Mappings;
 using Microsoft.AspNetCore.Builder;
 
-namespace DivingApplication.Api.Extensions
+namespace PortfolioApplication.Api.Extensions
 {
     public static class AppBuilderExtension
     {

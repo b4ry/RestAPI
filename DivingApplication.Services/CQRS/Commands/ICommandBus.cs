@@ -1,4 +1,4 @@
-﻿namespace DivingApplication.Services.CQRS.Commands
+﻿namespace PortfolioApplication.Services.CQRS.Commands
 {
     public interface ICommandBus
     {

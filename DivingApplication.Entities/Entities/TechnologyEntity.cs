@@ -1,9 +1,9 @@
-﻿using DivingApplication.Entities.Entities.JunctionEntities;
+﻿using PortfolioApplication.Entities.Entities.JunctionEntities;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DivingApplication.Entities.Entities
+namespace PortfolioApplication.Entities.Entities
 {
     [Table("Technologies")]
     public class TechnologyEntity : BaseEntity

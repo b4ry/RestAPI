@@ -1,4 +1,4 @@
-﻿namespace DivingApplication.Services.CQRS.Queries
+﻿namespace PortfolioApplication.Services.CQRS.Queries
 {
     public interface IQuery
     {

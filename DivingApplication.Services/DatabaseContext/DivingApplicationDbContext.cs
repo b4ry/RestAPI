@@ -1,9 +1,9 @@
-﻿using DivingApplication.Entities.Entities;
+﻿using PortfolioApplication.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
 
-namespace DivingApplication.Services.DatabaseContext
+namespace PortfolioApplication.Services.DatabaseContext
 {
     public class PortfolioApplicationDbContext : DbContext
     {

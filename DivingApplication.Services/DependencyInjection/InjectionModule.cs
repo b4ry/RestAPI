@@ -1,12 +1,12 @@
 ﻿using Autofac;
-using DivingApplication.Services.CQRS.Commands;
-using DivingApplication.Services.CQRS.Queries;
-using DivingApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.CQRS.Commands;
+using PortfolioApplication.Services.CQRS.Queries;
+using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace DivingApplication.Services.DependencyInjection
+namespace PortfolioApplication.Services.DependencyInjection
 {
     public class InjectionModule : Autofac.Module
     {

@@ -1,4 +1,4 @@
-﻿namespace DivingApplication.Api.DataTransferObjects
+﻿namespace PortfolioApplication.Api.DataTransferObjects
 {
     /// <summary>
     /// Diving gear data transfer object used in requests to API

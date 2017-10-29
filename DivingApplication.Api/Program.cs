@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 
-namespace DivingApplication.Api
+namespace PortfolioApplication.Api
 {
     public class Program
     {

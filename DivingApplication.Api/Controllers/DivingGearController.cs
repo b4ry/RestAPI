@@ -1,9 +1,9 @@
-﻿using DivingApplication.Services.CQRS.Commands;
-using DivingApplication.Services.CQRS.Queries;
+﻿using PortfolioApplication.Services.CQRS.Commands;
+using PortfolioApplication.Services.CQRS.Queries;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace DivingApplication.Api.Controllers
+namespace PortfolioApplication.Api.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]

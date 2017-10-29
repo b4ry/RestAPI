@@ -1,12 +1,12 @@
-﻿using DivingApplication.Entities.Entities;
-using DivingApplication.Services.DatabaseContext;
+﻿using PortfolioApplication.Entities.Entities;
+using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace DivingApplication.Tests.Services.DatabaseContext
+namespace PortfolioApplication.Tests.Services.DatabaseContext
 {
     public class TestDatabaseContext
     {

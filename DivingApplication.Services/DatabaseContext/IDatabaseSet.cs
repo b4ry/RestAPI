@@ -1,7 +1,7 @@
-﻿using DivingApplication.Entities.Entities;
+﻿using PortfolioApplication.Entities.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace DivingApplication.Services.DatabaseContext
+namespace PortfolioApplication.Services.DatabaseContext
 {
     public interface IDatabaseSet
     {

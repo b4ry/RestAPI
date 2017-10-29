@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2002
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DivingApplication.Entities", "DivingApplication.Entities\DivingApplication.Entities.csproj", "{E2AEF11E-51C5-4FE4-8A62-0772BEE47C12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApplication.Entities", "DivingApplication.Entities\PortfolioApplication.Entities.csproj", "{E2AEF11E-51C5-4FE4-8A62-0772BEE47C12}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DivingApplication.Services", "DivingApplication.Services\DivingApplication.Services.csproj", "{DA54E545-F9ED-4F4D-9822-AA3437C070D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApplication.Services", "DivingApplication.Services\PortfolioApplication.Services.csproj", "{DA54E545-F9ED-4F4D-9822-AA3437C070D0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DivingApplication.Api", "DivingApplication.Api\DivingApplication.Api.csproj", "{954DB4F2-9981-40C1-BFE6-FD660481B2AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApplication.Api", "DivingApplication.Api\PortfolioApplication.Api.csproj", "{954DB4F2-9981-40C1-BFE6-FD660481B2AC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DivingApplication.Migrations", "DivingApplication.Migrations\DivingApplication.Migrations.csproj", "{6462250B-467F-4428-855A-C069756CB4B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApplication.Migrations", "DivingApplication.Migrations\PortfolioApplication.Migrations.csproj", "{6462250B-467F-4428-855A-C069756CB4B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DivingApplication.Tests", "DivingApplication.Tests\DivingApplication.Tests.csproj", "{7DF428C5-E90B-465C-98FB-3E194CF9C426}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PortfolioApplication.Tests", "DivingApplication.Tests\PortfolioApplication.Tests.csproj", "{7DF428C5-E90B-465C-98FB-3E194CF9C426}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

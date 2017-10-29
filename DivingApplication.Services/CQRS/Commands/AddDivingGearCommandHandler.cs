@@ -1,8 +1,8 @@
-﻿using DivingApplication.Entities.Entities;
-using DivingApplication.Services.DatabaseContext;
+﻿using PortfolioApplication.Entities.Entities;
+using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 
-namespace DivingApplication.Services.CQRS.Commands
+namespace PortfolioApplication.Services.CQRS.Commands
 {
     public class AddDivingGearCommandHandler : IHandleCommand<AddDivingGearCommand>
     {

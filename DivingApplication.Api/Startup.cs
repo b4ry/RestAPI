@@ -1,7 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using DivingApplication.Api.Extensions;
-using DivingApplication.Services.DatabaseContext;
+using PortfolioApplication.Api.Extensions;
+using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
 
-namespace DivingApplication.Api
+namespace PortfolioApplication.Api
 {
     public class Startup
     {
@@ -34,7 +34,7 @@ namespace DivingApplication.Api
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<PortfolioApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("PortfolioApplication"),
-                migr => migr.MigrationsAssembly("DivingApplication.Migrations")));
+                migr => migr.MigrationsAssembly("PortfolioApplication.Migrations")));
             // Add framework services.
             services.AddMvc();
 
@@ -50,13 +50,13 @@ namespace DivingApplication.Api
                 c.SwaggerDoc("v1",
                     new Info
                     {
-                        Title = "DivingApplication API",
-                        Description = "DivingApplication API description",
+                        Title = "PortfolioApplication API",
+                        Description = "PortfolioApplication API description",
                         Version = "v1"
                     });
 
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "DivingApplication.Api.xml");
+                var xmlPath = Path.Combine(basePath, "PortfolioApplication.Api.xml");
                 c.IncludeXmlComments(xmlPath);
             });
 
@@ -91,7 +91,7 @@ namespace DivingApplication.Api
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "DivingApplication API V1.0");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "PortfolioApplication API V1.0");
             });
 
             appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());

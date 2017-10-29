@@ -1,9 +1,9 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using DivingApplication.Services.DependencyInjection;
+using PortfolioApplication.Services.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace DivingApplication.Api.Extensions
+namespace PortfolioApplication.Api.Extensions
 {
     public static class ServiceCollectionExtensions
     {

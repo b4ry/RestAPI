@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DivingApplication.Entities.Entities
+namespace PortfolioApplication.Entities.Entities
 {
     [Table("DivingGears")]
     public class DivingGear : BaseEntity

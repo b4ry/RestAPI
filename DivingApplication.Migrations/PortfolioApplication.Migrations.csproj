@@ -11,8 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DivingApplication.Entities\DivingApplication.Entities.csproj" />
-    <ProjectReference Include="..\DivingApplication.Services\DivingApplication.Services.csproj" />
+    <ProjectReference Include="..\DivingApplication.Entities\PortfolioApplication.Entities.csproj" />
+    <ProjectReference Include="..\DivingApplication.Services\PortfolioApplication.Services.csproj" />
   </ItemGroup>
 
 </Project>

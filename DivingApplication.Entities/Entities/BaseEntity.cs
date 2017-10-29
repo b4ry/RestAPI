@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace DivingApplication.Entities.Entities
+namespace PortfolioApplication.Entities.Entities
 {
     public class BaseEntity
     {

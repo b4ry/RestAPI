@@ -1,10 +1,10 @@
-﻿using DivingApplication.Entities.Entities;
-using DivingApplication.Services.DatabaseContext;
+﻿using PortfolioApplication.Entities.Entities;
+using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DivingApplication.Services.CQRS.Queries
+namespace PortfolioApplication.Services.CQRS.Queries
 {
     public class DivingGearQuery : IDivingGearQuery
     {

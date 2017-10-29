@@ -1,6 +1,6 @@
-﻿using DivingApplication.Entities.Enums;
+﻿using PortfolioApplication.Entities.Enums;
 
-namespace DivingApplication.Api.DataTransferObjects
+namespace PortfolioApplication.Api.DataTransferObjects
 {
     public class DivingGearTypeDto
     {

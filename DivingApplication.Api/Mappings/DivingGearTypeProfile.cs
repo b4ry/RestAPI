@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using DivingApplication.Api.DataTransferObjects;
-using DivingApplication.Entities.Entities;
+using PortfolioApplication.Api.DataTransferObjects;
+using PortfolioApplication.Entities.Entities;
 
-namespace DivingApplication.Api.Mappings
+namespace PortfolioApplication.Api.Mappings
 {
     internal class DivingGearTypeProfile : Profile
     {

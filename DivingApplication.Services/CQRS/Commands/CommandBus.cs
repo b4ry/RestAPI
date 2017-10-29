@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace DivingApplication.Services.CQRS.Commands
+namespace PortfolioApplication.Services.CQRS.Commands
 {
     public class CommandBus : ICommandBus
     {

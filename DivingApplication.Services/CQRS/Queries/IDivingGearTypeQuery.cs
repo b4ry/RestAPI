@@ -1,10 +1,10 @@
-﻿using DivingApplication.Entities.Entities;
+﻿using PortfolioApplication.Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DivingApplication.Services.CQRS.Queries
+namespace PortfolioApplication.Services.CQRS.Queries
 {
     public interface IDivingGearTypeQuery
     {

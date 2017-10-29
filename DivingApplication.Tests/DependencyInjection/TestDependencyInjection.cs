@@ -1,13 +1,13 @@
 ﻿using Autofac;
 using Autofac.Core;
-using DivingApplication.Api.Extensions;
-using DivingApplication.Services.DatabaseContext;
+using PortfolioApplication.Api.Extensions;
+using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using Xunit;
 
-namespace DivingApplication.Tests.DependencyInjection
+namespace PortfolioApplication.Tests.DependencyInjection
 {
     public class TestDependencyInjection
     {

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DivingApplication.Entities\DivingApplication.Entities.csproj" />
+    <ProjectReference Include="..\DivingApplication.Entities\PortfolioApplication.Entities.csproj" />
   </ItemGroup>
 
 </Project>

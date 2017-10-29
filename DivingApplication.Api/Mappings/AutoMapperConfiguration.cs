@@ -4,7 +4,7 @@ using System;
 using System.Linq;
 using System.Reflection;
 
-namespace DivingApplication.Api.Mappings
+namespace PortfolioApplication.Api.Mappings
 {
     public class AutoMapperConfiguration
     {

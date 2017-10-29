@@ -1,4 +1,4 @@
-﻿namespace DivingApplication.Entities.Enums
+﻿namespace PortfolioApplication.Entities.Enums
 {
     public enum ProjectTypeEnum
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace DivingApplication.Migrations.Migrations
+namespace PortfolioApplication.Migrations.Migrations
 {
     public partial class IntroducedEnumsAndTheirCorrespondingEntities : Migration
     {
