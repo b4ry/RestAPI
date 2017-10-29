@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace PortfolioApplication.Api.Extensions
 {
-    public static class AppBuilderExtension
+    public static class AppBuilderExtensions
     {
         public static void UseAutoMapper(this IApplicationBuilder app)
         {

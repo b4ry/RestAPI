@@ -74,6 +74,12 @@ namespace PortfolioApplication.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+                {
+                    serviceScope.ServiceProvider.GetService<PortfolioApplicationDbContext>().Database.Migrate();
+                    serviceScope.ServiceProvider.GetService<PortfolioApplicationDbContext>().EnsureSeedData();
+                }
             }
             else
             {
