@@ -22,8 +22,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DivingApplication.Migrations\PortfolioApplication.Migrations.csproj" />
-    <ProjectReference Include="..\DivingApplication.Services\PortfolioApplication.Services.csproj" />
+    <ProjectReference Include="..\PortfolioApplication.Migrations\PortfolioApplication.Migrations.csproj" />
+    <ProjectReference Include="..\PortfolioApplication.Services\PortfolioApplication.Services.csproj" />
   </ItemGroup>
 
 </Project>
