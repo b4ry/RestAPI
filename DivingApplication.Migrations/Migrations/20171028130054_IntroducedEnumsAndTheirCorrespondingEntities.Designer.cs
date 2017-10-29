@@ -8,7 +8,7 @@ using DivingApplication.Entities.Enums;
 
 namespace DivingApplication.Migrations.Migrations
 {
-    [DbContext(typeof(DivingApplicationDbContext))]
+    [DbContext(typeof(PortfolioApplicationDbContext))]
     [Migration("20171028130054_IntroducedEnumsAndTheirCorrespondingEntities")]
     partial class IntroducedEnumsAndTheirCorrespondingEntities
     {

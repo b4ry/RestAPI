@@ -4,9 +4,9 @@ namespace DivingApplication.Services.DatabaseContext
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private readonly DivingApplicationDbContext _databaseContext;
+        private readonly PortfolioApplicationDbContext _databaseContext;
 
-        public UnitOfWork(DivingApplicationDbContext databaseContext)
+        public UnitOfWork(PortfolioApplicationDbContext databaseContext)
         {
             _databaseContext = databaseContext;
         }

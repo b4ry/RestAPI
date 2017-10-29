@@ -8,7 +8,7 @@ using DivingApplication.Entities.Enums;
 
 namespace DivingApplication.Migrations.Migrations
 {
-    [DbContext(typeof(DivingApplicationDbContext))]
+    [DbContext(typeof(PortfolioApplicationDbContext))]
     partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

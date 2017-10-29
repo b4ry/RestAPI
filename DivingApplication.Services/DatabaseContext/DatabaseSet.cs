@@ -5,9 +5,9 @@ namespace DivingApplication.Services.DatabaseContext
 {
     public class DatabaseSet : IDatabaseSet
     {
-        private readonly DivingApplicationDbContext _databaseContext;
+        private readonly PortfolioApplicationDbContext _databaseContext;
 
-        public DatabaseSet(DivingApplicationDbContext databaseContext)
+        public DatabaseSet(PortfolioApplicationDbContext databaseContext)
         {
             _databaseContext = databaseContext;
         }

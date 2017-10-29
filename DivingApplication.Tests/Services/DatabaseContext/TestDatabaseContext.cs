@@ -6,7 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace DivingApplication.Tests.Services
+namespace DivingApplication.Tests.Services.DatabaseContext
 {
     public class TestDatabaseContext
     {
@@ -14,9 +14,9 @@ namespace DivingApplication.Tests.Services
         [Fact]
         public void DbContextMustCreateDynamicallyAllModelEntitiesOnItsOwnCreation()
         {
-            var builder = new DbContextOptionsBuilder<DivingApplicationDbContext>().UseInMemoryDatabase();
+            var builder = new DbContextOptionsBuilder<PortfolioApplicationDbContext>().UseInMemoryDatabase();
             var options = builder.Options;
-            var divingApplicationDbContext = new DivingApplicationDbContext(options);
+            var portfolioApplicationDbContext = new PortfolioApplicationDbContext(options);
             var allModelEntitiesCreated = true;
 
             var modelEntities = typeof(BaseEntity).GetTypeInfo().Assembly.GetTypes().Where(x => x.GetTypeInfo().BaseType == typeof(BaseEntity));
@@ -24,7 +24,7 @@ namespace DivingApplication.Tests.Services
             foreach (Type modelEntity in modelEntities)
             {
                 var modelEntityTypeName = modelEntity.GetTypeInfo().FullName;
-                var foundEntityType = divingApplicationDbContext.Model.FindEntityType(modelEntityTypeName);
+                var foundEntityType = portfolioApplicationDbContext.Model.FindEntityType(modelEntityTypeName);
 
                 if (foundEntityType == null)
                 {

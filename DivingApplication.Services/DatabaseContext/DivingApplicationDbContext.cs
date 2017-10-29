@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace DivingApplication.Services.DatabaseContext
 {
-    public class DivingApplicationDbContext : DbContext
+    public class PortfolioApplicationDbContext : DbContext
     {
-        public DivingApplicationDbContext(DbContextOptions options):base(options)
+        public PortfolioApplicationDbContext(DbContextOptions options):base(options)
         {
 
         }

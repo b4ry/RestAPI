@@ -4,6 +4,7 @@ using DivingApplication.Api.Extensions;
 using DivingApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using Xunit;
 
 namespace DivingApplication.Tests.DependencyInjection
@@ -24,15 +25,11 @@ namespace DivingApplication.Tests.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveUnitOfWorkWhenItIsCalledToDoSo()
+        public void InversionOfControlContainerMustResolveUnitOfWorkWhenUnitOfWorkIsNeeded()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
-            serviceCollection.AddDbContext<DivingApplicationDbContext>();
+            serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
             IContainer container = serviceCollection.AddApplicationModules();
-
-            var builder = new DbContextOptionsBuilder<DivingApplicationDbContext>().UseInMemoryDatabase();
-            var options = builder.Options;
-            var divingApplicationDbContext = new DivingApplicationDbContext(options);
 
             IUnitOfWork resolvedComponent = container.Resolve<IUnitOfWork>();
 
@@ -53,15 +50,11 @@ namespace DivingApplication.Tests.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveDatabaseSetWhenItIsCalledToDoSo()
+        public void InversionOfControlContainerMustResolveDatabaseSetWhenDatabaseSetIsNeeded()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
-            serviceCollection.AddDbContext<DivingApplicationDbContext>();
+            serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
             IContainer container = serviceCollection.AddApplicationModules();
-
-            var builder = new DbContextOptionsBuilder<DivingApplicationDbContext>().UseInMemoryDatabase();
-            var options = builder.Options;
-            var divingApplicationDbContext = new DivingApplicationDbContext(options);
 
             IDatabaseSet resolvedComponent = container.Resolve<IDatabaseSet>();
 
