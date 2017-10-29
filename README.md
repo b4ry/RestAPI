@@ -1,3 +1,3 @@
-# Diving application
+# Portfolio application
 
 More content coming soon!
