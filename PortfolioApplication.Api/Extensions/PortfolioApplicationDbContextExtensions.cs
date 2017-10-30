@@ -14,10 +14,10 @@ namespace PortfolioApplication.Api.Extensions
                 if (!portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Any())
                 {
                     portfolioApplicationDbContext.Set<TechnologyTypeEntity>().AddRange(
-                        new TechnologyTypeEntity("testFramework", TechnologyTypeEnum.Framework),
-                        new TechnologyTypeEntity("testLanguage", TechnologyTypeEnum.Language),
-                        new TechnologyTypeEntity("testMethodology", TechnologyTypeEnum.Methodology),
-                        new TechnologyTypeEntity("testTool", TechnologyTypeEnum.Tool)
+                        new TechnologyTypeEntity() { Name = "testFramework", TechnologyTypeEnum = TechnologyTypeEnum.Framework },
+                        new TechnologyTypeEntity() { Name = "testLanguage", TechnologyTypeEnum = TechnologyTypeEnum.Language },
+                        new TechnologyTypeEntity() { Name = "testMethodology", TechnologyTypeEnum = TechnologyTypeEnum.Methodology },
+                        new TechnologyTypeEntity() { Name = "testTool", TechnologyTypeEnum = TechnologyTypeEnum.Tool }
                         );
                 }
             }
