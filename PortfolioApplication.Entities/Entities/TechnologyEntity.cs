@@ -12,7 +12,7 @@ namespace PortfolioApplication.Entities.Entities
         public string Name { get; set; }
         
         [ForeignKey("TechnologyId")]
-        public List<ProjectTechnology> ProjectsTechnologies { get; set; }
+        public List<ProjectTechnologyJunctionEntity> ProjectsTechnologies { get; set; }
 
         [Required]
         public int TechnologyTypeId { get; set; }

@@ -17,7 +17,7 @@ namespace PortfolioApplication.Entities.Entities
         public string Description { get; set; }
 
         [ForeignKey("ProjectId")]
-        public IList<ProjectTechnology> ProjectsTechnologies { get; set; }
+        public IList<ProjectTechnologyJunctionEntity> ProjectsTechnologies { get; set; }
 
         [Required]
         public DateTime StartTime { get; set; }

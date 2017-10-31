@@ -8,11 +8,11 @@ namespace PortfolioApplication.Entities.Entities
     public class ExperienceEntity : BaseEntity
     {
         [Required]
-        [MaxLength(10)]
+        [MaxLength(20)]
         public string CompanyName { get; set; }
 
         [Required]
-        [MaxLength(10)]
+        [MaxLength(20)]
         public string Position { get; set; }
 
         [ForeignKey("ExperienceId")]

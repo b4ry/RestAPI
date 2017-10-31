@@ -78,7 +78,7 @@ namespace PortfolioApplication.Api
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
                     serviceScope.ServiceProvider.GetService<PortfolioApplicationDbContext>().Database.Migrate();
-                    serviceScope.ServiceProvider.GetService<PortfolioApplicationDbContext>().EnsureSeedData();
+                    serviceScope.ServiceProvider.GetService<PortfolioApplicationDbContext>().SeedData();
                 }
             }
             else

@@ -9,9 +9,10 @@ using PortfolioApplication.Entities.Enums;
 namespace PortfolioApplication.Migrations.Migrations
 {
     [DbContext(typeof(PortfolioApplicationDbContext))]
-    partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171031120646_ChangedExperienceEntitiesLengthRestrictions")]
+    partial class ChangedExperienceEntitiesLengthRestrictions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
