@@ -33,8 +33,15 @@ namespace PortfolioApplication.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<PortfolioApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("PortfolioApplication"),
+            services.AddDbContext<PortfolioApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("PortfolioDatabaseConnectionString"),
                 migr => migr.MigrationsAssembly("PortfolioApplication.Migrations")));
+
+            services.AddDistributedRedisCache(o =>
+            {
+                o.Configuration = Configuration.GetSection("RedisSettings")["RedisIP"];
+                o.InstanceName = Configuration.GetSection("RedisSettings")["RedisInstanceName"];
+            });
+
             // Add framework services.
             services.AddMvc();
 

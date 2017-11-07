@@ -11,18 +11,24 @@ namespace PortfolioApplication.Api.Controllers
     {
 
         private readonly IDivingGearTypeQuery _divingGearTypeQuery;
+        private readonly ITechnologyTypeEntityQuery _technologyTypeEntityQuery;
         private readonly ICommandBus _commandBus;
 
-        public DivingGearController(IDivingGearTypeQuery divingGearTypeQuery, ICommandBus commandBus)
+        public DivingGearController(
+            ITechnologyTypeEntityQuery technologyTypeEntityQuery, 
+            IDivingGearTypeQuery divingGearTypeQuery, 
+            ICommandBus commandBus)
         {
             _divingGearTypeQuery = divingGearTypeQuery;
             _commandBus = commandBus;
+            _technologyTypeEntityQuery = technologyTypeEntityQuery;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetDivingGearTypes()
         {
-            return new JsonResult(await _divingGearTypeQuery.GetDivingGearTypesAsync());
+            var a = await _technologyTypeEntityQuery.Get(1);
+            return new JsonResult(a);
         }
     }
 }

@@ -1,11 +1,10 @@
 ﻿using PortfolioApplication.Entities.Entities;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PortfolioApplication.Services.CQRS.Queries
 {
-    public interface IDivingGearQuery : IQuery
+    public interface ITechnologyTypeEntityQuery
     {
-        Task<IList<DivingGear>> GetDivingGearsAsync();
+        Task<TechnologyTypeEntity> Get(int id);
     }
 }
