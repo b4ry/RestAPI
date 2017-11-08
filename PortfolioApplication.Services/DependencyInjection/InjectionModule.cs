@@ -55,7 +55,7 @@ namespace PortfolioApplication.Services.DependencyInjection
             var repositoryAssembly = typeof(TechnologyTypeEntityQuery).GetTypeInfo().Assembly;
 
             builder.RegisterAssemblyTypes(repositoryAssembly)
-                .Where(t => t.Name.EndsWith("Query"))
+                .Where(t => (t.Name.EndsWith("Query") && t.Name != "Query"))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
         }
