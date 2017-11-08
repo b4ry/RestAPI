@@ -5,6 +5,7 @@ using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace PortfolioApplication.Services.CQRS.Queries
 {
@@ -24,24 +25,40 @@ namespace PortfolioApplication.Services.CQRS.Queries
         public async Task<TEntity> Get(int id)
         {
             string key = ComposeRedisKey(typeof(TEntity).Name, id.ToString());
-            string serializedEntity = await RedisCache.GetStringAsync(key);
+            string cachedEntity = await RedisCache.GetStringAsync(key);
 
-            if (string.IsNullOrEmpty(serializedEntity))
+            if (string.IsNullOrEmpty(cachedEntity))
             {
                 try
                 {
                     var retrievedEntity = await EntitySet.SingleAsync(x => x.Id == id);
-                    serializedEntity = JsonConvert.SerializeObject(retrievedEntity);
+                    cachedEntity = JsonConvert.SerializeObject(retrievedEntity);
 
-                    await RedisCache.SetStringAsync(key, serializedEntity);
+                    await RedisCache.SetStringAsync(key, cachedEntity);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     throw new NotImplementedException(e.Message);
                 }
             }
 
-            return JsonConvert.DeserializeObject<TEntity>(serializedEntity.ToString());
+            return JsonConvert.DeserializeObject<TEntity>(cachedEntity);
+        }
+
+        public async Task<IEnumerable<TEntity>> Get()
+        {
+            string key = ComposeRedisKey(typeof(TEntity).Name, "*");
+            string cachedEntities = await RedisCache.GetStringAsync(key);
+
+            if (string.IsNullOrEmpty(cachedEntities))
+            {
+                var retrievedEntities = await EntitySet.ToListAsync();
+                cachedEntities = JsonConvert.SerializeObject(retrievedEntities);
+
+                await RedisCache.SetStringAsync(key, cachedEntities);
+            }
+
+            return JsonConvert.DeserializeObject<IEnumerable<TEntity>>(cachedEntities);
         }
 
         private string ComposeRedisKey(string entityTypeName, string id)

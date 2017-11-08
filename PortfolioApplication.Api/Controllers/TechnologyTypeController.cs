@@ -2,12 +2,13 @@
 using Microsoft.AspNetCore.Mvc;
 using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Services.CQRS.Queries;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.Controllers
 {
     /// <summary>
-    /// Controller processing requests for TechnologyType entities. Produces json output.
+    /// Controller processing requests for TechnologyType entities. Produces JSON output.
     /// </summary>
     [Produces("application/json")]
     [Route("api/[controller]/[action]")]
@@ -26,10 +27,10 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get to retrieve TechnologyType entity by its id
+        /// Get endpoint retrieving TechnologyType entity by its id
         /// </summary>
         /// <param name="id"> Identification number of TechnologyType entity </param>
-        /// <returns></returns>
+        /// <returns> TechnologyEntity in JSON format </returns>
         [HttpGet]
         public async Task<IActionResult> GetTechnologyTypeById(int id)
         {
@@ -37,6 +38,19 @@ namespace PortfolioApplication.Api.Controllers
             var technologyTypeDto = Mapper.Map<TechnologyTypeDto>(technologyTypeEntity);
 
             return new JsonResult(technologyTypeDto);
+        }
+
+        /// <summary>
+        /// Get endpoint retrieving all TechnologyType entities
+        /// </summary>
+        /// <returns> TechnologyEntity collection in JSON format </returns>
+        [HttpGet]
+        public async Task<IActionResult> GetTechnologyTypes()
+        {
+            var technologyTypeEntities = await _technologyTypeEntityQuery.Get();
+            var technologyTypeDtos = Mapper.Map<IEnumerable<TechnologyTypeDto>>(technologyTypeEntities);
+
+            return new JsonResult(technologyTypeDtos);
         }
     }
 }
