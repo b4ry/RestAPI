@@ -6,7 +6,7 @@ namespace PortfolioApplication.Api.Mappings
 {
     internal class TechnologyTypeProfile : Profile
     {
-        internal TechnologyTypeProfile()
+        public TechnologyTypeProfile()
         {
             CreateMap<TechnologyTypeEntity, TechnologyTypeDto>().ReverseMap();
         }

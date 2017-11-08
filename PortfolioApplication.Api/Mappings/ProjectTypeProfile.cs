@@ -6,7 +6,7 @@ namespace PortfolioApplication.Api.Mappings
 {
     internal class ProjectTypeProfile : Profile
     {
-        internal ProjectTypeProfile()
+        public ProjectTypeProfile()
         {
             CreateMap<ProjectTypeEntity, ProjectTypeDto>().ReverseMap();
         }
