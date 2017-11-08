@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace PortfolioApplication.Api.Mappings
 {
-    public class AutoMapperConfiguration
+    internal class AutoMapperConfiguration
     {
-        public static void Configure()
+        internal static void Configure()
         {
             var profiles = typeof(Startup).GetTypeInfo().Assembly.GetTypes().Where(x => typeof(Profile).IsAssignableFrom(x));
 

@@ -5,9 +5,9 @@ using System.Linq;
 
 namespace PortfolioApplication.Api.Extensions
 {
-    public static class DbContextExtensions
+    internal static class DbContextExtensions
     {
-        public static bool AllMigrationsApplied(this DbContext context)
+        internal static bool AllMigrationsApplied(this DbContext context)
         {
             var applied = context.GetService<IHistoryRepository>()
                 .GetAppliedMigrations()

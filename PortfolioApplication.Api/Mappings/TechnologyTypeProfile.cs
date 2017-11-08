@@ -4,15 +4,9 @@ using PortfolioApplication.Entities.Entities;
 
 namespace PortfolioApplication.Api.Mappings
 {
-    /// <summary>
-    /// Mapping profile for TechnologyType entity
-    /// </summary>
     internal class TechnologyTypeProfile : Profile
     {
-        /// <summary>
-        /// TechnologyTypeProfile constructor
-        /// </summary>
-        public TechnologyTypeProfile()
+        internal TechnologyTypeProfile()
         {
             CreateMap<TechnologyTypeEntity, TechnologyTypeDto>().ReverseMap();
         }

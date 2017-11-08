@@ -18,10 +18,9 @@ namespace PortfolioApplication.Tests.DependencyInjection
         public void UnitOfWorkMustBeRegisteredWhenInversionOfControlContainerIsRegistered()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
-            IComponentRegistration componentRegistration = null;
             var container = serviceCollection.AddApplicationModules();
 
-            container.ComponentRegistry.TryGetRegistration(new TypedService(typeof(IUnitOfWork)), out componentRegistration);
+            container.ComponentRegistry.TryGetRegistration(new TypedService(typeof(IUnitOfWork)), out IComponentRegistration componentRegistration);
 
             Assert.Equal(componentRegistration.Activator.LimitType.FullName, typeof(UnitOfWork).FullName);
         }
@@ -42,10 +41,9 @@ namespace PortfolioApplication.Tests.DependencyInjection
         public void DatabaseSetMustBeRegisteredWhenInversionOfControlContainerIsRegistered()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
-            IComponentRegistration componentRegistration = null;
             var container = serviceCollection.AddApplicationModules();
 
-            container.ComponentRegistry.TryGetRegistration(new TypedService(typeof(IDatabaseSet)), out componentRegistration);
+            container.ComponentRegistry.TryGetRegistration(new TypedService(typeof(IDatabaseSet)), out IComponentRegistration componentRegistration);
 
             Assert.Equal(componentRegistration.Activator.LimitType.FullName, typeof(DatabaseSet).FullName);
         }

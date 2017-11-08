@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Builder;
 
 namespace PortfolioApplication.Api.Extensions
 {
-    public static class AppBuilderExtensions
+    internal static class AppBuilderExtensions
     {
-        public static void UseAutoMapper(this IApplicationBuilder app)
+        internal static void UseAutoMapper(this IApplicationBuilder app)
         {
             AutoMapperConfiguration.Configure();
         }

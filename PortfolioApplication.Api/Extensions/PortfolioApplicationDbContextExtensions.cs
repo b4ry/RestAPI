@@ -7,9 +7,9 @@ using System.Linq;
 
 namespace PortfolioApplication.Api.Extensions
 {
-    public static class PortfolioApplicationDbContextExtensions
+    internal static class PortfolioApplicationDbContextExtensions
     {
-        public static void SeedData(this PortfolioApplicationDbContext portfolioApplicationDbContext)
+        internal static void SeedData(this PortfolioApplicationDbContext portfolioApplicationDbContext)
         {
             if (portfolioApplicationDbContext.AllMigrationsApplied())
             {
