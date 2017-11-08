@@ -57,8 +57,8 @@ namespace PortfolioApplication.Api
                 c.SwaggerDoc("v1",
                     new Info
                     {
-                        Title = "PortfolioApplication API",
-                        Description = "PortfolioApplication API description",
+                        Title = "PortfolioApplication Web API",
+                        Description = "PortfolioApplication API exposing endpoints to manipulate application's business objects",
                         Version = "v1"
                     });
 
@@ -94,11 +94,8 @@ namespace PortfolioApplication.Api
             }
 
             app.UseCors("AllowSpecificOrigin");
-            app.UseMvc();
-
             app.UseAutoMapper();
-
-            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseMvc();
             app.UseSwagger();
 
             // Enable middleware to serve swagger-ui (HTML, JS, CSS etc.), specifying the Swagger JSON endpoint.

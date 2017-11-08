@@ -3,18 +3,18 @@
 namespace PortfolioApplication.Api.DataTransferObjects
 {
     /// <summary>
-    /// Data transfer object for TechnologyType entity
+    /// Data transfer object for ProjectType entity
     /// </summary>
-    public class TechnologyTypeDto 
+    public class ProjectTypeDto
     {
         /// <summary>
-        /// TechnologyType name
+        /// ProjectType name
         /// </summary>
         public string Name { get; set; }
 
         /// <summary>
-        /// TechnologyType enumeration object
+        /// ProjectType enumeration object
         /// </summary>
-        public TechnologyTypeEnum TechnologyTypeEnum { get; set; }
+        public ProjectTypeEnum ProjectTypeEnum { get; set; }
     }
 }
