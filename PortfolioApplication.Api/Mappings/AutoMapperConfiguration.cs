@@ -5,9 +5,15 @@ using System.Reflection;
 
 namespace PortfolioApplication.Api.Mappings
 {
-    internal class AutoMapperConfiguration
+    /// <summary>
+    /// Static class used to configure AutoMapper
+    /// </summary>
+    public static class AutoMapperConfiguration
     {
-        internal static void Configure()
+        /// <summary>
+        /// Configure method to register dynamically all of the application's profiles
+        /// </summary>
+        public static void Configure()
         {
             var profiles = typeof(Startup).GetTypeInfo().Assembly.GetTypes().Where(x => typeof(Profile).IsAssignableFrom(x));
 

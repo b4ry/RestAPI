@@ -14,14 +14,14 @@ namespace PortfolioApplication.Api.Controllers
     [Route("api/[controller]/[action]")]
     public class ProjectTypeController : Controller
     {
-        private readonly IProjectTypeEntityQuery _projectTypeEntityQuery;
+        private readonly IProjectTypeQuery _projectTypeEntityQuery;
 
         /// <summary>
         /// ProjectTypeController constructor
         /// </summary>
         /// <param name="projectTypeEntityQuery"> Query consumed to retrieve ProjectType entities </param>
         public ProjectTypeController(
-            IProjectTypeEntityQuery projectTypeEntityQuery)
+            IProjectTypeQuery projectTypeEntityQuery)
         {
             _projectTypeEntityQuery = projectTypeEntityQuery;
         }

@@ -4,9 +4,9 @@ using PortfolioApplication.Services.DatabaseContext;
 
 namespace PortfolioApplication.Services.CQRS.Queries
 {
-    public class ProjectTypeEntityQuery : Query<ProjectTypeEntity>, IProjectTypeEntityQuery
+    public class TechnologyTypeQuery : Query<TechnologyTypeEntity>, ITechnologyTypeQuery
     {
-        public ProjectTypeEntityQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) : base(databaseSet, redisCache)
+        public TechnologyTypeQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) : base(databaseSet, redisCache)
         {
         }
     }

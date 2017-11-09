@@ -52,7 +52,7 @@ namespace PortfolioApplication.Services.DependencyInjection
 
         private void RegisterQueries(ContainerBuilder builder)
         {
-            var repositoryAssembly = typeof(TechnologyTypeEntityQuery).GetTypeInfo().Assembly;
+            var repositoryAssembly = typeof(TechnologyTypeQuery).GetTypeInfo().Assembly;
 
             builder.RegisterAssemblyTypes(repositoryAssembly)
                 .Where(t => (t.Name.EndsWith("Query") && t.Name != "Query"))

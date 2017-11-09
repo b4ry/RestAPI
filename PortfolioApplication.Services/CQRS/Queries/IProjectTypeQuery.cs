@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace PortfolioApplication.Services.CQRS.Queries
 {
-    public interface ITechnologyTypeEntityQuery
+    public interface IProjectTypeQuery
     {
-        Task<TechnologyTypeEntity> Get(int id);
-        Task<IEnumerable<TechnologyTypeEntity>> Get();
+        Task<ProjectTypeEntity> Get(int id);
+        Task<IEnumerable<ProjectTypeEntity>> Get();
     }
 }

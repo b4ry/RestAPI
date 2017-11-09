@@ -14,14 +14,14 @@ namespace PortfolioApplication.Api.Controllers
     [Route("api/[controller]/[action]")]
     public class TechnologyTypeController : Controller
     {
-        private readonly ITechnologyTypeEntityQuery _technologyTypeEntityQuery;
+        private readonly ITechnologyTypeQuery _technologyTypeEntityQuery;
 
         /// <summary>
         /// TechnologyTypeController constructor
         /// </summary>
         /// <param name="technologyTypeEntityQuery"> Query consumed to retrieve TechnologyType entities </param>
         public TechnologyTypeController(
-            ITechnologyTypeEntityQuery technologyTypeEntityQuery)
+            ITechnologyTypeQuery technologyTypeEntityQuery)
         {
             _technologyTypeEntityQuery = technologyTypeEntityQuery;
         }

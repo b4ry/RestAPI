@@ -1,16 +1,16 @@
 ﻿using Autofac;
 using Autofac.Core;
-using PortfolioApplication.Api.Extensions;
-using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using Xunit;
-using System.Reflection;
-using System.Linq;
+using PortfolioApplication.Api.Extensions;
 using PortfolioApplication.Services.CQRS.Queries;
+using PortfolioApplication.Services.DatabaseContext;
+using System;
+using System.Linq;
+using System.Reflection;
+using Xunit;
 
-namespace PortfolioApplication.Tests.DependencyInjection
+namespace PortfolioApplication.Tests.Services.DependencyInjection
 {
     public class TestDependencyInjection
     {
@@ -104,9 +104,9 @@ namespace PortfolioApplication.Tests.DependencyInjection
             });
             var container = serviceCollection.AddApplicationModules();
             
-            var resolvedComponent = container.Resolve<ITechnologyTypeEntityQuery>();
+            var resolvedComponent = container.Resolve<ITechnologyTypeQuery>();
 
-            Assert.IsType(typeof(TechnologyTypeEntityQuery), resolvedComponent);
+            Assert.IsType(typeof(TechnologyTypeQuery), resolvedComponent);
         }
 
         [Fact]
@@ -121,9 +121,9 @@ namespace PortfolioApplication.Tests.DependencyInjection
             });
             var container = serviceCollection.AddApplicationModules();
 
-            var resolvedComponent = container.Resolve<IProjectTypeEntityQuery>();
+            var resolvedComponent = container.Resolve<IProjectTypeQuery>();
 
-            Assert.IsType(typeof(ProjectTypeEntityQuery), resolvedComponent);
+            Assert.IsType(typeof(ProjectTypeQuery), resolvedComponent);
         }
     }
 }
