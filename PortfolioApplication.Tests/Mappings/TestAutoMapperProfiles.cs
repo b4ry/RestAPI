@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
-using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Api.Mappings;
-using PortfolioApplication.Entities.Entities;
 using System.Linq;
 using System.Reflection;
 using Xunit;
@@ -33,22 +31,6 @@ namespace PortfolioApplication.Tests.Mappings
             }
 
             Assert.True(allProfilesRegistered, "Did not register all of the application's mapping profiles");
-        }
-
-        [Fact]
-        public void TechnologyTypeEntityToTechnologyTypeDtoReverseMappingConfigurationMustBeValid()
-        {
-            Mapper.Initialize(cfg => cfg.CreateMap<TechnologyTypeEntity, TechnologyTypeDto>().ReverseMap());
-
-            Mapper.Configuration.AssertConfigurationIsValid();
-        }
-
-        [Fact]
-        public void ProjectTypeEntityToProjectTypeDtoReverseMappingConfigurationMustBeValid()
-        {
-            Mapper.Initialize(cfg => cfg.CreateMap<ProjectTypeEntity, ProjectTypeDto>().ReverseMap());
-
-            Mapper.Configuration.AssertConfigurationIsValid();
         }
     }
 }
