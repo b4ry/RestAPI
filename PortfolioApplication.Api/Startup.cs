@@ -12,6 +12,7 @@ using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
+using NetEscapades.AspNetCore.SecurityHeaders;
 
 namespace PortfolioApplication.Api
 {
@@ -42,8 +43,7 @@ namespace PortfolioApplication.Api
                 o.InstanceName = Configuration.GetSection("RedisSettings")["RedisInstanceName"];
             });
 
-            // Add framework services.
-            services.AddMvc();
+            services.AddCustomHeaders();
 
             services.AddCors(options =>
             {
@@ -51,6 +51,8 @@ namespace PortfolioApplication.Api
                     builder => builder.WithOrigins("http://localhost:64315")
                     .AllowAnyHeader());
             });
+
+            services.AddMvc();
 
             services.AddSwaggerGen(c =>
             {
@@ -92,6 +94,12 @@ namespace PortfolioApplication.Api
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseCustomHeadersMiddleware(
+                    new HeaderPolicyCollection()
+                    .AddFrameOptionsSameOrigin()
+                    .AddXssProtectionBlock()
+                    .AddContentTypeOptionsNoSniff());
 
             app.UseCors("AllowSpecificOrigin");
             app.UseAutoMapper();
