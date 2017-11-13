@@ -40,17 +40,10 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectTypeById([Required]int id)
         {
-            try
-            {
-                var projectTypeEntity = await _projectTypeEntityQuery.Get(id);
-                var projectTypeDto = Mapper.Map<ProjectTypeDto>(projectTypeEntity);
+            var projectTypeEntity = await _projectTypeEntityQuery.Get(id);
+            var projectTypeDto = Mapper.Map<ProjectTypeDto>(projectTypeEntity);
 
-                return new JsonResult(projectTypeDto);
-            }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            return new JsonResult(projectTypeDto);
 
         }
 
@@ -63,17 +56,10 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProjectTypes()
         {
-            try
-            {
-                var projectTypeEntities = await _projectTypeEntityQuery.Get();
-                var projectTypeDtos = Mapper.Map<IEnumerable<ProjectTypeDto>>(projectTypeEntities);
+            var projectTypeEntities = await _projectTypeEntityQuery.Get();
+            var projectTypeDtos = Mapper.Map<IEnumerable<ProjectTypeDto>>(projectTypeEntities);
 
-                return new JsonResult(projectTypeDtos);
-            }
-            catch(EmptyCollectionException e)
-            {
-                return NotFound(e.Message);
-            }
+            return new JsonResult(projectTypeDtos);
         }
     }
 }

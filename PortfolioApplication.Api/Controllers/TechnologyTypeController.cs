@@ -40,17 +40,10 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetTechnologyTypeById([Required]int id)
         {
-            try
-            {
-                var technologyTypeEntity = await _technologyTypeEntityQuery.Get(id);
-                var technologyTypeDto = Mapper.Map<TechnologyTypeDto>(technologyTypeEntity);
+            var technologyTypeEntity = await _technologyTypeEntityQuery.Get(id);
+            var technologyTypeDto = Mapper.Map<TechnologyTypeDto>(technologyTypeEntity);
 
-                return new JsonResult(technologyTypeDto);
-            }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
+            return new JsonResult(technologyTypeDto);
         }
 
         /// <summary>
@@ -62,17 +55,10 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTechnologyTypes()
         {
-            try
-            { 
-                var technologyTypeEntities = await _technologyTypeEntityQuery.Get();
-                var technologyTypeDtos = Mapper.Map<IEnumerable<TechnologyTypeDto>>(technologyTypeEntities);
+            var technologyTypeEntities = await _technologyTypeEntityQuery.Get();
+            var technologyTypeDtos = Mapper.Map<IEnumerable<TechnologyTypeDto>>(technologyTypeEntities);
 
-                return new JsonResult(technologyTypeDtos);
-            }
-            catch(EmptyCollectionException e)
-            {
-                return NotFound(e.Message);
-            }
+            return new JsonResult(technologyTypeDtos);
         }
     }
 }

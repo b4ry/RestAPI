@@ -13,6 +13,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
 using NetEscapades.AspNetCore.SecurityHeaders;
+using PortfolioApplication.Services.Exceptions;
 
 namespace PortfolioApplication.Api
 {
@@ -103,6 +104,7 @@ namespace PortfolioApplication.Api
 
             app.UseCors("AllowSpecificOrigin");
             app.UseAutoMapper();
+            app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseMvc();
             app.UseSwagger();
 
