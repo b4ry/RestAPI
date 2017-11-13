@@ -6,6 +6,8 @@ using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
+using Microsoft.Extensions.Logging;
+using PortfolioApplication.Services.Exceptions;
 
 namespace PortfolioApplication.Services.CQRS.Queries
 {
@@ -14,12 +16,14 @@ namespace PortfolioApplication.Services.CQRS.Queries
         protected IDatabaseSet DatabaseSet { get; }
         protected DbSet<TEntity> EntitySet { get; }
         protected IDistributedCache RedisCache { get; }
+        protected ILogger<TEntity> Logger { get; }
 
-        public Query(IDatabaseSet databaseSet, IDistributedCache redisCache)
+        public Query(IDatabaseSet databaseSet, IDistributedCache redisCache, ILogger<TEntity> logger)
         {
             DatabaseSet = databaseSet;
             EntitySet = DatabaseSet.Set<TEntity>();
             RedisCache = redisCache;
+            Logger = logger;
         }
 
         public async Task<TEntity> Get(int id)
@@ -38,7 +42,9 @@ namespace PortfolioApplication.Services.CQRS.Queries
                 }
                 catch (Exception e)
                 {
-                    throw new NotImplementedException(e.Message);
+                    Logger.LogError(e, $"Could not retrieve entity (id: '{id}') from database.");
+
+                    throw new KeyNotFoundException($"Could not retrieve entity (id: '{id}') from database.");
                 }
             }
 
@@ -52,10 +58,19 @@ namespace PortfolioApplication.Services.CQRS.Queries
 
             if (string.IsNullOrEmpty(cachedEntities))
             {
-                var retrievedEntities = await EntitySet.ToListAsync();
-                cachedEntities = JsonConvert.SerializeObject(retrievedEntities);
+                if (await EntitySet.CountAsync() > 0)
+                {
+                    var retrievedEntities = await EntitySet.ToListAsync();
+                    cachedEntities = JsonConvert.SerializeObject(retrievedEntities);
 
-                await RedisCache.SetStringAsync(key, cachedEntities);
+                    await RedisCache.SetStringAsync(key, cachedEntities);
+                }
+                else
+                {
+                    Logger.LogInformation($"Collection is empty.");
+
+                    throw new EmptyCollectionException($"Collection is empty.");
+                }
             }
 
             return JsonConvert.DeserializeObject<IEnumerable<TEntity>>(cachedEntities);
