@@ -101,7 +101,7 @@ namespace PortfolioApplication.Api
                     .AddFrameOptionsSameOrigin()
                     .AddXssProtectionBlock()
                     .AddContentTypeOptionsNoSniff());
-
+            
             app.UseCors("AllowSpecificOrigin");
             app.UseAutoMapper();
             app.UseMiddleware<ErrorHandlingMiddleware>();

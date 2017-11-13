@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Services.CQRS.Queries;
-using PortfolioApplication.Services.Exceptions;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
