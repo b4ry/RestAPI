@@ -14,7 +14,7 @@ namespace PortfolioApplication.Tests.Services.DatabaseContext
         [Fact]
         public void DbContextMustCreateDynamicallyAllModelEntitiesOnItsOwnCreation()
         {
-            var builder = new DbContextOptionsBuilder<PortfolioApplicationDbContext>().UseInMemoryDatabase();
+            var builder = new DbContextOptionsBuilder<PortfolioApplicationDbContext>().UseInMemoryDatabase("testInMemoryDatabase");
             var options = builder.Options;
             var portfolioApplicationDbContext = new PortfolioApplicationDbContext(options);
             var allModelEntitiesCreated = true;

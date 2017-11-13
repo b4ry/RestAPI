@@ -34,7 +34,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
 
             IUnitOfWork resolvedComponent = container.Resolve<IUnitOfWork>();
 
-            Assert.IsType(typeof(UnitOfWork), resolvedComponent);
+            Assert.IsType<UnitOfWork>(resolvedComponent);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
 
             IDatabaseSet resolvedComponent = container.Resolve<IDatabaseSet>();
 
-            Assert.IsType(typeof(DatabaseSet), resolvedComponent);
+            Assert.IsType<DatabaseSet>(resolvedComponent);
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
             
             var resolvedComponent = container.Resolve<ITechnologyTypeQuery>();
 
-            Assert.IsType(typeof(TechnologyTypeQuery), resolvedComponent);
+            Assert.IsType<TechnologyTypeQuery>(resolvedComponent);
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
 
             var resolvedComponent = container.Resolve<IProjectTypeQuery>();
 
-            Assert.IsType(typeof(ProjectTypeQuery), resolvedComponent);
+            Assert.IsType<ProjectTypeQuery>(resolvedComponent);
         }
     }
 }
