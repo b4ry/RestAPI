@@ -1,7 +1,5 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using PortfolioApplication.Api.Extensions;
-using PortfolioApplication.Services.DatabaseContext;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +7,13 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
+using NetEscapades.AspNetCore.SecurityHeaders;
+using PortfolioApplication.Api.Extensions;
+using PortfolioApplication.Middlewares;
+using PortfolioApplication.Services.DatabaseContext;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;
-using NetEscapades.AspNetCore.SecurityHeaders;
-using PortfolioApplication.Services.Exceptions;
 
 namespace PortfolioApplication.Api
 {

@@ -35,7 +35,7 @@ namespace PortfolioApplication.Api.Controllers
         /// <param name="id"> Identification number of TechnologyType entity </param>
         /// <returns> TechnologyEntity in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(TechnologyTypeDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetTechnologyTypeById([Required]int id)
         {
@@ -50,7 +50,7 @@ namespace PortfolioApplication.Api.Controllers
         /// </summary>
         /// <returns> TechnologyEntity collection in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<TechnologyTypeDto>))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetTechnologyTypes()
         {

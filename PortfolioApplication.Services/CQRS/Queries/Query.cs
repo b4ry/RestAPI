@@ -3,11 +3,10 @@ using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
-using System;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using Microsoft.Extensions.Logging;
 using PortfolioApplication.Services.Exceptions;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace PortfolioApplication.Services.CQRS.Queries
 {
@@ -16,14 +15,12 @@ namespace PortfolioApplication.Services.CQRS.Queries
         protected IDatabaseSet DatabaseSet { get; }
         protected DbSet<TEntity> EntitySet { get; }
         protected IDistributedCache RedisCache { get; }
-        protected ILogger<TEntity> Logger { get; }
 
-        public Query(IDatabaseSet databaseSet, IDistributedCache redisCache, ILogger<TEntity> logger)
+        public Query(IDatabaseSet databaseSet, IDistributedCache redisCache)
         {
             DatabaseSet = databaseSet;
             EntitySet = DatabaseSet.Set<TEntity>();
             RedisCache = redisCache;
-            Logger = logger;
         }
 
         public async Task<TEntity> Get(int id)
@@ -42,9 +39,7 @@ namespace PortfolioApplication.Services.CQRS.Queries
                 }
                 catch (Exception e)
                 {
-                    Logger.LogError(e, $"Could not retrieve entity (id: '{id}') from database.");
-
-                    throw new KeyNotFoundException($"Could not retrieve entity (id: '{id}') from database.");
+                    throw new KeyNotFoundException($"Could not retrieve entity (id: '{id}', type: '{typeof(TEntity).Name}') from database.");
                 }
             }
 
@@ -67,9 +62,7 @@ namespace PortfolioApplication.Services.CQRS.Queries
                 }
                 else
                 {
-                    Logger.LogInformation("Collection is empty.");
-
-                    throw new EmptyCollectionException("Collection is empty.");
+                    throw new EmptyCollectionException($"Collection of '{typeof(TEntity).Name}' is empty.");
                 }
             }
 
