@@ -67,9 +67,9 @@ namespace PortfolioApplication.Services.CQRS.Queries
                 }
                 else
                 {
-                    Logger.LogInformation($"Collection is empty.");
+                    Logger.LogInformation("Collection is empty.");
 
-                    throw new EmptyCollectionException($"Collection is empty.");
+                    throw new EmptyCollectionException("Collection is empty.");
                 }
             }
 
