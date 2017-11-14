@@ -31,28 +31,29 @@ namespace PortfolioApplication.Middlewares
             }
         }
 
-        private Task HandleExceptionAsync(HttpContext context, Exception e)
+        private async Task HandleExceptionAsync(HttpContext context, Exception e)
         {
             if (e is KeyNotFoundException)
             {
-                _logger.LogError(e, e.Message);
+                _logger.LogError(exception: e, message: e.Message);
                 context.Response.StatusCode = StatusCodes.Status404NotFound;
             }
             else if(e is EmptyCollectionException)
             {
-                _logger.LogInformation(e.Message);
+                _logger.LogInformation(exception: e, message: e.Message);
                 context.Response.StatusCode = StatusCodes.Status204NoContent;
             }
             else
             {
-                _logger.LogError("Something bad is happening here!");
+
+                _logger.LogError(exception: e, message: e.Message);
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
 
             context.Response.ContentType = "application/json";
             var response = JsonConvert.SerializeObject(new { errorMessage = e.Message });
 
-            return context.Response.WriteAsync(response);
+            await context.Response.WriteAsync(response);
         }
     }
 }
