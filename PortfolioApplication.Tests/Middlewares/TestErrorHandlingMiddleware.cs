@@ -27,7 +27,7 @@ namespace PortfolioApplication.Tests.Middlewares
             var context = new DefaultHttpContext();
             context.Response.Body = new MemoryStream();
 
-            errorHandlingMiddleware.Invoke(context);
+            await errorHandlingMiddleware.Invoke(context);
             
             var responseMessage = "";
             var expectedMessage = JsonConvert.SerializeObject(new { errorMessage = "Entity not found" });
@@ -58,7 +58,7 @@ namespace PortfolioApplication.Tests.Middlewares
             var context = new DefaultHttpContext();
             context.Response.Body = new MemoryStream();
 
-            errorHandlingMiddleware.Invoke(context);
+            await errorHandlingMiddleware.Invoke(context);
 
             var responseMessage = "";
             var expectedMessage = JsonConvert.SerializeObject(new { errorMessage = "Collection is empty" });
