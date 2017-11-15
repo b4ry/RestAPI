@@ -17,7 +17,7 @@ namespace PortfolioApplication.Api.Controllers
     [Route("api/[controller]/[action]")]
     public class ProjectTypeController : Controller
     {
-        private readonly IProjectTypeQuery _projectTypeEntityQuery;
+        private readonly IProjectTypeQuery _projectTypeQuery;
 
         /// <summary>
         /// ProjectTypeController constructor
@@ -26,7 +26,7 @@ namespace PortfolioApplication.Api.Controllers
         public ProjectTypeController(
             IProjectTypeQuery projectTypeEntityQuery)
         {
-            _projectTypeEntityQuery = projectTypeEntityQuery;
+            _projectTypeQuery = projectTypeEntityQuery;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectTypeById([Required]int id)
         {
-            var projectTypeEntity = await _projectTypeEntityQuery.Get(id);
+            var projectTypeEntity = await _projectTypeQuery.Get(id);
             var projectTypeDto = Mapper.Map<ProjectTypeDto>(projectTypeEntity);
 
             return new JsonResult(projectTypeDto);
@@ -51,11 +51,11 @@ namespace PortfolioApplication.Api.Controllers
         /// </summary>
         /// <returns> ProjectType collection in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<ProjectTypeDto>))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetProjectTypes()
         {
-            var projectTypeEntities = await _projectTypeEntityQuery.Get();
+            var projectTypeEntities = await _projectTypeQuery.Get();
             var projectTypeDtos = Mapper.Map<IEnumerable<ProjectTypeDto>>(projectTypeEntities);
 
             return new JsonResult(projectTypeDtos);

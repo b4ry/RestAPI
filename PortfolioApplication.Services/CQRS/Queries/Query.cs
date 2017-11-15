@@ -23,7 +23,7 @@ namespace PortfolioApplication.Services.CQRS.Queries
             RedisCache = redisCache;
         }
 
-        public async Task<TEntity> Get(int id)
+        public virtual async Task<TEntity> Get(int id)
         {
             string key = ComposeRedisKey(typeof(TEntity).Name, id.ToString());
             string cachedEntity = await RedisCache.GetStringAsync(key);
@@ -37,7 +37,7 @@ namespace PortfolioApplication.Services.CQRS.Queries
 
                     await RedisCache.SetStringAsync(key, cachedEntity);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new KeyNotFoundException($"Could not retrieve entity (id: '{id}', type: '{typeof(TEntity).Name}') from database.");
                 }
@@ -46,7 +46,7 @@ namespace PortfolioApplication.Services.CQRS.Queries
             return JsonConvert.DeserializeObject<TEntity>(cachedEntity);
         }
 
-        public async Task<IEnumerable<TEntity>> Get()
+        public virtual async Task<IEnumerable<TEntity>> Get()
         {
             string key = ComposeRedisKey(typeof(TEntity).Name, "*");
             string cachedEntities = await RedisCache.GetStringAsync(key);
@@ -69,7 +69,7 @@ namespace PortfolioApplication.Services.CQRS.Queries
             return JsonConvert.DeserializeObject<IEnumerable<TEntity>>(cachedEntities);
         }
 
-        private string ComposeRedisKey(string entityTypeName, string id)
+        protected string ComposeRedisKey(string entityTypeName, string id)
         {
             return entityTypeName + ":" + id;
         }

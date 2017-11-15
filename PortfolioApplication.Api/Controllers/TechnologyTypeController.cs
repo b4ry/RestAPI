@@ -17,7 +17,7 @@ namespace PortfolioApplication.Api.Controllers
     [Route("api/[controller]/[action]")]
     public class TechnologyTypeController : Controller
     {
-        private readonly ITechnologyTypeQuery _technologyTypeEntityQuery;
+        private readonly ITechnologyTypeQuery _technologyTypeQuery;
 
         /// <summary>
         /// TechnologyTypeController constructor
@@ -26,7 +26,7 @@ namespace PortfolioApplication.Api.Controllers
         public TechnologyTypeController(
             ITechnologyTypeQuery technologyTypeEntityQuery)
         {
-            _technologyTypeEntityQuery = technologyTypeEntityQuery;
+            _technologyTypeQuery = technologyTypeEntityQuery;
         }
 
         /// <summary>
@@ -35,11 +35,11 @@ namespace PortfolioApplication.Api.Controllers
         /// <param name="id"> Identification number of TechnologyType entity </param>
         /// <returns> TechnologyEntity in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(TechnologyTypeDto))]
-        [SwaggerResponse((int)HttpStatusCode.NoContent)]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetTechnologyTypeById([Required]int id)
         {
-            var technologyTypeEntity = await _technologyTypeEntityQuery.Get(id);
+            var technologyTypeEntity = await _technologyTypeQuery.Get(id);
             var technologyTypeDto = Mapper.Map<TechnologyTypeDto>(technologyTypeEntity);
 
             return new JsonResult(technologyTypeDto);
@@ -54,7 +54,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTechnologyTypes()
         {
-            var technologyTypeEntities = await _technologyTypeEntityQuery.Get();
+            var technologyTypeEntities = await _technologyTypeQuery.Get();
             var technologyTypeDtos = Mapper.Map<IEnumerable<TechnologyTypeDto>>(technologyTypeEntities);
 
             return new JsonResult(technologyTypeDtos);

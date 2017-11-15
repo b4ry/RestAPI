@@ -14,7 +14,7 @@ namespace PortfolioApplication.Api.Mappings
         /// </summary>
         public ProjectTypeProfile()
         {
-            CreateMap<ProjectTypeEntity, ProjectTypeDto>().ReverseMap();
+            CreateMap<TechnologyEntity, TechnologyDto>().ReverseMap();
         }
     }
 }

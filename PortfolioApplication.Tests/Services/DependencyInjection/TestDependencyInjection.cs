@@ -26,7 +26,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveUnitOfWorkWhenUnitOfWorkIsNeeded()
+        public void InversionOfControlContainerMustResolveUnitOfWork()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -49,7 +49,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveDatabaseSetWhenDatabaseSetIsNeeded()
+        public void InversionOfControlContainerMustResolveDatabaseSet()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -93,7 +93,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveTechnologyTypeEntityQueryWhenItIsNeeded()
+        public void InversionOfControlContainerMustResolveTechnologyTypeEntityQuery()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -110,7 +110,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveProjectTypeEntityQueryWhenItIsNeeded()
+        public void InversionOfControlContainerMustResolveProjectTypeEntityQuery()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -124,6 +124,23 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
             var resolvedComponent = container.Resolve<IProjectTypeQuery>();
 
             Assert.IsType<ProjectTypeQuery>(resolvedComponent);
+        }
+
+        [Fact]
+        public void InversionOfControlContainerMustResolveExperienceEntityQuery()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            serviceCollection.AddDistributedRedisCache(o =>
+            {
+                o.Configuration = "testConfiguration";
+                o.InstanceName = "testInstanceName";
+            });
+            var container = serviceCollection.AddApplicationModules();
+
+            var resolvedComponent = container.Resolve<IExperienceQuery>();
+
+            Assert.IsType<ExperienceQuery>(resolvedComponent);
         }
     }
 }
