@@ -1,4 +1,7 @@
-﻿namespace PortfolioApplication.Api.DataTransferObjects
+﻿using PortfolioApplication.Api.DataTransferObjects.Project;
+using PortfolioApplication.Api.DataTransferObjects.Technology;
+
+namespace PortfolioApplication.Api.DataTransferObjects
 {
     /// <summary>
     /// Data transfer object for ProjectTechnologyJunction entity

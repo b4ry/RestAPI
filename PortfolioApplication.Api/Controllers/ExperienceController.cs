@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using PortfolioApplication.Api.DataTransferObjects;
-using PortfolioApplication.Entities.Entities.JunctionEntities;
+using PortfolioApplication.Api.DataTransferObjects.Project;
 using PortfolioApplication.Services.CQRS.Queries;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Collections.Generic;

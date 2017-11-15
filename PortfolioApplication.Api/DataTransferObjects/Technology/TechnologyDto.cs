@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PortfolioApplication.Api.DataTransferObjects
+namespace PortfolioApplication.Api.DataTransferObjects.Technology
 {
     /// <summary>
     /// Data transfer object for Technology entity
@@ -15,7 +15,7 @@ namespace PortfolioApplication.Api.DataTransferObjects
         /// <summary>
         /// Associated projects
         /// </summary>
-        public IList<ProjectDto> Projects { get; set; }
+        public IList<TechnologyProjectDto> Projects { get; set; }
 
         /// <summary>
         /// Type of the technology

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PortfolioApplication.Api.DataTransferObjects;
+using PortfolioApplication.Api.DataTransferObjects.Technology;
 using PortfolioApplication.Entities.Entities;
 using System.Linq;
 
