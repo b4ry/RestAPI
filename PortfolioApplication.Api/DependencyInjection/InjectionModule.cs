@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using PortfolioApplication.Api.CQRS.Commands;
-using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Linq;
@@ -52,7 +51,7 @@ namespace PortfolioApplication.Api.DependencyInjection
 
         private void RegisterQueries(ContainerBuilder builder)
         {
-            var repositoryAssembly = typeof(TechnologyTypeQuery).GetTypeInfo().Assembly;
+            var repositoryAssembly = Assembly.Load("PortfolioApplication.Api");
 
             builder.RegisterAssemblyTypes(repositoryAssembly)
                 .Where(t => (t.Name.EndsWith("Query") && t.Name != "Query"))

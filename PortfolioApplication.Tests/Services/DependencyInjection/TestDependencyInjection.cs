@@ -69,7 +69,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
             var allQueriesRegistered = true;
 
             var queries = Assembly
-                .Load("PortfolioApplication.Services")
+                .Load("PortfolioApplication.Api")
                 .GetTypes()
                 .Where(
                     x => x.GetTypeInfo().Name.EndsWith("Query") &&
