@@ -5,9 +5,9 @@ using PortfolioApplication.Services.DatabaseContext;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {
-    public class ProjectTypeQuery : Query<ProjectTypeEntity, ProjectTypeDto>, IProjectTypeQuery
+    public class ProjectQuery : Query<ProjectEntity, ProjectDto>, IProjectQuery
     {
-        public ProjectTypeQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) : base(databaseSet, redisCache)
+        public ProjectQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) : base(databaseSet, redisCache)
         {
         }
     }

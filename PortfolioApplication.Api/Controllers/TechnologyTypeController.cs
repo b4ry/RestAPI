@@ -30,10 +30,10 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving TechnologyType entity by its id
+        /// GET endpoint retrieving TechnologyType entity by its id
         /// </summary>
         /// <param name="id"> Identification number of TechnologyType entity </param>
-        /// <returns> TechnologyEntity in JSON format </returns>
+        /// <returns> TechnologyType entity in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(TechnologyTypeDto))]
         [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id:int:min(1)}")]
@@ -45,9 +45,9 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving all TechnologyType entities
+        /// GET endpoint retrieving all TechnologyType entities
         /// </summary>
-        /// <returns> TechnologyEntity collection in JSON format </returns>
+        /// <returns> TechnologyType entity collection in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<TechnologyTypeDto>))]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]

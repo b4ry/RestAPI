@@ -159,5 +159,22 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
 
             Assert.IsType<TechnologyQuery>(resolvedComponent);
         }
+
+        [Fact]
+        public void InversionOfControlContainerMustResolveProjectQuery()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            serviceCollection.AddDistributedRedisCache(o =>
+            {
+                o.Configuration = "testConfiguration";
+                o.InstanceName = "testInstanceName";
+            });
+            var container = serviceCollection.AddApplicationModules();
+
+            var resolvedComponent = container.Resolve<IProjectQuery>();
+
+            Assert.IsType<ProjectQuery>(resolvedComponent);
+        }
     }
 }

@@ -32,10 +32,10 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving Technology entity by its id
+        /// GET endpoint retrieving Technology entity by its id
         /// </summary>
         /// <param name="id"> Identification number of Technology entity. <br>Constraints:</br>- must be bigger than 0</param>
-        /// <returns> ProjectType in JSON format </returns>
+        /// <returns> Technology entity in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(TechnologyDto))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [HttpGet("{id:int:min(1)}")]
@@ -54,9 +54,9 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving all Technology entities
+        /// GET endpoint retrieving all Technology entities
         /// </summary>
-        /// <returns> Technology collection in JSON format </returns>
+        /// <returns> Technology entity collection in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<TechnologyDto>))]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]

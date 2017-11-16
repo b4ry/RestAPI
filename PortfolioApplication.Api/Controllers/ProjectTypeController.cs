@@ -30,7 +30,7 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving ProjectType entity by its id
+        /// GET endpoint retrieving ProjectType entity by its id
         /// </summary>
         /// <param name="id"> Identification number of ProjectType entity. <br>Constraints:</br>- must be bigger than 0</param>
         /// <returns> ProjectType in JSON format </returns>
@@ -46,9 +46,9 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving all ProjectType entities
+        /// GET endpoint retrieving all ProjectType entities
         /// </summary>
-        /// <returns> ProjectType collection in JSON format </returns>
+        /// <returns> ProjectType entity collection in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<ProjectTypeDto>))]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]

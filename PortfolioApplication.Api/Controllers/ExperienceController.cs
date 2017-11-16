@@ -32,10 +32,10 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving Experience entity by its id
+        /// GET endpoint retrieving Experience entity by its id
         /// </summary>
         /// <param name="id"> Identification number of Experience entity. <br>Constraints:</br>- must be bigger than 0</param>
-        /// <returns> ProjectType in JSON format </returns>
+        /// <returns> Experience entity in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(ExperienceDto))]
         [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
         [HttpGet("{id:int:min(1)}")]
@@ -45,8 +45,8 @@ namespace PortfolioApplication.Api.Controllers
                 dbSet => dbSet
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.Technologies)
-                .ThenInclude(tech => tech.Technology)
-                .ThenInclude(tech1 => tech1.TechnologyType)
+                .ThenInclude(techs => techs.Technology)
+                .ThenInclude(tech => tech.TechnologyType)
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.ProjectType)
                 .SingleAsync(exp => exp.Id == id);
@@ -58,9 +58,9 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Get endpoint retrieving all Experience entities
+        /// GET endpoint retrieving all Experience entities
         /// </summary>
-        /// <returns> Experience collection in JSON format </returns>
+        /// <returns> Experience entity collection in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<ExperienceDto>))]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
@@ -70,8 +70,8 @@ namespace PortfolioApplication.Api.Controllers
                 dbSet => dbSet
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.Technologies)
-                .ThenInclude(tech => tech.Technology)
-                .ThenInclude(tech1 => tech1.TechnologyType)
+                .ThenInclude(techs => techs.Technology)
+                .ThenInclude(tech => tech.TechnologyType)
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.ProjectType)
                 .ToListAsync();
