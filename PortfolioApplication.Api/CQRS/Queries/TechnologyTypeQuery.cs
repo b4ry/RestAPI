@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
+using PortfolioApplication.Api.DataTransferObjects.Technology;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {
-    public class TechnologyTypeQuery : Query<TechnologyTypeEntity>, ITechnologyTypeQuery
+    public class TechnologyTypeQuery : Query<TechnologyTypeEntity, TechnologyTypeDto>, ITechnologyTypeQuery
     {
         public TechnologyTypeQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) : 
             base(databaseSet, redisCache)

@@ -39,8 +39,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetTechnologyTypeById([Required]int id)
         {
-            var technologyTypeEntity = await _technologyTypeQuery.Get(id);
-            var technologyTypeDto = Mapper.Map<TechnologyTypeDto>(technologyTypeEntity);
+            var technologyTypeDto = await _technologyTypeQuery.Get(id);
 
             return new JsonResult(technologyTypeDto);
         }
@@ -54,8 +53,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetTechnologyTypes()
         {
-            var technologyTypeEntities = await _technologyTypeQuery.Get();
-            var technologyTypeDtos = Mapper.Map<IEnumerable<TechnologyTypeDto>>(technologyTypeEntities);
+            var technologyTypeDtos = await _technologyTypeQuery.Get();
 
             return new JsonResult(technologyTypeDtos);
         }

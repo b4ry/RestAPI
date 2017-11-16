@@ -6,7 +6,7 @@ namespace PortfolioApplication.Api.DataTransferObjects
     /// <summary>
     /// Data transfer object for ProjectTechnologyJunction entity
     /// </summary>
-    public class ProjectTechnologyJunctionDto
+    public class ProjectTechnologyJunctionDto : BaseDto
     {
         /// <summary>
         /// Project associated to the technology

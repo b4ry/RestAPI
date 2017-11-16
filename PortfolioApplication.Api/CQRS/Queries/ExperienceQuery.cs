@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
+using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
@@ -9,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {
-    public class ExperienceQuery : Query<ExperienceEntity>, IExperienceQuery
+    public class ExperienceQuery : Query<ExperienceEntity, ExperienceDto>, IExperienceQuery
     {
         public ExperienceQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) : 
             base(databaseSet, redisCache)
         {
         }
 
-        public async override Task<ExperienceEntity> Get(int id)
+        public async override Task<ExperienceDto> Get(int id)
         {
             string key = ComposeRedisKey(typeof(ExperienceEntity).Name, id.ToString());
             string cachedEntity = await RedisCache.GetStringAsync(key);
@@ -33,8 +35,9 @@ namespace PortfolioApplication.Api.CQRS.Queries
                         .Include(exp => exp.Projects)
                         .ThenInclude(proj => proj.ProjectType)
                         .SingleAsync(exp => exp.Id == id);
+                    var retrievedDto = Mapper.Map<ExperienceDto>(retrievedEntity);
 
-                    cachedEntity = JsonConvert.SerializeObject(retrievedEntity, new JsonSerializerSettings
+                    cachedEntity = JsonConvert.SerializeObject(retrievedDto, new JsonSerializerSettings
                     {
                         ReferenceLoopHandling = ReferenceLoopHandling.Ignore
                     });
@@ -47,7 +50,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
                 }
             }
 
-            return JsonConvert.DeserializeObject<ExperienceEntity>(cachedEntity);
+            return JsonConvert.DeserializeObject<ExperienceDto>(cachedEntity);
         }
     }
 }

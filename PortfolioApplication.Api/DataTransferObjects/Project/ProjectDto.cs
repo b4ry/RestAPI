@@ -6,7 +6,7 @@ namespace PortfolioApplication.Api.DataTransferObjects.Project
     /// <summary>
     /// Data transfer object for Project entity
     /// </summary>
-    public class ProjectDto
+    public class ProjectDto : BaseDto
     {
         /// <summary>
         /// Project name

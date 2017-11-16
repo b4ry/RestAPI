@@ -39,8 +39,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectTypeById([Required]int id)
         {
-            var projectTypeEntity = await _projectTypeQuery.Get(id);
-            var projectTypeDto = Mapper.Map<ProjectTypeDto>(projectTypeEntity);
+            var projectTypeDto = await _projectTypeQuery.Get(id);
 
             return new JsonResult(projectTypeDto);
 
@@ -55,8 +54,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProjectTypes()
         {
-            var projectTypeEntities = await _projectTypeQuery.Get();
-            var projectTypeDtos = Mapper.Map<IEnumerable<ProjectTypeDto>>(projectTypeEntities);
+            var projectTypeDtos = await _projectTypeQuery.Get();
 
             return new JsonResult(projectTypeDtos);
         }

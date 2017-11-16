@@ -40,8 +40,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetExperienceById([Required]int id)
         {
-            var experienceEntity = await _experienceQuery.Get(id);
-            var experienceDto = Mapper.Map<ExperienceDto>(experienceEntity);
+            var experienceDto = await _experienceQuery.Get(id);
 
             return new JsonResult(experienceDto);
 
@@ -56,8 +55,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetExperiences()
         {
-            var experienceEntities = await _experienceQuery.Get();
-            var experienceDtos = Mapper.Map<IEnumerable<ExperienceDto>>(experienceEntities);
+            var experienceDtos = await _experienceQuery.Get();
 
             return new JsonResult(experienceDtos);
         }

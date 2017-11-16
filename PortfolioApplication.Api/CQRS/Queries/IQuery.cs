@@ -1,12 +1,13 @@
-﻿using PortfolioApplication.Entities.Entities;
+﻿using PortfolioApplication.Api.DataTransferObjects;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {
-    public interface IQuery<TEntity> where TEntity : BaseEntity
+    public interface IQuery<TDto> 
+        where TDto : BaseDto
     {
-        Task<TEntity> Get(int id);
-        Task<IEnumerable<TEntity>> Get();
+        Task<TDto> Get(int id);
+        Task<IEnumerable<TDto>> Get();
     }
 }

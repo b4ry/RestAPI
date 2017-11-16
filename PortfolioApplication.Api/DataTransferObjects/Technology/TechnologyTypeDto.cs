@@ -5,7 +5,7 @@ namespace PortfolioApplication.Api.DataTransferObjects.Technology
     /// <summary>
     /// Data transfer object for TechnologyType entity
     /// </summary>
-    public class TechnologyTypeDto 
+    public class TechnologyTypeDto : BaseDto
     {
         /// <summary>
         /// TechnologyType name

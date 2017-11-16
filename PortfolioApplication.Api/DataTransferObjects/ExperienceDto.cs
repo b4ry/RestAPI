@@ -6,7 +6,7 @@ namespace PortfolioApplication.Api.DataTransferObjects
     /// <summary>
     /// Data transfer object for Experience entity
     /// </summary>
-    public class ExperienceDto
+    public class ExperienceDto : BaseDto
     {
         /// <summary>
         /// Name of the company
