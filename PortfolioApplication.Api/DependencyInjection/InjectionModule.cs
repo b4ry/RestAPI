@@ -1,12 +1,12 @@
 ﻿using Autofac;
-using PortfolioApplication.Services.CQRS.Commands;
-using PortfolioApplication.Services.CQRS.Queries;
+using PortfolioApplication.Api.CQRS.Commands;
+using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Linq;
 using System.Reflection;
 
-namespace PortfolioApplication.Services.DependencyInjection
+namespace PortfolioApplication.Api.DependencyInjection
 {
     public class InjectionModule : Autofac.Module
     {

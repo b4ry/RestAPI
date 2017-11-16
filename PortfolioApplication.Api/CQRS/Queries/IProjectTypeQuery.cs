@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PortfolioApplication.Services.CQRS.Queries
+namespace PortfolioApplication.Api.CQRS.Queries
 {
     public interface IProjectTypeQuery
     {

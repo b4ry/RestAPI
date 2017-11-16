@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PortfolioApplication.Services.Exceptions
+namespace PortfolioApplication.Middlewares.Errors.Exceptions
 {
     public class EmptyCollectionException : Exception
     {

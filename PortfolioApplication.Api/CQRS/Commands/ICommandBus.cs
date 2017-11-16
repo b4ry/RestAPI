@@ -1,4 +1,4 @@
-﻿namespace PortfolioApplication.Services.CQRS.Commands
+﻿namespace PortfolioApplication.Api.CQRS.Commands
 {
     public interface ICommandBus
     {

@@ -2,13 +2,13 @@
 using Microsoft.Extensions.Caching.Distributed;
 using Newtonsoft.Json;
 using PortfolioApplication.Entities.Entities;
+using PortfolioApplication.Middlewares.Errors.Exceptions;
 using PortfolioApplication.Services.DatabaseContext;
-using PortfolioApplication.Services.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PortfolioApplication.Services.CQRS.Queries
+namespace PortfolioApplication.Api.CQRS.Queries
 {
     public abstract class Query<TEntity> : IQuery<TEntity> where TEntity : BaseEntity
     {

@@ -1,6 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
-using PortfolioApplication.Services.DependencyInjection;
+using PortfolioApplication.Api.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace PortfolioApplication.Api.Extensions

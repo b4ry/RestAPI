@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Logging;
 using Moq;
 using Newtonsoft.Json;
-using PortfolioApplication.Middlewares;
-using PortfolioApplication.Services.Exceptions;
+using PortfolioApplication.Middlewares.Errors;
+using PortfolioApplication.Middlewares.Errors.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;

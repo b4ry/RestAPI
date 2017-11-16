@@ -1,6 +1,6 @@
-﻿using PortfolioApplication.Entities.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 using System.Reflection;

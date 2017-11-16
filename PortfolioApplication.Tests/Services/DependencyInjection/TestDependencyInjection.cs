@@ -2,8 +2,8 @@
 using Autofac.Core;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Api.Extensions;
-using PortfolioApplication.Services.CQRS.Queries;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Linq;

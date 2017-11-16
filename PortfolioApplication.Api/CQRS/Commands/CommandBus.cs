@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PortfolioApplication.Services.CQRS.Commands
+namespace PortfolioApplication.Api.CQRS.Commands
 {
     public class CommandBus : ICommandBus
     {

@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using PortfolioApplication.Services.Exceptions;
+using PortfolioApplication.Middlewares.Errors.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace PortfolioApplication.Middlewares
+namespace PortfolioApplication.Middlewares.Errors
 {
     public class ErrorHandlingMiddleware
     {

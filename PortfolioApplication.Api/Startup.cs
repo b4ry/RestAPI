@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using NetEscapades.AspNetCore.SecurityHeaders;
 using PortfolioApplication.Api.Extensions;
-using PortfolioApplication.Middlewares;
+using PortfolioApplication.Middlewares.Errors;
 using PortfolioApplication.Services.DatabaseContext;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
