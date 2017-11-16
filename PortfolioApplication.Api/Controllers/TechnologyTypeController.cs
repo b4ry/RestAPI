@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Api.DataTransferObjects.Technology;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -22,11 +22,11 @@ namespace PortfolioApplication.Api.Controllers
         /// <summary>
         /// TechnologyTypeController constructor
         /// </summary>
-        /// <param name="technologyTypeEntityQuery"> Query consumed to retrieve TechnologyType entities </param>
+        /// <param name="technologyTypeQuery"> Query consumed to retrieve TechnologyType entities </param>
         public TechnologyTypeController(
-            ITechnologyTypeQuery technologyTypeEntityQuery)
+            ITechnologyTypeQuery technologyTypeQuery)
         {
-            _technologyTypeQuery = technologyTypeEntityQuery;
+            _technologyTypeQuery = technologyTypeQuery;
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetTechnologyTypeById([Required]int id)
         {
-            var technologyTypeDto = await _technologyTypeQuery.Get(id);
+            var technologyTypeDto = await _technologyTypeQuery.Get(id, dbSet => dbSet.SingleAsync(x => x.Id == id));
 
             return new JsonResult(technologyTypeDto);
         }
@@ -48,12 +48,12 @@ namespace PortfolioApplication.Api.Controllers
         /// Get endpoint retrieving all TechnologyType entities
         /// </summary>
         /// <returns> TechnologyEntity collection in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<TechnologyTypeDto>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<TechnologyTypeDto>))]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetTechnologyTypes()
         {
-            var technologyTypeDtos = await _technologyTypeQuery.Get();
+            var technologyTypeDtos = await _technologyTypeQuery.Get(dbSet => dbSet.ToListAsync());
 
             return new JsonResult(technologyTypeDtos);
         }

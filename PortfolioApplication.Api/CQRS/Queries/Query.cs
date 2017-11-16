@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {
-    public abstract class Query<TEntity, TDto> : IQuery<TDto> 
+    public abstract class Query<TEntity, TDto> : IQuery<TEntity, TDto> 
         where TEntity : BaseEntity
         where TDto : BaseDto
     {
@@ -27,7 +27,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
             RedisCache = redisCache;
         }
 
-        public virtual async Task<TDto> Get(int id)
+        public virtual async Task<TDto> Get(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
         {
             string key = ComposeRedisKey(typeof(TEntity).Name, id.ToString());
             string cachedEntity = await RedisCache.GetStringAsync(key);
@@ -36,7 +36,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
             {
                 try
                 {
-                    var retrievedEntity = await EntitySet.SingleAsync(x => x.Id == id);
+                    var retrievedEntity = await retrievalFunc(EntitySet);
                     var retrievedDto = Mapper.Map<TDto>(retrievedEntity);
                     cachedEntity = JsonConvert.SerializeObject(retrievedDto);
 
@@ -51,7 +51,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
             return JsonConvert.DeserializeObject<TDto>(cachedEntity);
         }
 
-        public virtual async Task<IEnumerable<TDto>> Get()
+        public virtual async Task<IList<TDto>> Get(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc)
         {
             string key = ComposeRedisKey(typeof(TEntity).Name, "*");
             string cachedEntities = await RedisCache.GetStringAsync(key);
@@ -60,7 +60,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
             {
                 if (await EntitySet.CountAsync() > 0)
                 {
-                    var retrievedEntities = await EntitySet.ToListAsync();
+                    var retrievedEntities = await retrievalFunc(EntitySet);
                     var retrievedDtos = Mapper.Map <IEnumerable<TDto>>(retrievedEntities);
                     cachedEntities = JsonConvert.SerializeObject(retrievedDtos);
 
@@ -72,7 +72,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
                 }
             }
 
-            return JsonConvert.DeserializeObject<IEnumerable<TDto>>(cachedEntities);
+            return JsonConvert.DeserializeObject<IList<TDto>>(cachedEntities);
         }
 
         protected string ComposeRedisKey(string entityTypeName, string id)

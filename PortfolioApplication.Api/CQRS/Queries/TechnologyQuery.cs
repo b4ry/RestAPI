@@ -1,13 +1,13 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
-using PortfolioApplication.Api.DataTransferObjects;
+using PortfolioApplication.Api.DataTransferObjects.Technology;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {
-    public class ExperienceQuery : Query<ExperienceEntity, ExperienceDto>, IExperienceQuery
+    public class TechnologyQuery : Query<TechnologyEntity, TechnologyDto>, ITechnologyQuery
     {
-        public ExperienceQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) : 
+        public TechnologyQuery(IDatabaseSet databaseSet, IDistributedCache redisCache) :
             base(databaseSet, redisCache)
         {
         }

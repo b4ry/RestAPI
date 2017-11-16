@@ -15,7 +15,7 @@ namespace PortfolioApplication.Services.DatabaseContext
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             var entityMethod = typeof(ModelBuilder).GetMethods().FirstOrDefault(x => x.Name == "Entity" && x.IsGenericMethodDefinition);
-            var entities = typeof(BaseEntity).GetTypeInfo().Assembly.GetTypes().Where(x => x.GetTypeInfo().BaseType == typeof(BaseEntity));
+            var entities = Assembly.Load("PortfolioApplication.Entities").GetTypes().Where(x => x.GetTypeInfo().BaseType == typeof(BaseEntity));
 
             foreach (var entity in entities)
             {

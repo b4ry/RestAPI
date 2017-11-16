@@ -93,7 +93,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveTechnologyTypeEntityQuery()
+        public void InversionOfControlContainerMustResolveTechnologyTypeQuery()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -110,7 +110,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveProjectTypeEntityQuery()
+        public void InversionOfControlContainerMustResolveProjectTypeQuery()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -127,7 +127,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
         }
 
         [Fact]
-        public void InversionOfControlContainerMustResolveExperienceEntityQuery()
+        public void InversionOfControlContainerMustResolveExperienceQuery()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
             serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
@@ -141,6 +141,23 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
             var resolvedComponent = container.Resolve<IExperienceQuery>();
 
             Assert.IsType<ExperienceQuery>(resolvedComponent);
+        }
+
+        [Fact]
+        public void InversionOfControlContainerMustResolveTechnologyQuery()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            serviceCollection.AddDistributedRedisCache(o =>
+            {
+                o.Configuration = "testConfiguration";
+                o.InstanceName = "testInstanceName";
+            });
+            var container = serviceCollection.AddApplicationModules();
+
+            var resolvedComponent = container.Resolve<ITechnologyQuery>();
+
+            Assert.IsType<TechnologyQuery>(resolvedComponent);
         }
     }
 }

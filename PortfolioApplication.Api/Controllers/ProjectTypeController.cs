@@ -1,5 +1,5 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Api.DataTransferObjects.Project;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -39,7 +39,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectTypeById([Required]int id)
         {
-            var projectTypeDto = await _projectTypeQuery.Get(id);
+            var projectTypeDto = await _projectTypeQuery.Get(id, dbSet => dbSet.SingleAsync(x => x.Id == id));
 
             return new JsonResult(projectTypeDto);
 
@@ -49,12 +49,12 @@ namespace PortfolioApplication.Api.Controllers
         /// Get endpoint retrieving all ProjectType entities
         /// </summary>
         /// <returns> ProjectType collection in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IEnumerable<ProjectTypeDto>))]
+        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<ProjectTypeDto>))]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetProjectTypes()
         {
-            var projectTypeDtos = await _projectTypeQuery.Get();
+            var projectTypeDtos = await _projectTypeQuery.Get(dbSet => dbSet.ToListAsync());
 
             return new JsonResult(projectTypeDtos);
         }
