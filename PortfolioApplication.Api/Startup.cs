@@ -8,6 +8,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.PlatformAbstractions;
 using NetEscapades.AspNetCore.SecurityHeaders;
+using NLog;
+using NLog.Config;
 using PortfolioApplication.Api.Extensions;
 using PortfolioApplication.Middlewares.Errors;
 using PortfolioApplication.Services.DatabaseContext;
@@ -35,6 +37,7 @@ namespace PortfolioApplication.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<PortfolioApplicationLoggingDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("PortfolioLoggingDatabaseConnectionString")));
             services.AddDbContext<PortfolioApplicationDbContext>(o => o.UseSqlServer(Configuration.GetConnectionString("PortfolioDatabaseConnectionString"),
                 migr => migr.MigrationsAssembly("PortfolioApplication.Migrations")));
 
@@ -87,6 +90,7 @@ namespace PortfolioApplication.Api
 
                 using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
                 {
+                    serviceScope.ServiceProvider.GetService<PortfolioApplicationLoggingDbContext>().Database.EnsureCreated();
                     serviceScope.ServiceProvider.GetService<PortfolioApplicationDbContext>().Database.Migrate();
                     serviceScope.ServiceProvider.GetService<PortfolioApplicationDbContext>().SeedData();
                 }
@@ -105,6 +109,9 @@ namespace PortfolioApplication.Api
             app.UseCors("AllowSpecificOrigin");
             app.UseAutoMapper();
             app.UseMiddleware<ErrorHandlingMiddleware>();
+
+            LogManager.Configuration.Install(new InstallationContext());
+
             app.UseMvc();
             app.UseSwagger();
 

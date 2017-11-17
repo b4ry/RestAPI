@@ -7,7 +7,7 @@ namespace PortfolioApplication.Services.DatabaseContext
 {
     public class PortfolioApplicationDbContext : DbContext
     {
-        public PortfolioApplicationDbContext(DbContextOptions options):base(options)
+        public PortfolioApplicationDbContext(DbContextOptions<PortfolioApplicationDbContext> options) : base(options)
         {
 
         }
