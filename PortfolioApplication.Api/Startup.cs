@@ -73,9 +73,9 @@ namespace PortfolioApplication.Api
                 c.IncludeXmlComments(xmlPath);
             });
 
-            this.ApplicationContainer = services.AddApplicationModules();
+            ApplicationContainer = services.AddApplicationModules();
 
-            return new AutofacServiceProvider(this.ApplicationContainer);
+            return new AutofacServiceProvider(ApplicationContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -121,7 +121,7 @@ namespace PortfolioApplication.Api
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "PortfolioApplication API V1.0");
             });
 
-            appLifetime.ApplicationStopped.Register(() => this.ApplicationContainer.Dispose());
+            appLifetime.ApplicationStopped.Register(() => ApplicationContainer.Dispose());
         }
     }
 }

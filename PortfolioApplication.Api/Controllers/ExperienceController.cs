@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PortfolioApplication.Api.CQRS.Commands;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Entities.Entities;
@@ -20,15 +21,17 @@ namespace PortfolioApplication.Api.Controllers
     public class ExperienceController : Controller
     {
         private readonly IExperienceQuery _experienceQuery;
+        private readonly ICommandBus _commandBus;
 
         /// <summary>
         /// ExperienceController constructor
         /// </summary>
         /// <param name="experienceQuery"> Query consumed to retrieve Experience entities </param>
-        public ExperienceController(
-            IExperienceQuery experienceQuery)
+        /// <param name="commandBus"> Command bus managing incoming Experience commands </param>
+        public ExperienceController(IExperienceQuery experienceQuery, ICommandBus commandBus)
         {
             _experienceQuery = experienceQuery;
+            _commandBus = commandBus;
         }
 
         /// <summary>
@@ -54,7 +57,6 @@ namespace PortfolioApplication.Api.Controllers
             var experienceDto = await _experienceQuery.Get(id, retrivalFunc);
 
             return new JsonResult(experienceDto);
-
         }
 
         /// <summary>
@@ -79,6 +81,21 @@ namespace PortfolioApplication.Api.Controllers
             var experienceDtos = await _experienceQuery.Get(retrivalFunc);
 
             return new JsonResult(experienceDtos);
+        }
+
+        /// <summary>
+        /// POST endpoing creating Experience entity
+        /// </summary>
+        /// <param name="createExperienceCommand"> Command containing parameters to create Experience entity </param>
+        /// <returns> JSON containing information about processed command </returns>
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError)]
+        [HttpPost]
+        public async Task<IActionResult> CreateExperience([FromBody]CreateExperienceCommand createExperienceCommand)
+        { 
+            _commandBus.Send(createExperienceCommand);
+
+            return new JsonResult($"Processed command '{createExperienceCommand}'.");
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PortfolioApplication.Api.CQRS.Commands;
 using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Entities.Entities;
 
@@ -15,6 +16,7 @@ namespace PortfolioApplication.Api.Mappings
         public ExperienceProfile()
         {
             CreateMap<ExperienceEntity, ExperienceDto>().ReverseMap();
+            CreateMap<CreateExperienceCommand, ExperienceEntity>();
         }
     }
 }

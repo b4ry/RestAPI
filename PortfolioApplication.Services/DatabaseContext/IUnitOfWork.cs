@@ -4,6 +4,7 @@ namespace PortfolioApplication.Services.DatabaseContext
 {
     public interface IUnitOfWork
     {
+        void Save();
         Task SaveAsync();
     }
 }

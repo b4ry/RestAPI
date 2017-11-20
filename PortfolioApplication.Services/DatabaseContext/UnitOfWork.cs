@@ -11,6 +11,11 @@ namespace PortfolioApplication.Services.DatabaseContext
             _databaseContext = databaseContext;
         }
 
+        public void Save()
+        {
+            _databaseContext.SaveChanges();
+        }
+
         public async Task SaveAsync()
         {
             await _databaseContext.SaveChangesAsync();

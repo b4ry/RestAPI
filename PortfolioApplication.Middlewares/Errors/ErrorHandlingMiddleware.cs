@@ -45,7 +45,6 @@ namespace PortfolioApplication.Middlewares.Errors
             }
             else
             {
-
                 _logger.LogError(exception: e, message: e.Message);
                 context.Response.StatusCode = StatusCodes.Status500InternalServerError;
             }
