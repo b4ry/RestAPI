@@ -27,7 +27,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
             }
             catch (Exception e)
             {
-                throw new DbUpdateException(message: $"Could not process '{command}'.", innerException: e);
+                throw new DbUpdateException(message: $"Could not process '{command}'. Error: '{e.InnerException.Message}'", innerException: e);
             }
         }
     }

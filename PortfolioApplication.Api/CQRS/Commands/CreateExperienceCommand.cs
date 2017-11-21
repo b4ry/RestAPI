@@ -13,7 +13,7 @@
 
         public override string ToString()
         {
-            return $"Create Experience entity: Company name = '{CompanyName}', Position = '{Position}'.";
+            return $"Create Experience entity: Company name = '{CompanyName}', Position = '{Position}'";
         }
     }
 }

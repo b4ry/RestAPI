@@ -24,6 +24,8 @@ namespace PortfolioApplication.Services.DatabaseContext
                 constructedMethod.Invoke(modelBuilder, null);
             }
 
+            modelBuilder.Entity<ExperienceEntity>().HasIndex(exp => new { exp.CompanyName, exp.Position }).IsUnique();
+
             base.OnModelCreating(modelBuilder);
         }
     }
