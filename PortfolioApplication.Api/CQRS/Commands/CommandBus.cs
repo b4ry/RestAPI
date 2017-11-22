@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
@@ -22,6 +23,22 @@ namespace PortfolioApplication.Api.CQRS.Commands
             try
             {
                 handler.Handle(command);
+
+                _logger.LogInformation($"Processed command '{command}'.", command);
+            }
+            catch (Exception e)
+            {
+                throw new DbUpdateException(message: $"Could not process '{command}'. Error: '{e.InnerException.Message}'", innerException: e);
+            }
+        }
+
+        public async Task SendAsync<TCommand>(TCommand command) where TCommand : ICommand
+        {
+            var handler = (IHandleCommand<TCommand>)_handlersFactory(typeof(TCommand));
+
+            try
+            {
+                await handler.HandleAsync(command);
 
                 _logger.LogInformation($"Processed command '{command}'.", command);
             }

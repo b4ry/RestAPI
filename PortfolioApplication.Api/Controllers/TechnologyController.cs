@@ -26,6 +26,7 @@ namespace PortfolioApplication.Api.Controllers
         /// TechnologyController constructor
         /// </summary>
         /// <param name="technologyQuery"> Query consumed to retrieve Technology entities </param>
+        /// <param name="commandBus"> Command bus managing incoming Technology commands </param>
         public TechnologyController(
             ITechnologyQuery technologyQuery,
             ICommandBus commandBus)
@@ -85,9 +86,9 @@ namespace PortfolioApplication.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.OK)]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError)]
         [HttpPost]
-        public async Task<IActionResult> CreateExperience([FromBody]CreateTechnologyCommand createTechnologyCommand)
+        public async Task<IActionResult> CreateTechnology([FromBody]CreateTechnologyCommand createTechnologyCommand)
         {
-            _commandBus.Send(createTechnologyCommand);
+            await _commandBus.SendAsync(createTechnologyCommand);
 
             return new JsonResult($"Processed command '{createTechnologyCommand}'.");
         }

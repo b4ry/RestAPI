@@ -92,7 +92,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateExperience([FromBody]CreateExperienceCommand createExperienceCommand)
         { 
-            _commandBus.Send(createExperienceCommand);
+            await _commandBus.SendAsync(createExperienceCommand);
 
             return new JsonResult($"Processed command '{createExperienceCommand}'.");
         }

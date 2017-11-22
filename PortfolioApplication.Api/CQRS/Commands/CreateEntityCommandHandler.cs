@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
+using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
@@ -29,6 +30,15 @@ namespace PortfolioApplication.Api.CQRS.Commands
 
             ExperienceSet.Add(entity);
             UnitOfWork.Save();
+            RedisCache.Remove(ComposeRedisKey(typeof(TEntity).Name, "*"));
+        }
+
+        public async Task HandleAsync(TCommand command)
+        {
+            var entity = Mapper.Map<TEntity>(command);
+
+            ExperienceSet.Add(entity);
+            await UnitOfWork.SaveAsync();
             RedisCache.Remove(ComposeRedisKey(typeof(TEntity).Name, "*"));
         }
 

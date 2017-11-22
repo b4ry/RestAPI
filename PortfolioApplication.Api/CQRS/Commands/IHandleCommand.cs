@@ -1,11 +1,14 @@
-﻿namespace PortfolioApplication.Api.CQRS.Commands
+﻿using System.Threading.Tasks;
+
+namespace PortfolioApplication.Api.CQRS.Commands
 {
     public interface IHandleCommand
     {
     }
 
-    public interface IHandleCommand<T> : IHandleCommand where T : ICommand
+    public interface IHandleCommand<TCommand> : IHandleCommand where TCommand : ICommand
     {
-        void Handle(T command);
+        void Handle(TCommand command);
+        Task HandleAsync(TCommand command);
     }
 }
