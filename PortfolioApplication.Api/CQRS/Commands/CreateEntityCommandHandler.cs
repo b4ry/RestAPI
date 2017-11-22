@@ -25,10 +25,9 @@ namespace PortfolioApplication.Api.CQRS.Commands
 
         public void Handle(TCommand command)
         {
-            var experienceEntity = Mapper.Map<TEntity>(command);
+            var entity = Mapper.Map<TEntity>(command);
 
-            ExperienceSet.Add(experienceEntity);
-
+            ExperienceSet.Add(entity);
             UnitOfWork.Save();
             RedisCache.Remove(ComposeRedisKey(typeof(TEntity).Name, "*"));
         }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Queries;
-using PortfolioApplication.Api.DataTransferObjects.Project;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -32,12 +31,12 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// GET endpoint retrieving Project entity by its id
+        /// Retrieve Project entity by its id
         /// </summary>
         /// <param name="id"> Identification number of Project entity. <br>Constraints:</br>- must be bigger than 0</param>
         /// <returns> Project entity in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(ProjectDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectById([Required]int id)
         {
@@ -55,10 +54,10 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// GET endpoint retrieving all Project entities
+        /// Retrieve all Project entities
         /// </summary>
         /// <returns> Project entity collection in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<ProjectDto>))]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetProjects()

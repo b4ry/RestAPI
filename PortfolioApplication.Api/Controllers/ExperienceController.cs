@@ -2,7 +2,6 @@
 using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Commands;
 using PortfolioApplication.Api.CQRS.Queries;
-using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -35,12 +34,12 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// GET endpoint retrieving Experience entity by its id
+        /// Retrieve Experience entity by its id
         /// </summary>
         /// <param name="id"> Identification number of Experience entity. <br>Constraints:</br>- must be bigger than 0</param>
         /// <returns> Experience entity in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(ExperienceDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetExperienceById([Required]int id)
         {
@@ -60,10 +59,10 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// GET endpoint retrieving all Experience entities
+        /// Retrieve all Experience entities
         /// </summary>
         /// <returns> Experience entity collection in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<ExperienceDto>))]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetExperiences()
@@ -84,9 +83,9 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// POST endpoing creating Experience entity
+        /// Create new Experience entity in database
         /// </summary>
-        /// <param name="createExperienceCommand"> Command containing parameters to create Experience entity </param>
+        /// <param name="createExperienceCommand"> Command containing parameters to create new Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
         [SwaggerResponse((int)HttpStatusCode.OK)]
         [SwaggerResponse((int)HttpStatusCode.InternalServerError)]

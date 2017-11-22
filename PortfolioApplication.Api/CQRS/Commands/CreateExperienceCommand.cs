@@ -2,8 +2,8 @@
 {
     public class CreateExperienceCommand : ICreateExperienceCommand
     {
-        public readonly string CompanyName;
-        public readonly string Position;
+        public string CompanyName { get; }
+        public string Position { get; }
 
         public CreateExperienceCommand(string companyName, string position)
         {

@@ -25,6 +25,8 @@ namespace PortfolioApplication.Services.DatabaseContext
             }
 
             modelBuilder.Entity<ExperienceEntity>().HasIndex(exp => new { exp.CompanyName, exp.Position }).IsUnique();
+            modelBuilder.Entity<ProjectEntity>().HasIndex(proj => new { proj.Name }).IsUnique();
+            modelBuilder.Entity<TechnologyEntity>().HasIndex(tech => tech.Name).IsUnique();
 
             base.OnModelCreating(modelBuilder);
         }

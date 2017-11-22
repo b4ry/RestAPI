@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using PortfolioApplication.Api.CQRS.Commands;
 using PortfolioApplication.Api.DataTransferObjects.Technology;
 using PortfolioApplication.Entities.Entities;
 using System.Linq;
@@ -15,8 +16,13 @@ namespace PortfolioApplication.Api.Mappings
         /// </summary>
         public TechnologyProfile()
         {
-            CreateMap<TechnologyEntity, TechnologyDto>().ForMember(x => x.Projects, opt => opt.MapFrom(src => src.Projects.Select(p => p.Project).ToList()));
-            CreateMap<TechnologyDto, TechnologyEntity>().ForMember(x => x.TechnologyTypeId, opt => opt.Ignore());
+            CreateMap<TechnologyEntity, TechnologyDto>()
+                .ForMember(dest => dest.Projects, opt => opt.MapFrom(src => src.Projects.Select(p => p.Project)
+                .ToList()));
+            CreateMap<TechnologyDto, TechnologyEntity>()
+                .ForMember(dest => dest.TechnologyTypeId, opt => opt.Ignore());
+            CreateMap<CreateTechnologyCommand, TechnologyEntity>()
+                .ForMember(dest => dest.TechnologyTypeId, opt => opt.MapFrom(src => src.TechnologyTypeEnum));
         }
     }
 }

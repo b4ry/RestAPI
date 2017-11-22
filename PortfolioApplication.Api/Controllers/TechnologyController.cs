@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PortfolioApplication.Api.CQRS.Commands;
 using PortfolioApplication.Api.CQRS.Queries;
-using PortfolioApplication.Api.DataTransferObjects.Technology;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -20,24 +20,27 @@ namespace PortfolioApplication.Api.Controllers
     public class TechnologyController : Controller
     {
         private readonly ITechnologyQuery _technologyQuery;
+        private readonly ICommandBus _commandBus;
 
         /// <summary>
         /// TechnologyController constructor
         /// </summary>
         /// <param name="technologyQuery"> Query consumed to retrieve Technology entities </param>
         public TechnologyController(
-            ITechnologyQuery technologyQuery)
+            ITechnologyQuery technologyQuery,
+            ICommandBus commandBus)
         {
             _technologyQuery = technologyQuery;
+            _commandBus = commandBus;
         }
 
         /// <summary>
-        /// GET endpoint retrieving Technology entity by its id
+        /// Retrieve Technology entity by its id
         /// </summary>
         /// <param name="id"> Identification number of Technology entity. <br>Constraints:</br>- must be bigger than 0</param>
         /// <returns> Technology entity in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(TechnologyDto))]
-        [SwaggerResponse((int)HttpStatusCode.NotFound, Type = typeof(NotFoundObjectResult))]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.NotFound)]
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetTechnologyById([Required]int id)
         {
@@ -54,10 +57,10 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// GET endpoint retrieving all Technology entities
+        /// Retrieve all Technology entities
         /// </summary>
         /// <returns> Technology entity collection in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK, Type = typeof(IList<TechnologyDto>))]
+        [SwaggerResponse((int)HttpStatusCode.OK)]
         [SwaggerResponse((int)HttpStatusCode.NoContent)]
         [HttpGet]
         public async Task<IActionResult> GetTechnologies()
@@ -72,6 +75,21 @@ namespace PortfolioApplication.Api.Controllers
             var technologyDtos = await _technologyQuery.Get(retrivalFunc);
 
             return new JsonResult(technologyDtos);
+        }
+
+        /// <summary>
+        /// Create new Technology entity in database
+        /// </summary>
+        /// <param name="createTechnologyCommand"> Command containing parameters to create a new Technology entity </param>
+        /// <returns> JSON containing information about processed command </returns>
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError)]
+        [HttpPost]
+        public async Task<IActionResult> CreateExperience([FromBody]CreateTechnologyCommand createTechnologyCommand)
+        {
+            _commandBus.Send(createTechnologyCommand);
+
+            return new JsonResult($"Processed command '{createTechnologyCommand}'.");
         }
     }
 }
