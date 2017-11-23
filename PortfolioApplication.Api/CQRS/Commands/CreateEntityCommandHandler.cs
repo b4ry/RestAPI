@@ -31,7 +31,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
 
             EntitySet.Add(entity);
             UnitOfWork.Save();
-            RedisCache.Remove(RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, "*"));
+            RedisCache.Remove(RedisHelper.ComposeRedisKey(typeof(TEntity).Name, "*"));
         }
 
         public async Task HandleAsync(TCommand command)
@@ -40,7 +40,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
 
             EntitySet.Add(entity);
             await UnitOfWork.SaveAsync();
-            await RedisCache.RemoveAsync(RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, "*"));
+            await RedisCache.RemoveAsync(RedisHelper.ComposeRedisKey(typeof(TEntity).Name, "*"));
         }
     }
 }

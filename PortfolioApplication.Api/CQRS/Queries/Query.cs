@@ -30,7 +30,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
 
         public async Task<TDto> Get(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
         {
-            string key = RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, id.ToString());
+            string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, id.ToString());
             string cachedEntity = await RedisCache.GetStringAsync(key);
 
             if (string.IsNullOrEmpty(cachedEntity))
@@ -54,7 +54,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
 
         public async Task<IList<TDto>> Get(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc)
         {
-            string key = RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, "*");
+            string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, "*");
             string cachedEntities = await RedisCache.GetStringAsync(key);
 
             if (string.IsNullOrEmpty(cachedEntities))
