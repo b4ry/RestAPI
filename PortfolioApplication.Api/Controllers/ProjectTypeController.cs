@@ -37,7 +37,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectTypeById([Required]int id)
         {
-            var projectTypeDto = await _projectTypeQuery.Get(id, dbSet => dbSet.SingleAsync(x => x.Id == id));
+            var projectTypeDto = await _projectTypeQuery.GetAsync(id, dbSet => dbSet.SingleAsync(x => x.Id == id));
 
             return new JsonResult(projectTypeDto);
 
@@ -52,7 +52,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProjectTypes()
         {
-            var projectTypeDtos = await _projectTypeQuery.Get(dbSet => dbSet.ToListAsync());
+            var projectTypeDtos = await _projectTypeQuery.GetAsync(dbSet => dbSet.ToListAsync());
 
             return new JsonResult(projectTypeDtos);
         }

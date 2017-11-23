@@ -9,7 +9,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
 {
     public interface ITechnologyTypeQuery
     {
-        Task<TechnologyTypeDto> Get(int id, Func<DbSet<TechnologyTypeEntity>, Task<TechnologyTypeEntity>> retrievalFunc);
-        Task<IList<TechnologyTypeDto>> Get(Func<DbSet<TechnologyTypeEntity>, Task<List<TechnologyTypeEntity>>> retrievalFunc);
+        Task<TechnologyTypeDto> GetAsync(int id, Func<DbSet<TechnologyTypeEntity>, Task<TechnologyTypeEntity>> retrievalFunc);
+        Task<IList<TechnologyTypeDto>> GetAsync(Func<DbSet<TechnologyTypeEntity>, Task<List<TechnologyTypeEntity>>> retrievalFunc);
     }
 }

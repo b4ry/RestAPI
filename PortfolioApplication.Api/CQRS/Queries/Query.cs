@@ -28,7 +28,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
             RedisCache = redisCache;
         }
 
-        public async Task<TDto> Get(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
+        public async Task<TDto> GetAsync(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
         {
             string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, id.ToString());
             string cachedEntity = await RedisCache.GetStringAsync(key);
@@ -52,7 +52,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
             return JsonConvert.DeserializeObject<TDto>(cachedEntity);
         }
 
-        public async Task<IList<TDto>> Get(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc)
+        public async Task<IList<TDto>> GetAsync(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc)
         {
             string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, "*");
             string cachedEntities = await RedisCache.GetStringAsync(key);

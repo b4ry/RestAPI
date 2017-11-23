@@ -55,7 +55,7 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(proj => proj.ProjectType)
                 .SingleAsync(exp => exp.Id == id);
 
-            var experienceDto = await _experienceQuery.Get(id, retrivalFunc);
+            var experienceDto = await _experienceQuery.GetAsync(id, retrivalFunc);
 
             return new JsonResult(experienceDto);
         }
@@ -79,7 +79,7 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(proj => proj.ProjectType)
                 .ToListAsync();
 
-            var experienceDtos = await _experienceQuery.Get(retrivalFunc);
+            var experienceDtos = await _experienceQuery.GetAsync(retrivalFunc);
 
             return new JsonResult(experienceDtos);
         }
