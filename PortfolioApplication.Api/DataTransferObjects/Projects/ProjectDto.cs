@@ -1,12 +1,12 @@
-﻿using PortfolioApplication.Api.DataTransferObjects.Project;
-using System;
+﻿using System;
+using System.Collections.Generic;
 
-namespace PortfolioApplication.Api.DataTransferObjects.Technology
+namespace PortfolioApplication.Api.DataTransferObjects.Projects
 {
     /// <summary>
-    /// Data transfer object for project associated with technology
+    /// Data transfer object for Project entity
     /// </summary>
-    public class TechnologyProjectDto : BaseDto
+    public class ProjectDto : BaseDto
     {
         /// <summary>
         /// Project name
@@ -17,6 +17,11 @@ namespace PortfolioApplication.Api.DataTransferObjects.Technology
         /// Project description
         /// </summary>
         public string Description { get; set; }
+
+        /// <summary>
+        /// Associated technologies
+        /// </summary>
+        public IList<ProjectTechnologyDto> Technologies { get; set; }
 
         /// <summary>
         /// Date of start

@@ -1,5 +1,5 @@
-﻿using PortfolioApplication.Api.DataTransferObjects.Project;
-using PortfolioApplication.Api.DataTransferObjects.Technology;
+﻿using PortfolioApplication.Api.DataTransferObjects.Projects;
+using PortfolioApplication.Api.DataTransferObjects.Technologies;
 
 namespace PortfolioApplication.Api.DataTransferObjects
 {

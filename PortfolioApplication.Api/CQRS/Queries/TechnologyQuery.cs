@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
-using PortfolioApplication.Api.DataTransferObjects.Technology;
+using PortfolioApplication.Api.DataTransferObjects.Technologies;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
 

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using PortfolioApplication.Api.CQRS.Commands;
+using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Linq;
@@ -23,27 +24,48 @@ namespace PortfolioApplication.Api.DependencyInjection
             .Where(x => x.IsAssignableTo<IHandleCommand>())
             .AsImplementedInterfaces();
 
-            builder.Register(RegisterHandlersFactoryDelegate());
+            builder.Register(RegisterNoEntityHandlersFactoryDelegate());
+            builder.Register(RegisterEntityHandlersFactoryDelegate());
 
             builder.RegisterType<CommandBus>()
                 .AsImplementedInterfaces();
         }
 
-        private Func<IComponentContext, Func<Type, IHandleCommand>> RegisterHandlersFactoryDelegate()
+        private Func<IComponentContext, Func<Type, IHandleCommand>> RegisterNoEntityHandlersFactoryDelegate()
         {
             return c =>
             {
                 var ctx = c.Resolve<IComponentContext>();
 
-                return ResolveCommand(ctx);
+                return ResolveNoEntityCommand(ctx);
             };
         }
 
-        private Func<Type, IHandleCommand> ResolveCommand(IComponentContext ctx)
+        private Func<Type, IHandleCommand> ResolveNoEntityCommand(IComponentContext ctx)
         {
             return t =>
             {
                 var handlerType = typeof(IHandleCommand<>).MakeGenericType(t);
+
+                return (IHandleCommand)ctx.Resolve(handlerType);
+            };
+        }
+
+        private Func<IComponentContext, Func<Type, Type, IHandleCommand>> RegisterEntityHandlersFactoryDelegate()
+        {
+            return c =>
+            {
+                var ctx = c.Resolve<IComponentContext>();
+
+                return ResolveEntityCommand(ctx);
+            };
+        }
+
+        private Func<Type, Type, IHandleCommand> ResolveEntityCommand(IComponentContext ctx)
+        {
+            return (command, entity) =>
+            {
+                var handlerType = typeof(IHandleCommand<,>).MakeGenericType(command, entity);
 
                 return (IHandleCommand)ctx.Resolve(handlerType);
             };

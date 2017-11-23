@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Middlewares.Errors.Exceptions;
+using PortfolioApplication.Services;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
 using System.Collections.Generic;
@@ -27,9 +28,9 @@ namespace PortfolioApplication.Api.CQRS.Queries
             RedisCache = redisCache;
         }
 
-        public virtual async Task<TDto> Get(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
+        public async Task<TDto> Get(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
         {
-            string key = ComposeRedisKey(typeof(TEntity).Name, id.ToString());
+            string key = RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, id.ToString());
             string cachedEntity = await RedisCache.GetStringAsync(key);
 
             if (string.IsNullOrEmpty(cachedEntity))
@@ -51,9 +52,9 @@ namespace PortfolioApplication.Api.CQRS.Queries
             return JsonConvert.DeserializeObject<TDto>(cachedEntity);
         }
 
-        public virtual async Task<IList<TDto>> Get(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc)
+        public async Task<IList<TDto>> Get(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc)
         {
-            string key = ComposeRedisKey(typeof(TEntity).Name, "*");
+            string key = RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, "*");
             string cachedEntities = await RedisCache.GetStringAsync(key);
 
             if (string.IsNullOrEmpty(cachedEntities))
@@ -73,11 +74,6 @@ namespace PortfolioApplication.Api.CQRS.Queries
             }
 
             return JsonConvert.DeserializeObject<IList<TDto>>(cachedEntities);
-        }
-
-        protected string ComposeRedisKey(string entityTypeName, string id)
-        {
-            return entityTypeName + ":" + id;
         }
     }
 }

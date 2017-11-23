@@ -28,6 +28,8 @@ namespace PortfolioApplication.Services.DatabaseContext
             modelBuilder.Entity<ProjectEntity>().HasIndex(proj => new { proj.Name }).IsUnique();
             modelBuilder.Entity<TechnologyEntity>().HasIndex(tech => tech.Name).IsUnique();
 
+            modelBuilder.Entity<ProjectEntity>().HasOne<ExperienceEntity>().WithMany(exp => exp.Projects).OnDelete(DeleteBehavior.Cascade);
+
             base.OnModelCreating(modelBuilder);
         }
     }

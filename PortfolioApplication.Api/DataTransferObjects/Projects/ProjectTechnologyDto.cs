@@ -1,6 +1,6 @@
-﻿using PortfolioApplication.Api.DataTransferObjects.Technology;
+﻿using PortfolioApplication.Api.DataTransferObjects.Technologies;
 
-namespace PortfolioApplication.Api.DataTransferObjects.Project
+namespace PortfolioApplication.Api.DataTransferObjects.Projects
 {
     /// <summary>
     /// Data transfer object for technology associated with project

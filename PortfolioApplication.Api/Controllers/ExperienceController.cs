@@ -1,12 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Commands;
+using PortfolioApplication.Api.CQRS.Commands.Experiences;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -67,7 +69,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetExperiences()
         {
-            Func<DbSet<ExperienceEntity>, Task<List<ExperienceEntity>>> retrivalFunc = 
+            Func<DbSet<ExperienceEntity>, Task<List<ExperienceEntity>>> retrivalFunc =
                 dbSet => dbSet
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.Technologies)
@@ -83,7 +85,7 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Create new Experience entity in database
+        /// Create new Experience entity
         /// </summary>
         /// <param name="createExperienceCommand"> Command containing parameters to create new Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
@@ -91,10 +93,29 @@ namespace PortfolioApplication.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.InternalServerError)]
         [HttpPost]
         public async Task<IActionResult> CreateExperience([FromBody]CreateExperienceCommand createExperienceCommand)
-        { 
+        {
             await _commandBus.SendAsync(createExperienceCommand);
 
             return new JsonResult($"Processed command '{createExperienceCommand}'.");
+        }
+
+        /// <summary>
+        /// Delete Experience entity
+        /// </summary>
+        /// <param name="deleteExperienceCommand"> Command containing parameters to delete Experience entity </param>
+        /// <returns> JSON containing information about processed command </returns>
+        [SwaggerResponse((int)HttpStatusCode.OK)]
+        [SwaggerResponse((int)HttpStatusCode.InternalServerError)]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteExperience([FromBody]DeleteExperienceCommand deleteExperienceCommand)
+        {
+            Expression<Func<ExperienceEntity, bool>> retrievalFunc = 
+                (exp) => exp.CompanyName == deleteExperienceCommand.CompanyName 
+                    && exp.Position == deleteExperienceCommand.Position;
+
+            await _commandBus.SendAsync(deleteExperienceCommand, retrievalFunc);
+
+            return new JsonResult($"Processed command '{deleteExperienceCommand}'.");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using PortfolioApplication.Entities.Enums;
 
-namespace PortfolioApplication.Api.DataTransferObjects.Project
+namespace PortfolioApplication.Api.DataTransferObjects.Projects
 {
     /// <summary>
     /// Data transfer object for ProjectType entity

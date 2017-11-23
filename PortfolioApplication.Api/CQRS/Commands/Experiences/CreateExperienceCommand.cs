@@ -1,4 +1,4 @@
-﻿namespace PortfolioApplication.Api.CQRS.Commands
+﻿namespace PortfolioApplication.Api.CQRS.Commands.Experiences
 {
     public class CreateExperienceCommand : ICreateExperienceCommand
     {

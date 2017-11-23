@@ -2,7 +2,7 @@
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContext;
 
-namespace PortfolioApplication.Api.CQRS.Commands
+namespace PortfolioApplication.Api.CQRS.Commands.Experiences
 {
     public class CreateExperienceCommandHandler : CreateEntityCommandHandler<CreateExperienceCommand, ExperienceEntity>
     {

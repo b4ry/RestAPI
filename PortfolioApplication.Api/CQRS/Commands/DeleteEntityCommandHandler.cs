@@ -4,11 +4,14 @@ using Microsoft.Extensions.Caching.Distributed;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services;
 using PortfolioApplication.Services.DatabaseContext;
+using System;
+using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
-    public class CreateEntityCommandHandler<TCommand, TEntity> : IHandleCommand<TCommand> 
+    public class DeleteEntityCommandHandler<TCommand, TEntity> : IHandleCommand<TCommand, TEntity>
         where TCommand : ICommand
         where TEntity : BaseEntity
     {
@@ -17,7 +20,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
         private IDistributedCache RedisCache { get; }
         private DbSet<TEntity> EntitySet { get; }
 
-        public CreateEntityCommandHandler(IDatabaseSet databaseSet, IUnitOfWork unitOfWork, IDistributedCache redisCache)
+        public DeleteEntityCommandHandler(IDatabaseSet databaseSet, IUnitOfWork unitOfWork, IDistributedCache redisCache)
         {
             UnitOfWork = unitOfWork;
             DatabaseSet = databaseSet;
@@ -25,21 +28,25 @@ namespace PortfolioApplication.Api.CQRS.Commands
             RedisCache = redisCache;
         }
 
-        public void Handle(TCommand command)
+        public void Handle(TCommand command, Expression<Func<TEntity, bool>> retrievalFunc)
         {
             var entity = Mapper.Map<TEntity>(command);
+            entity = EntitySet.Single(predicate: retrievalFunc);
 
-            EntitySet.Add(entity);
+            EntitySet.Remove(entity);
             UnitOfWork.Save();
+            RedisCache.Remove(RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, entity.Id.ToString()));
             RedisCache.Remove(RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, "*"));
         }
 
-        public async Task HandleAsync(TCommand command)
+        public async Task HandleAsync(TCommand command, Expression<Func<TEntity, bool>> retrievalFunc)
         {
             var entity = Mapper.Map<TEntity>(command);
+            entity = await EntitySet.SingleAsync(predicate: retrievalFunc);
 
-            EntitySet.Add(entity);
+            EntitySet.Remove(entity);
             await UnitOfWork.SaveAsync();
+            await RedisCache.RemoveAsync(RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, entity.Id.ToString()));
             await RedisCache.RemoveAsync(RedisHelpers.ComposeRedisKey(typeof(TEntity).Name, "*"));
         }
     }

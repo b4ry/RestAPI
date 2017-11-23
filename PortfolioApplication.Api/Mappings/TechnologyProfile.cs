@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using PortfolioApplication.Api.CQRS.Commands;
-using PortfolioApplication.Api.DataTransferObjects.Technology;
+using PortfolioApplication.Api.CQRS.Commands.Technologies;
+using PortfolioApplication.Api.DataTransferObjects.Technologies;
 using PortfolioApplication.Entities.Entities;
 using System.Linq;
 

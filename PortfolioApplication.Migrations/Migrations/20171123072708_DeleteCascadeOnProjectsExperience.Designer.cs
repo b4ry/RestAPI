@@ -12,9 +12,10 @@ using System;
 namespace PortfolioApplication.Migrations.Migrations
 {
     [DbContext(typeof(PortfolioApplicationDbContext))]
-    partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171123072708_DeleteCascadeOnProjectsExperience")]
+    partial class DeleteCascadeOnProjectsExperience
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

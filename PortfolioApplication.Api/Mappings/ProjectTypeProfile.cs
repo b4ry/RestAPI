@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using PortfolioApplication.Api.DataTransferObjects.Technology;
+using PortfolioApplication.Api.DataTransferObjects.Technologies;
 using PortfolioApplication.Entities.Entities;
 
 namespace PortfolioApplication.Api.Mappings

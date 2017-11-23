@@ -1,4 +1,4 @@
-﻿using PortfolioApplication.Api.DataTransferObjects.Project;
+﻿using PortfolioApplication.Api.DataTransferObjects.Projects;
 using System.Collections.Generic;
 
 namespace PortfolioApplication.Api.DataTransferObjects
