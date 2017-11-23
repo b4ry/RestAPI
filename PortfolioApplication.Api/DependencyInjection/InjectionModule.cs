@@ -43,9 +43,9 @@ namespace PortfolioApplication.Api.DependencyInjection
 
         private Func<Type, IHandleCommand> ResolveNoEntityCommand(IComponentContext ctx)
         {
-            return t =>
+            return command =>
             {
-                var handlerType = typeof(IHandleCommand<>).MakeGenericType(t);
+                var handlerType = typeof(IHandleCommand<>).MakeGenericType(command);
 
                 return (IHandleCommand)ctx.Resolve(handlerType);
             };
