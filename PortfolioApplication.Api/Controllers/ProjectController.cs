@@ -35,8 +35,8 @@ namespace PortfolioApplication.Api.Controllers
         /// </summary>
         /// <param name="id"> Identification number of Project entity. <br>Constraints:</br>- must be bigger than 0</param>
         /// <returns> Project entity in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entity from database")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectById([Required]int id)
         {
@@ -57,8 +57,8 @@ namespace PortfolioApplication.Api.Controllers
         /// Retrieve all Project entities
         /// </summary>
         /// <returns> Project entity collection in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.NoContent)]
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entities from database")]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, description: "Collection of enquired entities is empty")]
         [HttpGet]
         public async Task<IActionResult> GetProjects()
         {

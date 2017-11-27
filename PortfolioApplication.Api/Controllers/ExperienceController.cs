@@ -40,8 +40,8 @@ namespace PortfolioApplication.Api.Controllers
         /// </summary>
         /// <param name="id"> Identification number of Experience entity. <br>Constraints:</br>- must be bigger than 0</param>
         /// <returns> Experience entity in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.NotFound)]
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entity from database")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetExperienceById([Required]int id)
         {
@@ -64,8 +64,8 @@ namespace PortfolioApplication.Api.Controllers
         /// Retrieve all Experience entities
         /// </summary>
         /// <returns> Experience entity collection in JSON format </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.NoContent)]
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entities from database")]
+        [SwaggerResponse((int)HttpStatusCode.NoContent, description: "Collection of enquired entities is empty")]
         [HttpGet]
         public async Task<IActionResult> GetExperiences()
         {
@@ -89,8 +89,9 @@ namespace PortfolioApplication.Api.Controllers
         /// </summary>
         /// <param name="createExperienceCommand"> Command containing parameters to create new Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.InternalServerError)]
+        [SwaggerResponse((int)HttpStatusCode.Created, description: "Successfully created new entity in database")]
+        [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
+        [SwaggerResponse((int)HttpStatusCode.NotAcceptable, description: "Provided values are not acceptable, e.g. empty entity")]
         [HttpPost]
         public async Task<IActionResult> CreateExperience([FromBody]CreateExperienceCommand createExperienceCommand)
         {
@@ -104,8 +105,8 @@ namespace PortfolioApplication.Api.Controllers
         /// </summary>
         /// <param name="deleteExperienceCommand"> Command containing parameters to delete Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
-        [SwaggerResponse((int)HttpStatusCode.OK)]
-        [SwaggerResponse((int)HttpStatusCode.InternalServerError)]
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully removed enquired entity from database")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
         [HttpDelete]
         public async Task<IActionResult> DeleteExperience([FromBody]DeleteExperienceCommand deleteExperienceCommand)
         {

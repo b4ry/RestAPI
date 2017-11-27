@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using PortfolioApplication.Middlewares.Errors.Exceptions;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace PortfolioApplication.Middlewares.Errors
@@ -42,6 +44,22 @@ namespace PortfolioApplication.Middlewares.Errors
             {
                 _logger.LogInformation(exception: e, message: e.Message);
                 context.Response.StatusCode = StatusCodes.Status204NoContent;
+            }
+            else if(e is DbUpdateException)
+            {
+                SqlException sqlException = e.InnerException as SqlException;
+                e = sqlException;
+                
+                if(sqlException.Number == (int)SqlErrorsEnum.CannotInsertDuplicate)
+                {
+                    context.Response.StatusCode = StatusCodes.Status409Conflict;
+                }
+                else if(sqlException.Number == (int)SqlErrorsEnum.CannotInsertNull)
+                {
+                    context.Response.StatusCode = StatusCodes.Status406NotAcceptable;
+                }
+
+                _logger.LogError(exception: e, message: e.Message);
             }
             else
             {

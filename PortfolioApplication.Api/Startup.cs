@@ -11,6 +11,7 @@ using NetEscapades.AspNetCore.SecurityHeaders;
 using NLog;
 using NLog.Config;
 using PortfolioApplication.Api.Extensions;
+using PortfolioApplication.Middlewares;
 using PortfolioApplication.Middlewares.Errors;
 using PortfolioApplication.Services.DatabaseContext;
 using Swashbuckle.AspNetCore.Swagger;
@@ -109,6 +110,7 @@ namespace PortfolioApplication.Api
             app.UseCors("AllowSpecificOrigin");
             app.UseAutoMapper();
             app.UseMiddleware<ErrorHandlingMiddleware>();
+            app.UseMiddleware<PrepareHttpResponseMiddleware>();
 
             LogManager.Configuration.Install(new InstallationContext());
 
