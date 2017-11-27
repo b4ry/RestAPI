@@ -5,6 +5,7 @@ using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services;
 using PortfolioApplication.Services.DatabaseContext;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -31,7 +32,15 @@ namespace PortfolioApplication.Api.CQRS.Commands
         public void Handle(TCommand command, Expression<Func<TEntity, bool>> retrievalFunc)
         {
             var entity = Mapper.Map<TEntity>(command);
-            entity = EntitySet.Single(predicate: retrievalFunc);
+
+            try
+            {
+                entity = EntitySet.Single(predicate: retrievalFunc);
+            }
+            catch (Exception)
+            {
+                throw new KeyNotFoundException($"Could not retrieve entity specified by '{command}', type: '{typeof(TEntity).Name}') from database.");
+            }
 
             EntitySet.Remove(entity);
             UnitOfWork.Save();
@@ -42,7 +51,15 @@ namespace PortfolioApplication.Api.CQRS.Commands
         public async Task HandleAsync(TCommand command, Expression<Func<TEntity, bool>> retrievalFunc)
         {
             var entity = Mapper.Map<TEntity>(command);
-            entity = await EntitySet.SingleAsync(predicate: retrievalFunc);
+
+            try
+            {
+                entity = await EntitySet.SingleAsync(predicate: retrievalFunc);
+            }
+            catch (Exception)
+            {
+                throw new KeyNotFoundException($"Could not retrieve entity specified by '{command}', type: '{typeof(TEntity).Name}') from database.");
+            }
 
             EntitySet.Remove(entity);
             await UnitOfWork.SaveAsync();

@@ -18,7 +18,7 @@
         public override string ToString()
         {
             return $"Update Experience entity identified by: Company name = '{CompanyNameId}', Position = '{PositionId}'" +
-                $" with values: Company name = '{CompanyNameId}', Position = '{PositionId}'";
+                $" with values: Company name = '{CompanyName}', Position = '{Position}'";
         }
     }
 }
