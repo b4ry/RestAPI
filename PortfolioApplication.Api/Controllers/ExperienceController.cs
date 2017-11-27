@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Commands;
-using PortfolioApplication.Api.CQRS.Commands.Experiences;
+using PortfolioApplication.Api.CQRS.Commands.Experiences.Commands;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -90,8 +90,8 @@ namespace PortfolioApplication.Api.Controllers
         /// <param name="createExperienceCommand"> Command containing parameters to create new Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
         [SwaggerResponse((int)HttpStatusCode.Created, description: "Successfully created new entity in database")]
-        [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [SwaggerResponse((int)HttpStatusCode.NotAcceptable, description: "Provided values are not acceptable, e.g. empty entity")]
+        [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [HttpPost]
         public async Task<IActionResult> CreateExperience([FromBody]CreateExperienceCommand createExperienceCommand)
         {
@@ -117,6 +117,26 @@ namespace PortfolioApplication.Api.Controllers
             await _commandBus.SendAsync(deleteExperienceCommand, retrievalFunc);
 
             return new JsonResult($"Processed command '{deleteExperienceCommand}'.");
+        }
+
+        /// <summary>
+        /// Update Experience entity
+        /// </summary>
+        /// <param name="updateExperienceCommand"> Command containing parameters to update Experience entity </param>
+        /// <returns> JSON containing information about processed command </returns>
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully updated enquired entity in database")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
+        [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
+        [HttpPatch]
+        public async Task<IActionResult> UpdateExperience([FromBody]UpdateExperienceCommand updateExperienceCommand)
+        {
+            Expression<Func<ExperienceEntity, bool>> retrievalFunc =
+                (exp) => exp.CompanyName == updateExperienceCommand.CompanyNameId
+                    && exp.Position == updateExperienceCommand.PositionId;
+
+            await _commandBus.SendAsync(updateExperienceCommand, retrievalFunc);
+
+            return new JsonResult($"Processed command '{updateExperienceCommand}'.");
         }
     }
 }

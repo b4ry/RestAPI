@@ -1,4 +1,4 @@
-﻿namespace PortfolioApplication.Api.CQRS.Commands.Experiences
+﻿namespace PortfolioApplication.Api.CQRS.Commands.Experiences.Commands
 {
     public class DeleteExperienceCommand : IDeleteExperienceCommand
     {

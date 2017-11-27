@@ -85,8 +85,8 @@ namespace PortfolioApplication.Api.Controllers
         /// <param name="createTechnologyCommand"> Command containing parameters to create a new Technology entity </param>
         /// <returns> JSON containing information about processed command </returns>
         [SwaggerResponse((int)HttpStatusCode.Created, description: "Successfully created new entity in database")]
-        [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [SwaggerResponse((int)HttpStatusCode.NotAcceptable, description: "Provided values are not acceptable, e.g. empty entity")]
+        [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [HttpPost]
         public async Task<IActionResult> CreateTechnology([FromBody]CreateTechnologyCommand createTechnologyCommand)
         {
