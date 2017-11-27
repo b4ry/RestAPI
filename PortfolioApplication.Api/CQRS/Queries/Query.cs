@@ -6,7 +6,7 @@ using PortfolioApplication.Api.DataTransferObjects;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Middlewares.Errors.Exceptions;
 using PortfolioApplication.Services;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;

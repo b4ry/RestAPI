@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
-    public class CreateEntityCommandHandler<TCommand, TEntity> : IHandleCommand<TCommand> 
+    public class CreateEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand> 
         where TCommand : ICommand
         where TEntity : BaseEntity
     {

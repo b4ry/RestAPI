@@ -1,7 +1,7 @@
 ﻿using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Entities.Entities.JunctionEntities;
 using PortfolioApplication.Entities.Enums;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Linq;
 

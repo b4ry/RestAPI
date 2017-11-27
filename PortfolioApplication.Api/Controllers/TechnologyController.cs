@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Commands;
-using PortfolioApplication.Api.CQRS.Commands.Technologies;
+using PortfolioApplication.Api.CQRS.Commands.Technologies.Commands;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;

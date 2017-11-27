@@ -1,10 +1,9 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using PortfolioApplication.Services.DatabaseContext;
-using PortfolioApplication.Entities.Enums;
+using PortfolioApplication.Services.DatabaseContexts;
+using System;
 
 namespace PortfolioApplication.Migrations.Migrations
 {

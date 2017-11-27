@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
 using PortfolioApplication.Api.DataTransferObjects.Projects;
 using PortfolioApplication.Entities.Entities;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {

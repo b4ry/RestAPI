@@ -1,18 +1,20 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using Newtonsoft.Json;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
-    public class DeleteEntityCommandHandler<TCommand, TEntity> : IHandleCommand<TCommand, TEntity>
+    public class UpdateEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand, TEntity>
         where TCommand : ICommand
         where TEntity : BaseEntity
     {
@@ -21,7 +23,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
         private IDistributedCache RedisCache { get; }
         private DbSet<TEntity> EntitySet { get; }
 
-        public DeleteEntityCommandHandler(IDatabaseSet databaseSet, IUnitOfWork unitOfWork, IDistributedCache redisCache)
+        public UpdateEntityCommandHandler(IDatabaseSet databaseSet, IUnitOfWork unitOfWork, IDistributedCache redisCache)
         {
             UnitOfWork = unitOfWork;
             DatabaseSet = databaseSet;
@@ -32,15 +34,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
         public void Handle(TCommand command, Expression<Func<TEntity, bool>> retrievalFunc)
         {
             var entity = Mapper.Map<TEntity>(command);
-
-            try
-            {
-                entity = EntitySet.Single(predicate: retrievalFunc);
-            }
-            catch (Exception)
-            {
-                throw new KeyNotFoundException($"Could not retrieve entity specified by '{command}', type: '{typeof(TEntity).Name}') from database.");
-            }
+            entity = EntitySet.Single(predicate: retrievalFunc);
 
             EntitySet.Remove(entity);
             UnitOfWork.Save();
@@ -56,15 +50,36 @@ namespace PortfolioApplication.Api.CQRS.Commands
             {
                 entity = await EntitySet.SingleAsync(predicate: retrievalFunc);
             }
-            catch (Exception)
+            catch(Exception)
             {
                 throw new KeyNotFoundException($"Could not retrieve entity specified by '{command}', type: '{typeof(TEntity).Name}') from database.");
             }
 
-            EntitySet.Remove(entity);
+            var properties = command.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            
+            foreach(var property in properties)
+            {
+                var propertyToUpdate = entity.GetType().GetProperty(property.Name);
+
+                if (propertyToUpdate != null)
+                {
+                    var value = property.GetValue(command);
+
+                    if (value != null)
+                    {
+                        propertyToUpdate.SetValue(entity, value);
+                    }
+                }
+            }
+
             await UnitOfWork.SaveAsync();
-            await RedisCache.RemoveAsync(RedisHelper.ComposeRedisKey(typeof(TEntity).Name, entity.Id.ToString()));
+
+            string redisKey = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, entity.Id.ToString());
+            string serializedEntity = JsonConvert.SerializeObject(entity);
+
+            await RedisCache.RemoveAsync(redisKey);
             await RedisCache.RemoveAsync(RedisHelper.ComposeRedisKey(typeof(TEntity).Name, "*"));
+            await RedisCache.SetStringAsync(redisKey, serializedEntity);
         }
     }
 }

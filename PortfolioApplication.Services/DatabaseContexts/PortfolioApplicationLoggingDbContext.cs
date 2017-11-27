@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace PortfolioApplication.Services.DatabaseContext
+namespace PortfolioApplication.Services.DatabaseContexts
 {
     public class PortfolioApplicationLoggingDbContext : DbContext
     {

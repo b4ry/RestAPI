@@ -13,7 +13,7 @@ using NLog.Config;
 using PortfolioApplication.Api.Extensions;
 using PortfolioApplication.Middlewares;
 using PortfolioApplication.Middlewares.Errors;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
 using System.IO;

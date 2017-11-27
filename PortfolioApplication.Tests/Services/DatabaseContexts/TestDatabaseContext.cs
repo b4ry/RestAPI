@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Entities.Entities;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Linq;
 using System.Reflection;
 using Xunit;
 
-namespace PortfolioApplication.Tests.Services.DatabaseContext
+namespace PortfolioApplication.Tests.Services.DatabaseContexts
 {
     public class TestDatabaseContext
     {

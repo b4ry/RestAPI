@@ -8,13 +8,13 @@ namespace PortfolioApplication.Api.CQRS.Commands
 {
     public class CommandBus : ICommandBus
     {
-        private readonly Func<Type, IHandleCommand> _noEntityHandlersFactory;
-        private readonly Func<Type, Type, IHandleCommand> _entityHandlersFactory;
+        private readonly Func<Type, ICommandHandler> _noEntityHandlersFactory;
+        private readonly Func<Type, Type, ICommandHandler> _entityHandlersFactory;
         private readonly ILogger<CommandBus> _logger;
 
         public CommandBus(
-            Func<Type, IHandleCommand> noEntityHandlersFactory,
-            Func<Type, Type, IHandleCommand> entityHandlersFactory,
+            Func<Type, ICommandHandler> noEntityHandlersFactory,
+            Func<Type, Type, ICommandHandler> entityHandlersFactory,
             ILogger<CommandBus> logger)
         {
             _noEntityHandlersFactory = noEntityHandlersFactory;
@@ -24,7 +24,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
 
         public void Send<TCommand>(TCommand command) where TCommand : ICommand
         {
-            var handler = (IHandleCommand<TCommand>)_noEntityHandlersFactory(typeof(TCommand));
+            var handler = (ICommandHandler<TCommand>)_noEntityHandlersFactory(typeof(TCommand));
 
             handler.Handle(command);
             _logger.LogInformation($"Processed command '{command}'.", command);
@@ -32,7 +32,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
 
         public async Task SendAsync<TCommand>(TCommand command) where TCommand : ICommand
         {
-            var handler = (IHandleCommand<TCommand>)_noEntityHandlersFactory(typeof(TCommand));
+            var handler = (ICommandHandler<TCommand>)_noEntityHandlersFactory(typeof(TCommand));
 
             await handler.HandleAsync(command);
             _logger.LogInformation($"Processed command '{command}'.", command);
@@ -42,7 +42,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
             where TCommand : ICommand
             where TEntity : BaseEntity
         {
-            var handler = (IHandleCommand<TCommand, TEntity>)_entityHandlersFactory(typeof(TCommand), typeof(TEntity));
+            var handler = (ICommandHandler<TCommand, TEntity>)_entityHandlersFactory(typeof(TCommand), typeof(TEntity));
 
             handler.Handle(command, retrievalFunc);
             _logger.LogInformation($"Processed command '{command}'.", command);
@@ -52,7 +52,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
             where TCommand : ICommand
             where TEntity : BaseEntity
         {
-            var handler = (IHandleCommand<TCommand, TEntity>)_entityHandlersFactory(typeof(TCommand), typeof(TEntity));
+            var handler = (ICommandHandler<TCommand, TEntity>)_entityHandlersFactory(typeof(TCommand), typeof(TEntity));
 
             await handler.HandleAsync(command, retrievalFunc);
             _logger.LogInformation($"Processed command '{command}'.", command);

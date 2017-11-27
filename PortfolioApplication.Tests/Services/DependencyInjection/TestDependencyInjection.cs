@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Api.Extensions;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Linq;
 using System.Reflection;

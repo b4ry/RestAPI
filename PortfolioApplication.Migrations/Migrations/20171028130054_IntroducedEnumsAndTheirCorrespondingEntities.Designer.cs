@@ -3,8 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using PortfolioApplication.Services.DatabaseContext;
-using PortfolioApplication.Entities.Enums;
+using PortfolioApplication.Services.DatabaseContexts;
 
 namespace PortfolioApplication.Migrations.Migrations
 {

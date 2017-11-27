@@ -1,6 +1,6 @@
 ﻿using PortfolioApplication.Entities.Enums;
 
-namespace PortfolioApplication.Api.CQRS.Commands.Technologies
+namespace PortfolioApplication.Api.CQRS.Commands.Technologies.Commands
 {
     public class CreateTechnologyCommand : ICreateTechnologyCommand
     {

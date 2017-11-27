@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using PortfolioApplication.Api.CQRS.Commands;
-using PortfolioApplication.Entities.Entities;
-using PortfolioApplication.Services.DatabaseContext;
+using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -21,7 +20,7 @@ namespace PortfolioApplication.Api.DependencyInjection
         private void RegisterCommands(ContainerBuilder builder)
         {
             builder.RegisterAssemblyTypes(ThisAssembly)
-            .Where(x => x.IsAssignableTo<IHandleCommand>())
+            .Where(x => x.IsAssignableTo<ICommandHandler>())
             .AsImplementedInterfaces();
 
             builder.Register(RegisterNoEntityHandlersFactoryDelegate());
@@ -31,7 +30,7 @@ namespace PortfolioApplication.Api.DependencyInjection
                 .AsImplementedInterfaces();
         }
 
-        private Func<IComponentContext, Func<Type, IHandleCommand>> RegisterNoEntityHandlersFactoryDelegate()
+        private Func<IComponentContext, Func<Type, ICommandHandler>> RegisterNoEntityHandlersFactoryDelegate()
         {
             return c =>
             {
@@ -41,17 +40,17 @@ namespace PortfolioApplication.Api.DependencyInjection
             };
         }
 
-        private Func<Type, IHandleCommand> ResolveNoEntityCommand(IComponentContext ctx)
+        private Func<Type, ICommandHandler> ResolveNoEntityCommand(IComponentContext ctx)
         {
             return command =>
             {
-                var handlerType = typeof(IHandleCommand<>).MakeGenericType(command);
+                var handlerType = typeof(ICommandHandler<>).MakeGenericType(command);
 
-                return (IHandleCommand)ctx.Resolve(handlerType);
+                return (ICommandHandler)ctx.Resolve(handlerType);
             };
         }
 
-        private Func<IComponentContext, Func<Type, Type, IHandleCommand>> RegisterEntityHandlersFactoryDelegate()
+        private Func<IComponentContext, Func<Type, Type, ICommandHandler>> RegisterEntityHandlersFactoryDelegate()
         {
             return c =>
             {
@@ -61,13 +60,13 @@ namespace PortfolioApplication.Api.DependencyInjection
             };
         }
 
-        private Func<Type, Type, IHandleCommand> ResolveEntityCommand(IComponentContext ctx)
+        private Func<Type, Type, ICommandHandler> ResolveEntityCommand(IComponentContext ctx)
         {
             return (command, entity) =>
             {
-                var handlerType = typeof(IHandleCommand<,>).MakeGenericType(command, entity);
+                var handlerType = typeof(ICommandHandler<,>).MakeGenericType(command, entity);
 
-                return (IHandleCommand)ctx.Resolve(handlerType);
+                return (ICommandHandler)ctx.Resolve(handlerType);
             };
         }
 

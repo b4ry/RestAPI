@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Reflection;
 
-namespace PortfolioApplication.Services.DatabaseContext
+namespace PortfolioApplication.Services.DatabaseContexts
 {
     public class PortfolioApplicationDbContext : DbContext
     {

@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace PortfolioApplication.Services.DatabaseContext
+namespace PortfolioApplication.Services.DatabaseContexts
 {
     public class UnitOfWork : IUnitOfWork
     {
