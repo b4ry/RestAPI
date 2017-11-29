@@ -15,7 +15,9 @@ namespace PortfolioApplication.Api.Mappings
         /// </summary>
         public ProjectProfile()
         {
-            CreateMap<ProjectEntity, ProjectDto>().ForMember(x => x.Technologies, opt => opt.MapFrom(src => src.Technologies.Select(t => t.Technology).ToList()));
+            CreateMap<ProjectEntity, ProjectDto>()
+                .ForMember(x => x.Technologies, opt => opt.MapFrom(src => src.Technologies.Select(t => t.Technology)
+                .ToList()));
             CreateMap<ProjectDto, ProjectEntity>().ForMember(x => x.ProjectTypeId, opt => opt.Ignore());
         }
     }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Queries
 {
-    public abstract class Query<TEntity, TDto> : IQuery<TEntity, TDto> 
+    public abstract class Query<TEntity, TDto> : IQuery<TEntity, TDto>
         where TEntity : BaseEntity
         where TDto : BaseDto
     {
@@ -52,17 +52,18 @@ namespace PortfolioApplication.Api.CQRS.Queries
             return JsonConvert.DeserializeObject<TDto>(cachedEntity);
         }
 
-        public async Task<IList<TDto>> GetAsync(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc)
+        public async Task<IList<TDto>> GetAsync(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc, string queryParameter = "")
         {
-            string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, "*");
+            string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, $"*{queryParameter}");
             string cachedEntities = await RedisCache.GetStringAsync(key);
 
             if (string.IsNullOrEmpty(cachedEntities))
             {
-                if (await EntitySet.CountAsync() > 0)
+                var retrievedEntities = await retrievalFunc(EntitySet);
+
+                if (retrievedEntities.Count > 0)
                 {
-                    var retrievedEntities = await retrievalFunc(EntitySet);
-                    var retrievedDtos = Mapper.Map <IEnumerable<TDto>>(retrievedEntities);
+                    var retrievedDtos = Mapper.Map<IEnumerable<TDto>>(retrievedEntities);
                     cachedEntities = JsonConvert.SerializeObject(retrievedDtos);
 
                     await RedisCache.SetStringAsync(key, cachedEntities);

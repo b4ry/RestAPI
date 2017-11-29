@@ -12,6 +12,6 @@ namespace PortfolioApplication.Api.CQRS.Queries
         where TDto : BaseDto
     {
         Task<TDto> GetAsync(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc);
-        Task<IList<TDto>> GetAsync(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc);
+        Task<IList<TDto>> GetAsync(Func<DbSet<TEntity>, Task<List<TEntity>>> retrievalFunc, string queryParameter);
     }
 }

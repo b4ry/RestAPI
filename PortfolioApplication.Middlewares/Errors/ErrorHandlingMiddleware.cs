@@ -50,15 +50,15 @@ namespace PortfolioApplication.Middlewares.Errors
                 SqlException sqlException = e.InnerException as SqlException;
                 e = sqlException;
                 
-                if(sqlException.Number == (int)SqlErrorsEnum.CannotInsertDuplicate)
-                {
-                    context.Response.StatusCode = StatusCodes.Status409Conflict;
-                }
-                else if(sqlException.Number == (int)SqlErrorsEnum.CannotInsertNull)
+                if (sqlException.Number == (int)SqlErrorsEnum.CannotInsertNull)
                 {
                     context.Response.StatusCode = StatusCodes.Status406NotAcceptable;
                 }
-
+                else if (sqlException.Number == (int)SqlErrorsEnum.CannotInsertDuplicate)
+                {
+                    context.Response.StatusCode = StatusCodes.Status409Conflict;
+                }
+                
                 _logger.LogError(exception: e, message: e.Message);
             }
             else

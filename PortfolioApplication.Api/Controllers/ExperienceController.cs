@@ -8,6 +8,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
@@ -63,13 +64,14 @@ namespace PortfolioApplication.Api.Controllers
         /// <summary>
         /// Retrieve all Experience entities
         /// </summary>
+        /// <param name="companyName"> Company name parameter to filter results </param>
         /// <returns> Experience entity collection in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entities from database")]
         [SwaggerResponse((int)HttpStatusCode.NoContent, description: "Collection of enquired entities is empty")]
         [HttpGet]
-        public async Task<IActionResult> GetExperiences()
+        public async Task<IActionResult> GetExperiences([FromQuery]string companyName)
         {
-            Func<DbSet<ExperienceEntity>, Task<List<ExperienceEntity>>> retrivalFunc =
+            Func<DbSet<ExperienceEntity>, Task<List<ExperienceEntity>>> retrievalFunc =
                 dbSet => dbSet
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.Technologies)
@@ -79,7 +81,14 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(proj => proj.ProjectType)
                 .ToListAsync();
 
-            var experienceDtos = await _experienceQuery.GetAsync(retrivalFunc);
+            if(companyName != string.Empty && companyName != null)
+            {
+                Func<DbSet<ExperienceEntity>, Task<List<ExperienceEntity>>> whereCondition = 
+                    dbset => dbset.Where(exp => exp.CompanyName == companyName).ToListAsync();
+                retrievalFunc += whereCondition;
+            }
+
+            var experienceDtos = await _experienceQuery.GetAsync(retrievalFunc, companyName);
 
             return new JsonResult(experienceDtos);
         }
