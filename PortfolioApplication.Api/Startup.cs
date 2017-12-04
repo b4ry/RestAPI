@@ -53,7 +53,7 @@ namespace PortfolioApplication.Api
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
-                    builder => builder.WithOrigins("http://localhost:64315")
+                    builder => builder.WithOrigins("http://localhost:4200")
                     .AllowAnyHeader());
             });
 
