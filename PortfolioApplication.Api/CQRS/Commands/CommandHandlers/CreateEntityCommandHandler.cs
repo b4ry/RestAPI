@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
-    public class CreateEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand> 
+    public abstract class CreateEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand> 
         where TCommand : ICommand
         where TEntity : BaseEntity
     {

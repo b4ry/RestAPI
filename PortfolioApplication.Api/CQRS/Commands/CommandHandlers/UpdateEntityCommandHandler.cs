@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
-    public class UpdateEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand, TEntity>
+    public abstract class UpdateEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand, TEntity>
         where TCommand : ICommand
         where TEntity : BaseEntity
     {

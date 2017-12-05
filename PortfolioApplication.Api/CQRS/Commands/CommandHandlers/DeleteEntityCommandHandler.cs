@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace PortfolioApplication.Api.CQRS.Commands
 {
-    public class DeleteEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand, TEntity>
+    public abstract class DeleteEntityCommandHandler<TCommand, TEntity> : ICommandHandler<TCommand, TEntity>
         where TCommand : ICommand
         where TEntity : BaseEntity
     {
