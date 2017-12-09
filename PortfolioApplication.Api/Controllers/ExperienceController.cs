@@ -64,8 +64,8 @@ namespace PortfolioApplication.Api.Controllers
         /// <summary>
         /// Retrieve Experience entity by its key (Company name and position)
         /// </summary>
-        /// <param name="companyName"> Company name associated with the experience
-        /// <param name="position"> Position associate with the experience
+        /// <param name="companyName"> Company name associated with the experience </param>
+        /// <param name="position"> Position associate with the experience </param>
         /// <returns> Experience entity in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entity from database")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
