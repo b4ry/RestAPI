@@ -9,7 +9,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
 {
     public interface IProjectTypeQuery
     {
-        Task<ProjectTypeDto> GetAsync(int id, Func<DbSet<ProjectTypeEntity>, Task<ProjectTypeEntity>> retrievalFunc);
+        Task<ProjectTypeDto> GetAsync(string id, Func<DbSet<ProjectTypeEntity>, Task<ProjectTypeEntity>> retrievalFunc);
         Task<IList<ProjectTypeDto>> GetAsync(Func<DbSet<ProjectTypeEntity>, Task<List<ProjectTypeEntity>>> retrievalFunc, string queryParameter = "");
     }
 }

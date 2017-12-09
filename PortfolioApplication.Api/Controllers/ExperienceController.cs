@@ -56,6 +56,33 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(proj => proj.ProjectType)
                 .SingleAsync(exp => exp.Id == id);
 
+            var experienceDto = await _experienceQuery.GetAsync(id.ToString(), retrivalFunc);
+
+            return new JsonResult(experienceDto);
+        }
+
+        /// <summary>
+        /// Retrieve Experience entity by its key (Company name and position)
+        /// </summary>
+        /// <param name="companyName"> Company name associated with the experience
+        /// <param name="position"> Position associate with the experience
+        /// <returns> Experience entity in JSON format </returns>
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entity from database")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
+        [HttpGet]
+        public async Task<IActionResult> GetExperience([Required]string companyName, [Required]string position)
+        {
+            Func<DbSet<ExperienceEntity>, Task<ExperienceEntity>> retrivalFunc =
+                dbSet => dbSet
+                .Include(exp => exp.Projects)
+                .ThenInclude(proj => proj.Technologies)
+                .ThenInclude(techs => techs.Technology)
+                .ThenInclude(tech => tech.TechnologyType)
+                .Include(exp => exp.Projects)
+                .ThenInclude(proj => proj.ProjectType)
+                .SingleAsync(exp => exp.CompanyName == companyName && exp.Position == position);
+
+            string id = companyName + ":" + position;
             var experienceDto = await _experienceQuery.GetAsync(id, retrivalFunc);
 
             return new JsonResult(experienceDto);

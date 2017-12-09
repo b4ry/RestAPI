@@ -48,7 +48,7 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(tech => tech.TechnologyType)
                 .SingleAsync(proj => proj.Id == id);
 
-            var experienceDto = await _projectQuery.GetAsync(id, retrivalFunc);
+            var experienceDto = await _projectQuery.GetAsync(id.ToString(), retrivalFunc);
 
             return new JsonResult(experienceDto);
         }

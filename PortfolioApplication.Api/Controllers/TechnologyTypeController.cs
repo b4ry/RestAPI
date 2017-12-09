@@ -37,7 +37,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetTechnologyTypeById([Required]int id)
         {
-            var technologyTypeDto = await _technologyTypeQuery.GetAsync(id, dbSet => dbSet.SingleAsync(x => x.Id == id));
+            var technologyTypeDto = await _technologyTypeQuery.GetAsync(id.ToString(), dbSet => dbSet.SingleAsync(x => x.Id == id));
 
             return new JsonResult(technologyTypeDto);
         }

@@ -37,7 +37,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectTypeById([Required]int id)
         {
-            var projectTypeDto = await _projectTypeQuery.GetAsync(id, dbSet => dbSet.SingleAsync(x => x.Id == id));
+            var projectTypeDto = await _projectTypeQuery.GetAsync(id.ToString(), dbSet => dbSet.SingleAsync(x => x.Id == id));
 
             return new JsonResult(projectTypeDto);
 

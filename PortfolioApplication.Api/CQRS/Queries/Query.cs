@@ -28,9 +28,9 @@ namespace PortfolioApplication.Api.CQRS.Queries
             RedisCache = redisCache;
         }
 
-        public async Task<TDto> GetAsync(int id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
+        public async Task<TDto> GetAsync(string id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)
         {
-            string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, id.ToString());
+            string key = RedisHelper.ComposeRedisKey(typeof(TEntity).Name, id);
             string cachedEntity = await RedisCache.GetStringAsync(key);
 
             if (string.IsNullOrEmpty(cachedEntity))

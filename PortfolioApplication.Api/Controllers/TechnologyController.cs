@@ -53,7 +53,7 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(proj => proj.ProjectType)
                 .SingleAsync(tech => tech.Id == id);
 
-            var technologyDto = await _technologyQuery.GetAsync(id, retrivalFunc);
+            var technologyDto = await _technologyQuery.GetAsync(id.ToString(), retrivalFunc);
 
             return new JsonResult(technologyDto);
         }
