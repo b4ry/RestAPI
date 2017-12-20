@@ -58,7 +58,11 @@ namespace PortfolioApplication.Middlewares.Errors
                 {
                     context.Response.StatusCode = StatusCodes.Status409Conflict;
                 }
-                
+                else
+                {
+                    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                }
+
                 _logger.LogError(exception: e, message: e.Message);
             }
             else
