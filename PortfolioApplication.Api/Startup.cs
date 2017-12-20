@@ -54,7 +54,8 @@ namespace PortfolioApplication.Api
             {
                 options.AddPolicy("AllowSpecificOrigin",
                     builder => builder.WithOrigins("http://localhost:4200")
-                    .AllowAnyHeader());
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
             });
 
             services.AddMvc();

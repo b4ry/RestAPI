@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Commands;
 using PortfolioApplication.Api.CQRS.Commands.Technologies.Commands;
 using PortfolioApplication.Api.CQRS.Queries;
+using PortfolioApplication.Api.DataTransferObjects.Technologies;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -88,8 +89,10 @@ namespace PortfolioApplication.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotAcceptable, description: "Provided values are not acceptable, e.g. empty entity")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [HttpPost]
-        public async Task<IActionResult> CreateTechnology([FromBody]CreateTechnologyCommand createTechnologyCommand)
+        public async Task<IActionResult> CreateTechnology([FromBody]TechnologyDto technologyDto)
         {
+            var createTechnologyCommand = new CreateTechnologyCommand(technologyDto.Name, technologyDto.TechnologyType.TechnologyTypeEnum);
+
             await _commandBus.SendAsync(createTechnologyCommand);
 
             return new JsonResult($"Processed command '{createTechnologyCommand}'.");
