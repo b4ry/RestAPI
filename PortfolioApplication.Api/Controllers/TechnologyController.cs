@@ -89,7 +89,7 @@ namespace PortfolioApplication.Api.Controllers
         [SwaggerResponse((int)HttpStatusCode.NotAcceptable, description: "Provided values are not acceptable, e.g. empty entity")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [HttpPost]
-        public async Task<IActionResult> CreateTechnology([FromBody]TechnologyDto technologyDto)
+        public async Task<IActionResult> CreateTechnology([FromBody]CreateTechnologyDto technologyDto)
         {
             var createTechnologyCommand = new CreateTechnologyCommand(technologyDto.Name, technologyDto.TechnologyType.TechnologyTypeEnum);
 
