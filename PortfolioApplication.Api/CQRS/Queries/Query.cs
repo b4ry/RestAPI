@@ -37,7 +37,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
             {
                 try
                 {
-                    var retrievedEntity = await retrievalFunc(EntitySet);
+                    var retrievedEntity = await DatabaseAccess.RetrieveEntityAsync(retrievalFunc, EntitySet);
                     var retrievedDto = Mapper.Map<TDto>(retrievedEntity);
                     cachedEntity = JsonConvert.SerializeObject(retrievedDto);
 
@@ -59,7 +59,7 @@ namespace PortfolioApplication.Api.CQRS.Queries
 
             if (string.IsNullOrEmpty(cachedEntities))
             {
-                var retrievedEntities = await retrievalFunc(EntitySet);
+                var retrievedEntities = await DatabaseAccess.RetrieveEntitiesAsync(retrievalFunc, EntitySet);
 
                 if (retrievedEntities.Count > 0)
                 {

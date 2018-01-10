@@ -48,9 +48,9 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(tech => tech.TechnologyType)
                 .SingleAsync(proj => proj.Id == id);
 
-            var experienceDto = await _projectQuery.GetAsync(id.ToString(), retrivalFunc);
+            var projectDto = await _projectQuery.GetAsync(id.ToString(), retrivalFunc);
 
-            return new JsonResult(experienceDto);
+            return new JsonResult(projectDto);
         }
 
         /// <summary>
@@ -70,9 +70,9 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(tech => tech.TechnologyType)
                 .ToListAsync();
 
-            var experienceDtos = await _projectQuery.GetAsync(retrivalFunc);
+            var projectDtos = await _projectQuery.GetAsync(retrivalFunc);
 
-            return new JsonResult(experienceDtos);
+            return new JsonResult(projectDtos);
         }
     }
 }
