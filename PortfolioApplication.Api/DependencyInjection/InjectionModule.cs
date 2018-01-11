@@ -39,12 +39,12 @@ namespace PortfolioApplication.Api.DependencyInjection
                 .As<IMapper>()
                 .InstancePerLifetimeScope();
 
-            builder.Register(c =>
-            {
-                var context = c.Resolve<IComponentContext>();
+            //builder.Register(c =>
+            //{
+            //    var context = c.Resolve<IComponentContext>();
 
-                return new ProjectResolver(context.Resolve<IDatabaseSet>());
-            });
+            //    return new ProjectResolver(context.Resolve<IDatabaseSet>());
+            //});
         }
 
         private void RegisterCommands(ContainerBuilder builder)
