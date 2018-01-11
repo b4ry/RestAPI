@@ -44,7 +44,7 @@ namespace PortfolioApplication.Api.CQRS.Commands
 
         public async Task HandleAsync(TCommand command, Expression<Func<TEntity, bool>> retrievalFunc)
         {
-            var entity = Mapper.Map<TEntity>(command);
+            var entity = Mapper.Map<TEntity>(command); //todo: ??
 
             try
             {

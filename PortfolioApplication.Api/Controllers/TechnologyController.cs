@@ -11,6 +11,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq.Expressions;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -126,10 +127,14 @@ namespace PortfolioApplication.Api.Controllers
             patchedTechnologyDto.ApplyTo(technologyDto, ModelState);
 
             var technology = _mapper.Map<TechnologyEntity>(technologyDto);
+            var patchTechnologyCommand = new PatchTechnologyCommand(technology.Name, technology.Projects, technology.TechnologyType.TechnologyTypeEnum);
 
-            // todo: SAVE TO DB
+            Expression<Func<TechnologyEntity, bool>> retFunc =
+                (tech) => tech.Name == technology.Name;
 
-            return Ok(technologyDto);
+            await _commandBus.SendAsync(patchTechnologyCommand, retFunc);
+
+            return new JsonResult($"Processed command '{patchTechnologyCommand}'.");
         }
     }
 }
