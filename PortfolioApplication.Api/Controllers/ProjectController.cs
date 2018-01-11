@@ -40,7 +40,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetProjectById([Required]int id)
         {
-            Func<DbSet<ProjectEntity>, Task<ProjectEntity>> retrivalFunc =
+            Func<DbSet<ProjectEntity>, Task<ProjectEntity>> retrievalFunc =
                 dbSet => dbSet
                 .Include(proj => proj.ProjectType)
                 .Include(proj => proj.Technologies)
@@ -48,7 +48,7 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(tech => tech.TechnologyType)
                 .SingleAsync(proj => proj.Id == id);
 
-            var projectDto = await _projectQuery.GetAsync(id.ToString(), retrivalFunc);
+            var projectDto = await _projectQuery.GetAsync(id.ToString(), retrievalFunc);
 
             return new JsonResult(projectDto);
         }
@@ -62,7 +62,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetProjects()
         {
-            Func<DbSet<ProjectEntity>, Task<List<ProjectEntity>>> retrivalFunc =
+            Func<DbSet<ProjectEntity>, Task<List<ProjectEntity>>> retrievalFunc =
                 dbSet => dbSet
                 .Include(proj => proj.ProjectType)
                 .Include(proj => proj.Technologies)
@@ -70,7 +70,7 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(tech => tech.TechnologyType)
                 .ToListAsync();
 
-            var projectDtos = await _projectQuery.GetAsync(retrivalFunc);
+            var projectDtos = await _projectQuery.GetAsync(retrievalFunc);
 
             return new JsonResult(projectDtos);
         }

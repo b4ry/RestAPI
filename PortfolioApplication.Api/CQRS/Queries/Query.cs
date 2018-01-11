@@ -20,12 +20,14 @@ namespace PortfolioApplication.Api.CQRS.Queries
         protected IDatabaseSet DatabaseSet { get; }
         protected DbSet<TEntity> EntitySet { get; }
         protected IDistributedCache RedisCache { get; }
+        protected IMapper Mapper { get; }
 
-        public Query(IDatabaseSet databaseSet, IDistributedCache redisCache)
+        public Query(IDatabaseSet databaseSet, IDistributedCache redisCache, IMapper mapper)
         {
             DatabaseSet = databaseSet;
             EntitySet = DatabaseSet.Set<TEntity>();
             RedisCache = redisCache;
+            Mapper = mapper;
         }
 
         public async Task<TDto> GetAsync(string id, Func<DbSet<TEntity>, Task<TEntity>> retrievalFunc)

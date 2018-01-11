@@ -109,7 +109,7 @@ namespace PortfolioApplication.Api
                     .AddContentTypeOptionsNoSniff());
             
             app.UseCors("AllowSpecificOrigin");
-            app.UseAutoMapper();
+            //app.UseAutoMapper();
             app.UseMiddleware<ErrorHandlingMiddleware>();
             app.UseMiddleware<PrepareHttpResponseMiddleware>();
 

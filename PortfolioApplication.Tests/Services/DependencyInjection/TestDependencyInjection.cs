@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PortfolioApplication.Api.CQRS.Queries;
 using PortfolioApplication.Api.Extensions;
+using PortfolioApplication.Api.Mappings.Resolvers;
 using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Linq;
@@ -175,6 +176,31 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
             var resolvedComponent = container.Resolve<IProjectQuery>();
 
             Assert.IsType<ProjectQuery>(resolvedComponent);
+        }
+
+        [Fact]
+        public void ProjectResolverMustBeRegisteredWhenInversionOfControlContainerIsRegistered()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            var container = serviceCollection.AddApplicationModules();
+
+            container.ComponentRegistry
+                .TryGetRegistration(new TypedService(typeof(ProjectResolver))
+                , out IComponentRegistration componentRegistration);
+
+            Assert.Equal(componentRegistration.Activator.LimitType.FullName, typeof(ProjectResolver).FullName);
+        }
+
+        [Fact]
+        public void InversionOfControlContainerMustResolveProjectResolver()
+        {
+            IServiceCollection serviceCollection = new ServiceCollection();
+            serviceCollection.AddDbContext<PortfolioApplicationDbContext>(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+            IContainer container = serviceCollection.AddApplicationModules();
+
+            ProjectResolver resolvedComponent = container.Resolve<ProjectResolver>();
+
+            Assert.IsType<ProjectResolver>(resolvedComponent);
         }
     }
 }

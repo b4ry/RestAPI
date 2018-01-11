@@ -1,7 +1,10 @@
 ﻿using Autofac;
+using AutoMapper;
 using PortfolioApplication.Api.CQRS.Commands;
+using PortfolioApplication.Api.Mappings.Resolvers;
 using PortfolioApplication.Services.DatabaseContexts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -15,6 +18,33 @@ namespace PortfolioApplication.Api.DependencyInjection
             RegisterDatabaseSet(builder);
             RegisterCommands(builder);
             RegisterUnitOfWork(builder);
+            RegisterAutoMapper(builder);
+        }
+
+        private void RegisterAutoMapper(ContainerBuilder builder)
+        {
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .Where(t => typeof(Profile).IsAssignableFrom(t) && !t.IsAbstract && t.IsPublic)
+                .As<Profile>();
+
+            builder.Register(c => new MapperConfiguration(cfg => {
+                foreach (var profile in c.Resolve<IEnumerable<Profile>>())
+                {
+                    cfg.AddProfile(profile);
+                }
+            })).AsSelf().SingleInstance();
+
+            builder.Register(c => c.Resolve<MapperConfiguration>()
+                .CreateMapper(c.Resolve))
+                .As<IMapper>()
+                .InstancePerLifetimeScope();
+
+            builder.Register(c =>
+            {
+                var context = c.Resolve<IComponentContext>();
+
+                return new ProjectResolver(context.Resolve<IDatabaseSet>());
+            });
         }
 
         private void RegisterCommands(ContainerBuilder builder)

@@ -26,6 +26,7 @@ namespace PortfolioApplication.Api.Controllers
         private readonly ITechnologyQuery _technologyQuery;
         private readonly IProjectQuery _projectQuery;
         private readonly ICommandBus _commandBus;
+        private readonly IMapper _mapper;
 
         /// <summary>
         /// TechnologyController constructor
@@ -35,11 +36,13 @@ namespace PortfolioApplication.Api.Controllers
         public TechnologyController(
             ITechnologyQuery technologyQuery,
             IProjectQuery projectQuery,
-            ICommandBus commandBus)
+            ICommandBus commandBus,
+            IMapper mapper)
         {
             _technologyQuery = technologyQuery;
             _projectQuery = projectQuery;
             _commandBus = commandBus;
+            _mapper = mapper;
         }
 
         /// <summary>
@@ -122,27 +125,7 @@ namespace PortfolioApplication.Api.Controllers
             var technologyDto = await _technologyQuery.GetAsync(technologyNameId, retrievalFunc);
             patchedTechnologyDto.ApplyTo(technologyDto, ModelState);
 
-            IList<TechnologyProjectDto> technologyProjectDtos = new List<TechnologyProjectDto>();
-
-            foreach(var project in technologyDto.Projects)
-            {
-                Func<DbSet<ProjectEntity>, Task<ProjectEntity>> retrivalFunc =
-                dbSet => dbSet
-                .Include(proj => proj.ProjectType)
-                .Include(proj => proj.Technologies)
-                .ThenInclude(techs => techs.Technology)
-                .ThenInclude(tech => tech.TechnologyType)
-                .SingleAsync(proj => proj.Name == project.Name);
-
-                var projectDto = await _projectQuery.GetAsync(project.Name.ToString(), retrivalFunc);
-                var technologyProjectDto = Mapper.Map<TechnologyProjectDto>(projectDto);
-
-                technologyProjectDtos.Add(technologyProjectDto);
-            }
-
-            technologyDto.Projects = technologyProjectDtos;
-
-            var technology = Mapper.Map<TechnologyEntity>(technologyDto);
+            var technology = _mapper.Map<TechnologyEntity>(technologyDto);
 
             // todo: SAVE TO DB
 
