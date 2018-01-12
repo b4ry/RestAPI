@@ -12,9 +12,10 @@ using System;
 namespace PortfolioApplication.Migrations.Migrations
 {
     [DbContext(typeof(PortfolioApplicationDbContext))]
-    partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180112065909_RenamedIconUrlColumnToIconClassInTechnologyEntity")]
+    partial class RenamedIconUrlColumnToIconClassInTechnologyEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -20,6 +20,6 @@ namespace PortfolioApplication.Entities.Entities
         [ForeignKey(nameof(TechnologyTypeId))]
         public TechnologyTypeEntity TechnologyType { get; set; }
 
-        public string IconUrl { get; set; }
+        public string IconClass { get; set; }
     }
 }

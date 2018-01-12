@@ -28,9 +28,9 @@ namespace PortfolioApplication.Api.Extensions
                 var backendProjectId =
                     portfolioApplicationDbContext.Set<ProjectEntity>().Single(x => x.ProjectType.ProjectTypeEnum == ProjectTypeEnum.Backend).Id;
                 var languageTechnologyId =
-                    portfolioApplicationDbContext.Set<TechnologyEntity>().Single(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id;
+                    portfolioApplicationDbContext.Set<TechnologyEntity>().First(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id;
                 var frameworkTechnologyId =
-                    portfolioApplicationDbContext.Set<TechnologyEntity>().Single(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id;
+                    portfolioApplicationDbContext.Set<TechnologyEntity>().First(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id;
 
                 portfolioApplicationDbContext.Set<ProjectTechnologyJunctionEntity>().AddRange(
                     new ProjectTechnologyJunctionEntity() { ProjectId = fullstackProjectId, TechnologyId = languageTechnologyId },
@@ -51,14 +51,42 @@ namespace PortfolioApplication.Api.Extensions
                     {
                         Name = "testC#",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id,
-                        IconUrl = "http://pxware.com/wp-content/uploads/2017/08/C-Logo-300x300.png"
+                        IconClass = "devicon-csharp-line-wordmark colored"
                     },
 
                     new TechnologyEntity()
                     {
                         Name = "testAngular",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id,
-                        IconUrl = "https://angular.io/assets/images/logos/angular/angular.png"
+                        IconClass = "devicon-angularjs-plain colored"
+                    },
+
+                    new TechnologyEntity()
+                    {
+                        Name = "testCSS",
+                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id,
+                        IconClass = "devicon-css3-plain-wordmark colored"
+                    },
+
+                    new TechnologyEntity()
+                    {
+                        Name = "testHTML",
+                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id,
+                        IconClass = "devicon-html5-plain-wordmark colored"
+                    },
+
+                    new TechnologyEntity()
+                    {
+                        Name = "testCUCUMBER",
+                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id,
+                        IconClass = "devicon-cucumber-plain colored"
+                    },
+
+                    new TechnologyEntity()
+                    {
+                        Name = "testREDIS",
+                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Tool).Id,
+                        IconClass = "devicon-redis-plain colored"
                     }
                 );
             }

@@ -18,8 +18,8 @@ namespace PortfolioApplication.Api.DataTransferObjects.Technologies
         public TechnologyTypeEnum TechnologyTypeEnum { get; set; }
 
         /// <summary>
-        /// URL path to the technology icon
+        /// CSS class for technology icon
         /// </summary>
-        public string IconUrl { get; set; }
+        public string IconClass { get; set; }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
 using PortfolioApplication.Api.CQRS.Commands;
-using PortfolioApplication.Api.Mappings.Resolvers;
 using PortfolioApplication.Services.DatabaseContexts;
 using System;
 using System.Collections.Generic;

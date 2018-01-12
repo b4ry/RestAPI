@@ -6,18 +6,18 @@ namespace PortfolioApplication.Api.CQRS.Commands.Technologies.Commands
     {
         public string Name { get; }
         public TechnologyTypeEnum TechnologyTypeEnum { get; }
-        public string IconUrl { get; }
+        public string IconClass { get; }
 
-        public CreateTechnologyCommand(string name, TechnologyTypeEnum technologyTypeEnum, string iconUrl)
+        public CreateTechnologyCommand(string name, TechnologyTypeEnum technologyTypeEnum, string iconClass)
         {
             Name = name;
             TechnologyTypeEnum = technologyTypeEnum;
-            IconUrl = iconUrl;
+            IconClass = iconClass;
         }
 
         public override string ToString()
         {
-            return $"Create Technology entity: Company name = '{Name}', TechnologyType = '{TechnologyTypeEnum}', IconUrl = '{IconUrl}'";
+            return $"Create Technology entity: Company name = '{Name}', TechnologyType = '{TechnologyTypeEnum}', IconClass = '{IconClass}'";
         }
     }
 }
