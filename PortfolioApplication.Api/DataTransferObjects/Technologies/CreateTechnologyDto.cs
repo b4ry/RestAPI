@@ -1,4 +1,6 @@
-﻿namespace PortfolioApplication.Api.DataTransferObjects.Technologies
+﻿using PortfolioApplication.Entities.Enums;
+
+namespace PortfolioApplication.Api.DataTransferObjects.Technologies
 {
     /// <summary>
     /// Data transfer object for creating Technology entity
@@ -13,6 +15,6 @@
         /// <summary>
         /// Type of the technology
         /// </summary>
-        public TechnologyTypeDto TechnologyType { get; set; }
+        public TechnologyTypeEnum TechnologyTypeEnum { get; set; }
     }
 }

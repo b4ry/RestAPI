@@ -100,7 +100,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateTechnology([FromBody]CreateTechnologyDto technologyDto)
         {
-            var createTechnologyCommand = new CreateTechnologyCommand(technologyDto.Name, technologyDto.TechnologyType.TechnologyTypeEnum);
+            var createTechnologyCommand = new CreateTechnologyCommand(technologyDto.Name, technologyDto.TechnologyTypeEnum);
 
             await _commandBus.SendAsync(createTechnologyCommand);
 
