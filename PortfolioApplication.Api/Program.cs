@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using NLog.Web;
-using System.IO;
 using System;
 
 namespace PortfolioApplication.Api
@@ -26,18 +26,10 @@ namespace PortfolioApplication.Api
             }
         }
 
-        private static IWebHost BuildWebHost(string[] args)
-        {
-            var host = new WebHostBuilder()
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
+        public static IWebHost BuildWebHost(string[] args) =>
+            WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseApplicationInsights()
                 .UseNLog()
                 .Build();
-
-            return host;
-        }
     }
 }

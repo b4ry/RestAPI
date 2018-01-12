@@ -16,5 +16,10 @@ namespace PortfolioApplication.Api.DataTransferObjects.Technologies
         /// Type of the technology
         /// </summary>
         public TechnologyTypeEnum TechnologyTypeEnum { get; set; }
+
+        /// <summary>
+        /// URL path to the technology icon
+        /// </summary>
+        public string IconUrl { get; set; }
     }
 }

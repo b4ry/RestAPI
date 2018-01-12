@@ -50,13 +50,15 @@ namespace PortfolioApplication.Api.Extensions
                     new TechnologyEntity()
                     {
                         Name = "testC#",
-                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id
+                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id,
+                        IconUrl = "http://pxware.com/wp-content/uploads/2017/08/C-Logo-300x300.png"
                     },
 
                     new TechnologyEntity()
                     {
-                        Name = "testASP.NET MVC",
-                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id
+                        Name = "testAngular",
+                        TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id,
+                        IconUrl = "https://angular.io/assets/images/logos/angular/angular.png"
                     }
                 );
             }
