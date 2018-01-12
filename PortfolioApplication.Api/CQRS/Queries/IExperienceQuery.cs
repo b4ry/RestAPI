@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PortfolioApplication.Api.DataTransferObjects;
+using PortfolioApplication.Api.DataTransferObjects.Experiences;
 using PortfolioApplication.Entities.Entities;
 using System;
 using System.Collections.Generic;

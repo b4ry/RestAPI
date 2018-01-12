@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using PortfolioApplication.Api.CQRS.Commands.Experiences.Commands;
-using PortfolioApplication.Api.DataTransferObjects;
+using PortfolioApplication.Api.DataTransferObjects.Experiences;
 using PortfolioApplication.Entities.Entities;
 
 namespace PortfolioApplication.Api.Mappings

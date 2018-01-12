@@ -178,7 +178,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
             Assert.IsType<ProjectQuery>(resolvedComponent);
         }
 
-        [Fact]
+        [Fact(Skip = "Resolvers are not needed to be registered (might change in the future)")]
         public void ProjectResolverMustBeRegisteredWhenInversionOfControlContainerIsRegistered()
         {
             IServiceCollection serviceCollection = new ServiceCollection();
@@ -191,7 +191,7 @@ namespace PortfolioApplication.Tests.Services.DependencyInjection
             Assert.Equal(componentRegistration.Activator.LimitType.FullName, typeof(ProjectResolver).FullName);
         }
 
-        [Fact]
+        [Fact(Skip = "Resolvers are not needed to be registered (might change in the future)")]
         public void InversionOfControlContainerMustResolveProjectResolver()
         {
             IServiceCollection serviceCollection = new ServiceCollection();

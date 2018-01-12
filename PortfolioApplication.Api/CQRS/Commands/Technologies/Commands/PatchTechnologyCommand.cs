@@ -1,4 +1,9 @@
-﻿using PortfolioApplication.Entities.Entities.JunctionEntities;
+﻿using AutoMapper;
+using PortfolioApplication.Api.DataTransferObjects;
+using PortfolioApplication.Api.DataTransferObjects.Projects;
+using PortfolioApplication.Api.DataTransferObjects.Technologies;
+using PortfolioApplication.Entities.Entities;
+using PortfolioApplication.Entities.Entities.JunctionEntities;
 using PortfolioApplication.Entities.Enums;
 using System.Collections.Generic;
 
@@ -10,11 +15,28 @@ namespace PortfolioApplication.Api.CQRS.Commands.Technologies.Commands
         public IList<ProjectTechnologyJunctionEntity> Projects { get; }
         public TechnologyTypeEnum TechnologyTypeEnum { get; }
 
-        public PatchTechnologyCommand(string name, IList<ProjectTechnologyJunctionEntity> projects, TechnologyTypeEnum technologyTypeEnum)
+        private IMapper _mapper;
+
+        public PatchTechnologyCommand(string name, IList<TechnologyProjectDto> projects, TechnologyTypeEnum technologyTypeEnum, IMapper mapper)
         {
+            _mapper = mapper;
+
             Name = name;
-            Projects = projects;
             TechnologyTypeEnum = technologyTypeEnum;
+            Projects = new List<ProjectTechnologyJunctionEntity>();
+
+            foreach(var project in projects)
+            {
+                var projectTechnologyJunctionEntity = new ProjectTechnologyJunctionEntity();
+
+                projectTechnologyJunctionEntity.Project = new ProjectEntity();
+                projectTechnologyJunctionEntity.Project.Name = project.Name;
+
+                projectTechnologyJunctionEntity.Technology = new TechnologyEntity();
+                projectTechnologyJunctionEntity.Technology.Name = name;
+
+                Projects.Add(projectTechnologyJunctionEntity);
+            }
         }
 
         //public override string ToString()

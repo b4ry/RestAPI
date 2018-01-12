@@ -111,10 +111,10 @@ namespace PortfolioApplication.Api.Controllers
         /// Patch (modify) existing Technology entity in database
         /// </summary>
         /// <param name="technologyNameId"> </param>
-        /// <param name="patchedTechnologyDto"> Patch operations to alter Technology entity </param>
+        /// <param name="patchTechnologyDto"> Patch operations to alter Technology entity </param>
         /// <returns></returns>
         [HttpPatch]
-        public async Task<IActionResult> Patch([FromQuery]string technologyNameId, [FromBody]JsonPatchDocument<TechnologyDto> patchedTechnologyDto)
+        public async Task<IActionResult> Patch([FromQuery]string technologyNameId, [FromBody]JsonPatchDocument<TechnologyDto> patchTechnologyDto)
         {
             Func<DbSet<TechnologyEntity>, Task<TechnologyEntity>> retrievalFunc =
                 dbSet => dbSet.Include(tech => tech.TechnologyType)
@@ -124,13 +124,19 @@ namespace PortfolioApplication.Api.Controllers
                 .SingleAsync(tech => tech.Name == technologyNameId);
 
             var technologyDto = await _technologyQuery.GetAsync(technologyNameId, retrievalFunc);
-            patchedTechnologyDto.ApplyTo(technologyDto, ModelState);
+            patchTechnologyDto.ApplyTo(technologyDto, ModelState);
 
-            var technology = _mapper.Map<TechnologyEntity>(technologyDto);
-            var patchTechnologyCommand = new PatchTechnologyCommand(technology.Name, technology.Projects, technology.TechnologyType.TechnologyTypeEnum);
+            //var technology = _mapper.Map<TechnologyEntity>(technologyDto);
+            var patchTechnologyCommand = new PatchTechnologyCommand
+                (
+                    technologyDto.Name, 
+                    technologyDto.Projects, 
+                    technologyDto.TechnologyType.TechnologyTypeEnum, 
+                    _mapper
+                );
 
             Expression<Func<TechnologyEntity, bool>> retFunc =
-                (tech) => tech.Name == technology.Name;
+                (tech) => tech.Name == technologyDto.Name;
 
             await _commandBus.SendAsync(patchTechnologyCommand, retFunc);
 

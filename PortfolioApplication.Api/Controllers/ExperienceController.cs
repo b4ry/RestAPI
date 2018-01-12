@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PortfolioApplication.Api.CQRS.Commands;
 using PortfolioApplication.Api.CQRS.Commands.Experiences.Commands;
 using PortfolioApplication.Api.CQRS.Queries;
+using PortfolioApplication.Api.DataTransferObjects.Experiences;
 using PortfolioApplication.Entities.Entities;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
@@ -65,7 +66,7 @@ namespace PortfolioApplication.Api.Controllers
         /// Retrieve Experience entity by its key (Company name and position)
         /// </summary>
         /// <param name="companyName"> Company name associated with the experience </param>
-        /// <param name="position"> Position associate with the experience </param>
+        /// <param name="position"> Position associated with the experience </param>
         /// <returns> Experience entity in JSON format </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entity from database")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
@@ -123,14 +124,16 @@ namespace PortfolioApplication.Api.Controllers
         /// <summary>
         /// Create new Experience entity
         /// </summary>
-        /// <param name="createExperienceCommand"> Command containing parameters to create new Experience entity </param>
+        /// <param name="createExperienceDto"> DTO containing parameters to create new Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
         [SwaggerResponse((int)HttpStatusCode.Created, description: "Successfully created new entity in database")]
         [SwaggerResponse((int)HttpStatusCode.NotAcceptable, description: "Provided values are not acceptable, e.g. empty entity")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [HttpPost]
-        public async Task<IActionResult> CreateExperience([FromBody]CreateExperienceCommand createExperienceCommand)
+        public async Task<IActionResult> CreateExperience([FromBody]CreateExperienceDto createExperienceDto)
         {
+            var createExperienceCommand = new CreateExperienceCommand(createExperienceDto.CompanyName, createExperienceDto.Position);
+
             await _commandBus.SendAsync(createExperienceCommand);
 
             return new JsonResult($"Processed command '{createExperienceCommand}'.");
@@ -139,16 +142,18 @@ namespace PortfolioApplication.Api.Controllers
         /// <summary>
         /// Delete Experience entity
         /// </summary>
-        /// <param name="deleteExperienceCommand"> Command containing parameters to delete Experience entity </param>
+        /// <param name="deleteExperienceDto"> DTO containing parameters to delete Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully removed enquired entity from database")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
         [HttpDelete]
-        public async Task<IActionResult> DeleteExperience([FromBody]DeleteExperienceCommand deleteExperienceCommand)
+        public async Task<IActionResult> DeleteExperience([FromBody]DeleteExperienceDto deleteExperienceDto)
         {
             Expression<Func<ExperienceEntity, bool>> retrievalFunc = 
-                (exp) => exp.CompanyName == deleteExperienceCommand.CompanyName 
-                    && exp.Position == deleteExperienceCommand.Position;
+                (exp) => exp.CompanyName == deleteExperienceDto.CompanyName 
+                    && exp.Position == deleteExperienceDto.Position;
+
+            var deleteExperienceCommand = new DeleteExperienceCommand(deleteExperienceDto.CompanyName, deleteExperienceDto.Position);
 
             await _commandBus.SendAsync(deleteExperienceCommand, retrievalFunc);
 
@@ -156,19 +161,23 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
-        /// Update Experience entity
+        /// Patch Experience entity
         /// </summary>
-        /// <param name="updateExperienceCommand"> Command containing parameters to update Experience entity </param>
+        /// <param name="companyName"> Company name associated with the experience </param>
+        /// <param name="position"> Position associate with the experience </param>
+        /// <param name="updateExperienceDto"> Dto containing parameters to update Experience entity </param>
         /// <returns> JSON containing information about processed command </returns>
         [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully updated enquired entity in database")]
         [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
         [SwaggerResponse((int)HttpStatusCode.Conflict, description: "Entity already exists in database")]
         [HttpPatch]
-        public async Task<IActionResult> UpdateExperience([FromBody]UpdateExperienceCommand updateExperienceCommand)
+        public async Task<IActionResult> UpdateExperience([Required]string companyName, [Required]string position, [FromBody]UpdateExperienceDto updateExperienceDto)
         {
             Expression<Func<ExperienceEntity, bool>> retrievalFunc =
-                (exp) => exp.CompanyName == updateExperienceCommand.CompanyNameId
-                    && exp.Position == updateExperienceCommand.PositionId;
+                (exp) => exp.CompanyName == companyName
+                    && exp.Position == position;
+
+            var updateExperienceCommand = new UpdateExperienceCommand(updateExperienceDto.CompanyName, updateExperienceDto.Position);
 
             await _commandBus.SendAsync(updateExperienceCommand, retrievalFunc);
 

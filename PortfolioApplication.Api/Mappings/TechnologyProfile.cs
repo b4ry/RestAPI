@@ -22,8 +22,8 @@ namespace PortfolioApplication.Api.Mappings
                 .ForMember(dest => dest.Projects, opt => opt.MapFrom(src => src.Projects.Select(p => p.Project)
                 .ToList()));
             CreateMap<TechnologyDto, TechnologyEntity>()
-                .ForMember(dest => dest.TechnologyTypeId, opt => opt.Ignore())
-                .ForMember(dest => dest.Projects, opt => opt.ResolveUsing(new ProjectResolver(databaseSet)));
+                .ForMember(dest => dest.TechnologyTypeId, opt => opt.Ignore());
+                //.ForMember(dest => dest.Projects, opt => opt.ResolveUsing(new ProjectResolver(databaseSet)));
             CreateMap<CreateTechnologyCommand, TechnologyEntity>()
                 .ForMember(dest => dest.TechnologyTypeId, opt => opt.MapFrom(src => src.TechnologyTypeEnum));
         }

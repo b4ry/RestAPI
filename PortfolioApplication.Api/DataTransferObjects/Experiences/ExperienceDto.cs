@@ -1,7 +1,7 @@
 ﻿using PortfolioApplication.Api.DataTransferObjects.Projects;
 using System.Collections.Generic;
 
-namespace PortfolioApplication.Api.DataTransferObjects
+namespace PortfolioApplication.Api.DataTransferObjects.Experiences
 {
     /// <summary>
     /// Data transfer object for Experience entity

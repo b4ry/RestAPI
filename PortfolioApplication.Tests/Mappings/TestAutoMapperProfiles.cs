@@ -8,7 +8,7 @@ namespace PortfolioApplication.Tests.Mappings
 {
     public class TestAutoMapperProfiles
     {
-        [Fact]
+        [Fact(Skip = "AutoMapper is no longer configured this way - it is registered in IoC now (might change in the future)")]
         public void ApplicationMappingProfilesMustBeRegisteredWhenAutoMapperIsConfigured()
         {
             AutoMapperConfiguration.Configure();

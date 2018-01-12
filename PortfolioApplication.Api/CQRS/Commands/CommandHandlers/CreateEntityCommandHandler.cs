@@ -16,13 +16,15 @@ namespace PortfolioApplication.Api.CQRS.Commands
         private IDatabaseSet DatabaseSet { get; }
         private IDistributedCache RedisCache { get; }
         private DbSet<TEntity> EntitySet { get; }
+        private IMapper Mapper { get; }
 
-        public CreateEntityCommandHandler(IDatabaseSet databaseSet, IUnitOfWork unitOfWork, IDistributedCache redisCache)
+        public CreateEntityCommandHandler(IDatabaseSet databaseSet, IUnitOfWork unitOfWork, IDistributedCache redisCache, IMapper mapper)
         {
             UnitOfWork = unitOfWork;
             DatabaseSet = databaseSet;
             EntitySet = DatabaseSet.Set<TEntity>();
             RedisCache = redisCache;
+            Mapper = mapper;
         }
 
         public void Handle(TCommand command)

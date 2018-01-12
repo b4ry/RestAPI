@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Caching.Distributed;
-using PortfolioApplication.Api.DataTransferObjects;
+using PortfolioApplication.Api.DataTransferObjects.Experiences;
 using PortfolioApplication.Entities.Entities;
 using PortfolioApplication.Services.DatabaseContexts;
 
