@@ -49,42 +49,42 @@ namespace PortfolioApplication.Api.Extensions
                 portfolioApplicationDbContext.Set<TechnologyEntity>().AddRange(
                     new TechnologyEntity()
                     {
-                        Name = "testC#",
+                        Name = "C#",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id,
                         IconClass = "devicon-csharp-line-wordmark colored"
                     },
 
                     new TechnologyEntity()
                     {
-                        Name = "testAngular",
+                        Name = "Angular",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id,
                         IconClass = "devicon-angularjs-plain colored"
                     },
 
                     new TechnologyEntity()
                     {
-                        Name = "testCSS",
+                        Name = "CSS",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id,
                         IconClass = "devicon-css3-plain-wordmark colored"
                     },
 
                     new TechnologyEntity()
                     {
-                        Name = "testHTML",
+                        Name = "HTML",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id,
                         IconClass = "devicon-html5-plain-wordmark colored"
                     },
 
                     new TechnologyEntity()
                     {
-                        Name = "testCUCUMBER",
+                        Name = "Cucumber",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id,
                         IconClass = "devicon-cucumber-plain colored"
                     },
 
                     new TechnologyEntity()
                     {
-                        Name = "testREDIS",
+                        Name = "Redis",
                         TechnologyTypeId = portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Single(x => x.TechnologyTypeEnum == TechnologyTypeEnum.Tool).Id,
                         IconClass = "devicon-redis-plain colored"
                     }
@@ -134,10 +134,10 @@ namespace PortfolioApplication.Api.Extensions
             if (!portfolioApplicationDbContext.Set<TechnologyTypeEntity>().Any())
             {
                 portfolioApplicationDbContext.Set<TechnologyTypeEntity>().AddRange(
-                    new TechnologyTypeEntity() { Name = "testLanguage", TechnologyTypeEnum = TechnologyTypeEnum.Language },
-                    new TechnologyTypeEntity() { Name = "testFramework", TechnologyTypeEnum = TechnologyTypeEnum.Framework },
-                    new TechnologyTypeEntity() { Name = "testMethodology", TechnologyTypeEnum = TechnologyTypeEnum.Methodology },
-                    new TechnologyTypeEntity() { Name = "testTool", TechnologyTypeEnum = TechnologyTypeEnum.Tool }
+                    new TechnologyTypeEntity() { Name = "Languages", TechnologyTypeEnum = TechnologyTypeEnum.Language },
+                    new TechnologyTypeEntity() { Name = "Frameworks", TechnologyTypeEnum = TechnologyTypeEnum.Framework },
+                    new TechnologyTypeEntity() { Name = "Methodologies", TechnologyTypeEnum = TechnologyTypeEnum.Methodology },
+                    new TechnologyTypeEntity() { Name = "Tools", TechnologyTypeEnum = TechnologyTypeEnum.Tool }
                 );
             }
 
