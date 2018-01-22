@@ -47,7 +47,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet("{id:int:min(1)}")]
         public async Task<IActionResult> GetExperienceById([Required]int id)
         {
-            Func<DbSet<ExperienceEntity>, Task<ExperienceEntity>> retrivalFunc =
+            Func<DbSet<ExperienceEntity>, Task<ExperienceEntity>> retrievalFunc =
                 dbSet => dbSet
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.Technologies)
@@ -57,7 +57,7 @@ namespace PortfolioApplication.Api.Controllers
                 .ThenInclude(proj => proj.ProjectType)
                 .SingleAsync(exp => exp.Id == id);
 
-            var experienceDto = await _experienceQuery.GetAsync(id.ToString(), retrivalFunc);
+            var experienceDto = await _experienceQuery.GetAsync(id.ToString(), retrievalFunc);
 
             return new JsonResult(experienceDto);
         }
@@ -73,7 +73,7 @@ namespace PortfolioApplication.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> GetExperience([Required]string companyName, [Required]string position)
         {
-            Func<DbSet<ExperienceEntity>, Task<ExperienceEntity>> retrivalFunc =
+            Func<DbSet<ExperienceEntity>, Task<ExperienceEntity>> retrievalFunc =
                 dbSet => dbSet
                 .Include(exp => exp.Projects)
                 .ThenInclude(proj => proj.Technologies)
@@ -84,7 +84,7 @@ namespace PortfolioApplication.Api.Controllers
                 .SingleAsync(exp => exp.CompanyName == companyName && exp.Position == position);
 
             string id = companyName + ":" + position;
-            var experienceDto = await _experienceQuery.GetAsync(id, retrivalFunc);
+            var experienceDto = await _experienceQuery.GetAsync(id, retrievalFunc);
 
             return new JsonResult(experienceDto);
         }

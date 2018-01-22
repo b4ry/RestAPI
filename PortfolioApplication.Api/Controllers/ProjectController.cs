@@ -54,6 +54,30 @@ namespace PortfolioApplication.Api.Controllers
         }
 
         /// <summary>
+        /// Retrieve Project entity by its key (Project name)
+        /// </summary>
+        /// <param name="projectName"> Project name associated with the project </param>
+        /// <returns> Project entity in JSON format </returns>
+        [SwaggerResponse((int)HttpStatusCode.OK, description: "Successfully retrieved enquired entity from database")]
+        [SwaggerResponse((int)HttpStatusCode.NotFound, description: "Enquired entity does not exist in database")]
+        [HttpGet]
+        public async Task<IActionResult> GetProject([Required]string projectName)
+        {
+            Func<DbSet<ProjectEntity>, Task<ProjectEntity>> retrievalFunc =
+                dbSet => dbSet
+                .Include(proj => proj.ProjectType)
+                .Include(proj => proj.Technologies)
+                .ThenInclude(techs => techs.Technology)
+                .ThenInclude(tech => tech.TechnologyType)
+                .SingleAsync(proj => proj.Name == projectName);
+
+            string id = projectName;
+            var experienceDto = await _projectQuery.GetAsync(id, retrievalFunc);
+
+            return new JsonResult(experienceDto);
+        }
+
+        /// <summary>
         /// Retrieve all Project entities
         /// </summary>
         /// <returns> Project entity collection in JSON format </returns>
