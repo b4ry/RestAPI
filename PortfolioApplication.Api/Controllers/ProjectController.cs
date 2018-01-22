@@ -72,9 +72,9 @@ namespace PortfolioApplication.Api.Controllers
                 .SingleAsync(proj => proj.Name == projectName);
 
             string id = projectName;
-            var experienceDto = await _projectQuery.GetAsync(id, retrievalFunc);
+            var projectDto = await _projectQuery.GetAsync(id, retrievalFunc);
 
-            return new JsonResult(experienceDto);
+            return new JsonResult(projectDto);
         }
 
         /// <summary>
