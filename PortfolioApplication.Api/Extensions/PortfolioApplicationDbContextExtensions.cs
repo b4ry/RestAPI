@@ -27,6 +27,8 @@ namespace PortfolioApplication.Api.Extensions
                     portfolioApplicationDbContext.Set<ProjectEntity>().Single(x => x.ProjectType.ProjectTypeEnum == ProjectTypeEnum.Fullstack).Id;
                 var backendProjectId =
                     portfolioApplicationDbContext.Set<ProjectEntity>().Single(x => x.ProjectType.ProjectTypeEnum == ProjectTypeEnum.Backend).Id;
+                var frontendProjectId =
+                    portfolioApplicationDbContext.Set<ProjectEntity>().Single(x => x.ProjectType.ProjectTypeEnum == ProjectTypeEnum.Frontend).Id;
                 var languageTechnologyId =
                     portfolioApplicationDbContext.Set<TechnologyEntity>().First(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id;
                 var frameworkTechnologyId =
@@ -35,7 +37,8 @@ namespace PortfolioApplication.Api.Extensions
                 portfolioApplicationDbContext.Set<ProjectTechnologyJunctionEntity>().AddRange(
                     new ProjectTechnologyJunctionEntity() { ProjectId = fullstackProjectId, TechnologyId = languageTechnologyId },
                     new ProjectTechnologyJunctionEntity() { ProjectId = fullstackProjectId, TechnologyId = frameworkTechnologyId },
-                    new ProjectTechnologyJunctionEntity() { ProjectId = backendProjectId, TechnologyId = languageTechnologyId }
+                    new ProjectTechnologyJunctionEntity() { ProjectId = backendProjectId, TechnologyId = languageTechnologyId },
+                    new ProjectTechnologyJunctionEntity() { ProjectId = frontendProjectId, TechnologyId = languageTechnologyId }
                 );
             }
 
@@ -110,6 +113,15 @@ namespace PortfolioApplication.Api.Extensions
                         ProjectTypeId = portfolioApplicationDbContext.Set<ProjectTypeEntity>().Single(x => x.ProjectTypeEnum == ProjectTypeEnum.Backend).Id,
                         StartTime = new DateTime(2000),
                         EndTime = new DateTime(2500)
+                    },
+
+                    new ProjectEntity()
+                    {
+                        Name = "testProjectFrontend",
+                        Description = "testDescriptionFrontend",
+                        ProjectTypeId = portfolioApplicationDbContext.Set<ProjectTypeEntity>().Single(x => x.ProjectTypeEnum == ProjectTypeEnum.Frontend).Id,
+                        StartTime = new DateTime(3000),
+                        EndTime = new DateTime(5000)
                     }
                 );
             }

@@ -4,7 +4,7 @@
     <DebuggerFlavor>ProjectDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup>
-    <ActiveDebugProfile>Swagger</ActiveDebugProfile>
+    <ActiveDebugProfile>PortfolioApplication.Api</ActiveDebugProfile>
     <ShowAllFiles>true</ShowAllFiles>
     <WebStackScaffolding_DependencyDialogWidth>600</WebStackScaffolding_DependencyDialogWidth>
   </PropertyGroup>
