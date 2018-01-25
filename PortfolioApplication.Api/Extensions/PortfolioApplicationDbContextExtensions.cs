@@ -106,8 +106,8 @@ namespace PortfolioApplication.Api.Extensions
                         Name = "testProjectFullstack",
                         Description = "testDescriptionFullstack",
                         ProjectTypeId = portfolioApplicationDbContext.Set<ProjectTypeEntity>().Single(x => x.ProjectTypeEnum == ProjectTypeEnum.Fullstack).Id,
-                        StartTime = new DateTime(100),
-                        EndTime = new DateTime(1000)
+                        StartTime = new DateTime(2016, 5, 5),
+                        EndTime = new DateTime(2017, 3, 18)
                     },
 
                     new ProjectEntity()
@@ -115,8 +115,8 @@ namespace PortfolioApplication.Api.Extensions
                         Name = "testProjectBackend",
                         Description = "testDescriptionBackend",
                         ProjectTypeId = portfolioApplicationDbContext.Set<ProjectTypeEntity>().Single(x => x.ProjectTypeEnum == ProjectTypeEnum.Backend).Id,
-                        StartTime = new DateTime(2000),
-                        EndTime = new DateTime(2500)
+                        StartTime = new DateTime(2015, 1, 1),
+                        EndTime = new DateTime(2015, 6, 25)
                     },
 
                     new ProjectEntity()
@@ -124,8 +124,8 @@ namespace PortfolioApplication.Api.Extensions
                         Name = "testProjectFrontend",
                         Description = "testDescriptionFrontend",
                         ProjectTypeId = portfolioApplicationDbContext.Set<ProjectTypeEntity>().Single(x => x.ProjectTypeEnum == ProjectTypeEnum.Frontend).Id,
-                        StartTime = new DateTime(3000),
-                        EndTime = new DateTime(5000)
+                        StartTime = new DateTime(2014, 1, 1),
+                        EndTime = new DateTime(2016, 5, 4)
                     }
                 );
             }
