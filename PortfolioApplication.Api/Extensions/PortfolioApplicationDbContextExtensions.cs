@@ -33,12 +33,16 @@ namespace PortfolioApplication.Api.Extensions
                     portfolioApplicationDbContext.Set<TechnologyEntity>().First(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Language).Id;
                 var frameworkTechnologyId =
                     portfolioApplicationDbContext.Set<TechnologyEntity>().First(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Framework).Id;
+                var toolTechnologyId =
+                    portfolioApplicationDbContext.Set<TechnologyEntity>().First(x => x.TechnologyType.TechnologyTypeEnum == TechnologyTypeEnum.Tool).Id;
 
                 portfolioApplicationDbContext.Set<ProjectTechnologyJunctionEntity>().AddRange(
                     new ProjectTechnologyJunctionEntity() { ProjectId = fullstackProjectId, TechnologyId = languageTechnologyId },
                     new ProjectTechnologyJunctionEntity() { ProjectId = fullstackProjectId, TechnologyId = frameworkTechnologyId },
+                    new ProjectTechnologyJunctionEntity() { ProjectId = fullstackProjectId, TechnologyId = toolTechnologyId },
                     new ProjectTechnologyJunctionEntity() { ProjectId = backendProjectId, TechnologyId = languageTechnologyId },
-                    new ProjectTechnologyJunctionEntity() { ProjectId = frontendProjectId, TechnologyId = languageTechnologyId }
+                    new ProjectTechnologyJunctionEntity() { ProjectId = backendProjectId, TechnologyId = toolTechnologyId },
+                    new ProjectTechnologyJunctionEntity() { ProjectId = frontendProjectId, TechnologyId = frameworkTechnologyId }
                 );
             }
 
