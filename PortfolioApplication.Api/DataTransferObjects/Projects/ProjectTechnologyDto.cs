@@ -16,5 +16,10 @@ namespace PortfolioApplication.Api.DataTransferObjects.Projects
         /// Type of the technology
         /// </summary>
         public TechnologyTypeDto TechnologyType { get; set; }
+
+        /// <summary>
+        /// CSS class for technology icon
+        /// </summary>
+        public string IconClass { get; set; }
     }
 }
