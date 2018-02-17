@@ -86,7 +86,7 @@ namespace PortfolioApplication.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
+            if (env.IsDevelopmentModeOn())
             {
                 app.UseDeveloperExceptionPage();
 
