@@ -86,6 +86,8 @@ namespace PortfolioApplication.Api
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            LogManager.Configuration.Variables["loggingDbConnectionString"] = Configuration.GetConnectionString("PortfolioLoggingDatabaseConnectionString");
+
             if (env.IsDevelopmentModeOn())
             {
                 app.UseDeveloperExceptionPage();
