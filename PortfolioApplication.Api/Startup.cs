@@ -44,7 +44,7 @@ namespace PortfolioApplication.Api
 
             services.AddDistributedRedisCache(o =>
             {
-                o.Configuration = Configuration.GetSection("RedisSettings")["RedisIP"];
+                o.Configuration = Configuration.GetConnectionString("RedisConnectionString");
                 o.InstanceName = Configuration.GetSection("RedisSettings")["RedisInstanceName"];
             });
 
