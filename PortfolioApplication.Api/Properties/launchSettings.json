@@ -1,4 +1,4 @@
-﻿{
+{
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
@@ -8,20 +8,20 @@
     }
   },
   "profiles": {
-    "Swagger": {
+    "Api/LOCAL": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "swagger",
+      "launchUrl": "api",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "DevelopmentLocal"
       }
     },
-    "PortfolioApplication.Api": {
+    "Api/AZURE": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "api/",
+      "launchUrl": "api",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "DevelopmentAzure"
       },
       "applicationUrl": "http://localhost:62122"
     }
