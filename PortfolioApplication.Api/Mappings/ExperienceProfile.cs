@@ -19,6 +19,7 @@ namespace PortfolioApplication.Api.Mappings
             CreateMap<CreateExperienceCommand, ExperienceEntity>();
             CreateMap<DeleteExperienceCommand, ExperienceEntity>();
             CreateMap<UpdateExperienceCommand, ExperienceEntity>();
+            CreateMap<UpdateExperienceDto, ExperienceDto>().ReverseMap();
         }
     }
 }

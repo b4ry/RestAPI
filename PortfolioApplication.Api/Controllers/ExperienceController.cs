@@ -160,7 +160,7 @@ namespace PortfolioApplication.Api.Controllers
             return new JsonResult($"Processed command '{deleteExperienceCommand}'.");
         }
 
-        /// <summary>
+        /*/// <summary>
         /// Patch Experience entity
         /// </summary>
         /// <param name="companyName"> Company name associated with the experience </param>
@@ -182,6 +182,6 @@ namespace PortfolioApplication.Api.Controllers
             await _commandBus.SendAsync(updateExperienceCommand, retrievalFunc);
 
             return new JsonResult($"Processed command '{updateExperienceCommand}'.");
-        }
+        }*/
     }
 }

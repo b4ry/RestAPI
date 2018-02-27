@@ -15,6 +15,7 @@ namespace PortfolioApplication.Api.Mappings
         public ProjectTechnologyJunctionProfile()
         {
             CreateMap<ProjectTechnologyJunctionEntity, ProjectTechnologyJunctionDto>().ReverseMap();
+            CreateMap<ProjectTechnologyJunctionEntity, PatchProjectTechnologyJunctionDto>().ReverseMap();
         }
     }
 }

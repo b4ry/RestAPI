@@ -25,6 +25,7 @@ namespace PortfolioApplication.Api.Controllers
     public class TechnologyController : Controller
     {
         private readonly ITechnologyQuery _technologyQuery;
+        private readonly IPatchTechnologyQuery _patchTechnologyQuery;
         private readonly IProjectQuery _projectQuery;
         private readonly ICommandBus _commandBus;
         private readonly IMapper _mapper;
@@ -36,11 +37,13 @@ namespace PortfolioApplication.Api.Controllers
         /// <param name="commandBus"> Command bus managing incoming Technology commands </param>
         public TechnologyController(
             ITechnologyQuery technologyQuery,
+            IPatchTechnologyQuery patchTechnologyQuery,
             IProjectQuery projectQuery,
             ICommandBus commandBus,
             IMapper mapper)
         {
             _technologyQuery = technologyQuery;
+            _patchTechnologyQuery = patchTechnologyQuery;
             _projectQuery = projectQuery;
             _commandBus = commandBus;
             _mapper = mapper;
@@ -114,29 +117,20 @@ namespace PortfolioApplication.Api.Controllers
         /// <param name="patchTechnologyDto"> Patch operations to alter Technology entity </param>
         /// <returns></returns>
         [HttpPatch]
-        public async Task<IActionResult> Patch([FromQuery]string technologyNameId, [FromBody]JsonPatchDocument<TechnologyDto> patchTechnologyDto)
+        public async Task<IActionResult> Patch([FromQuery]string technologyNameId, [FromBody]JsonPatchDocument<PatchTechnologyDto> patchTechnologyDto)
         {
             Func<DbSet<TechnologyEntity>, Task<TechnologyEntity>> retrievalFunc =
                 dbSet => dbSet.Include(tech => tech.TechnologyType)
                 .Include(tech => tech.Projects)
-                .ThenInclude(projs => projs.Project)
-                .ThenInclude(proj => proj.ProjectType)
                 .SingleAsync(tech => tech.Name == technologyNameId);
 
-            var technologyDto = await _technologyQuery.GetAsync(technologyNameId, retrievalFunc);
-            patchTechnologyDto.ApplyTo(technologyDto, ModelState);
+            var _patchTechnologyDto = await _patchTechnologyQuery.GetAsync(technologyNameId, retrievalFunc);
+            patchTechnologyDto.ApplyTo(_patchTechnologyDto, ModelState);
 
-            //var technology = _mapper.Map<TechnologyEntity>(technologyDto);
-            var patchTechnologyCommand = new PatchTechnologyCommand
-                (
-                    technologyDto.Name, 
-                    technologyDto.Projects, 
-                    technologyDto.TechnologyType.TechnologyTypeEnum, 
-                    _mapper
-                );
+            var patchTechnologyCommand = new PatchTechnologyCommand(_patchTechnologyDto);
 
             Expression<Func<TechnologyEntity, bool>> retFunc =
-                (tech) => tech.Name == technologyDto.Name;
+                (tech) => tech.Name == _patchTechnologyDto.Name;
 
             await _commandBus.SendAsync(patchTechnologyCommand, retFunc);
 

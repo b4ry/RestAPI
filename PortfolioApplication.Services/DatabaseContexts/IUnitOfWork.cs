@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using PortfolioApplication.Entities.Entities;
+using System.Threading.Tasks;
 
 namespace PortfolioApplication.Services.DatabaseContexts
 {
@@ -6,5 +7,6 @@ namespace PortfolioApplication.Services.DatabaseContexts
     {
         void Save();
         Task SaveAsync();
+        void TrackEntity<TEntity>(TEntity entity) where TEntity : BaseEntity;
     }
 }

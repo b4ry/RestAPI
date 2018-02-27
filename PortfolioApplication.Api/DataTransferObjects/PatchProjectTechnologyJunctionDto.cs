@@ -1,7 +1,6 @@
 ﻿namespace PortfolioApplication.Api.DataTransferObjects
 {
-    public class BaseDto
+    public class PatchProjectTechnologyJunctionDto : BaseDto
     {
-        public int Id { set; get; }
     }
 }

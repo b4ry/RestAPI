@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
+using PortfolioApplication.Entities.Entities;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace PortfolioApplication.Services.DatabaseContexts
 {
@@ -19,6 +22,12 @@ namespace PortfolioApplication.Services.DatabaseContexts
         public async Task SaveAsync()
         {
             await _databaseContext.SaveChangesAsync();
+        }
+
+        public void TrackEntity<TEntity>(TEntity entity) where TEntity : BaseEntity
+        {
+            _databaseContext.Set<TEntity>().Attach(entity);
+            _databaseContext.ChangeTracker.Entries<TEntity>().Single(e => e.Entity.Equals(entity)).State = EntityState.Modified;
         }
     }
 }
