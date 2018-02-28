@@ -113,18 +113,18 @@ namespace PortfolioApplication.Api.Controllers
         /// <summary>
         /// Patch (modify) existing Technology entity in database
         /// </summary>
-        /// <param name="technologyNameId"> </param>
+        /// <param name="technologyId"> Id of the technology to patch </param>
         /// <param name="patchTechnologyDto"> Patch operations to alter Technology entity </param>
         /// <returns></returns>
         [HttpPatch]
-        public async Task<IActionResult> Patch([FromQuery]string technologyNameId, [FromBody]JsonPatchDocument<PatchTechnologyDto> patchTechnologyDto)
+        public async Task<IActionResult> Patch([FromQuery]int technologyId, [FromBody]JsonPatchDocument<PatchTechnologyDto> patchTechnologyDto)
         {
             Func<DbSet<TechnologyEntity>, Task<TechnologyEntity>> retrievalFunc =
                 dbSet => dbSet.Include(tech => tech.TechnologyType)
                 .Include(tech => tech.Projects)
-                .SingleAsync(tech => tech.Name == technologyNameId);
+                .SingleAsync(tech => tech.Id == technologyId);
 
-            var _patchTechnologyDto = await _patchTechnologyQuery.GetAsync(technologyNameId, retrievalFunc);
+            var _patchTechnologyDto = await _patchTechnologyQuery.GetAsync(technologyId.ToString(), retrievalFunc);
             patchTechnologyDto.ApplyTo(_patchTechnologyDto, ModelState);
 
             var patchTechnologyCommand = new PatchTechnologyCommand(_patchTechnologyDto);

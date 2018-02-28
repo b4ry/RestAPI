@@ -2,5 +2,6 @@
 {
     public class PatchProjectTechnologyJunctionDto : BaseDto
     {
+        public int ProjectId { get; set; }
     }
 }

@@ -9,12 +9,13 @@
   },
   "profiles": {
     "Api/LOCAL": {
-      "commandName": "IISExpress",
+      "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "api",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "DevelopmentLocal"
-      }
+      },
+      "applicationUrl": "http://localhost:62122"
     },
     "Api/AZURE": {
       "commandName": "Project",
