@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using AspNetCoreRateLimit;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -48,6 +49,15 @@ namespace PortfolioApplication.Api
                 o.InstanceName = Configuration.GetSection("RedisSettings")["RedisInstanceName"];
             });
 
+            //services.AddOptions();
+            //services.AddMemoryCache();
+
+            services.Configure<IpRateLimitOptions>(Configuration.GetSection("IpRateLimiting"));
+            services.Configure<IpRateLimitPolicies>(Configuration.GetSection("IpRateLimitPolicies"));
+
+            services.AddSingleton<IIpPolicyStore, DistributedCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitCounterStore, DistributedCacheRateLimitCounterStore>();
+
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
@@ -85,6 +95,8 @@ namespace PortfolioApplication.Api
             loggerFactory.AddDebug();
 
             LogManager.Configuration.Variables["loggingDbConnectionString"] = Configuration.GetConnectionString("PortfolioLoggingDatabaseConnectionString");
+
+            app.UseIpRateLimiting();
 
             app.UseSecurityHeaders(
                     new HeaderPolicyCollection()
