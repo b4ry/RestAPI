@@ -48,8 +48,6 @@ namespace PortfolioApplication.Api
                 o.InstanceName = Configuration.GetSection("RedisSettings")["RedisInstanceName"];
             });
 
-            services.AddCustomHeaders();
-
             services.AddCors(options =>
             {
                 options.AddPolicy("AllowSpecificOrigin",
@@ -88,6 +86,10 @@ namespace PortfolioApplication.Api
 
             LogManager.Configuration.Variables["loggingDbConnectionString"] = Configuration.GetConnectionString("PortfolioLoggingDatabaseConnectionString");
 
+            app.UseSecurityHeaders(
+                    new HeaderPolicyCollection()
+                        .AddDefaultSecurityHeaders());
+
             if (env.IsDevelopmentModeOn())
             {
                 app.UseDeveloperExceptionPage();
@@ -104,12 +106,6 @@ namespace PortfolioApplication.Api
                 app.UseExceptionHandler("/Home/Error");
             }
 
-            app.UseCustomHeadersMiddleware(
-                    new HeaderPolicyCollection()
-                    .AddFrameOptionsSameOrigin()
-                    .AddXssProtectionBlock()
-                    .AddContentTypeOptionsNoSniff());
-            
             app.UseCors("AllowSpecificOrigin");
             //app.UseAutoMapper();
             app.UseMiddleware<ErrorHandlingMiddleware>();
