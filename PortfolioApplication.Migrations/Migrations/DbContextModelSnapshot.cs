@@ -2,17 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Storage;
-using Microsoft.EntityFrameworkCore.Storage.Internal;
-using PortfolioApplication.Entities.Enums;
 using PortfolioApplication.Services.DatabaseContexts;
 using System;
 
 namespace PortfolioApplication.Migrations.Migrations
 {
     [DbContext(typeof(PortfolioApplicationDbContext))]
-    partial class DivingApplicationDbContextModelSnapshot : ModelSnapshot
+    partial class DbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
