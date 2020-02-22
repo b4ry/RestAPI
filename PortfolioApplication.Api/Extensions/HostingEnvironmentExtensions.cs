@@ -2,7 +2,7 @@
 
 namespace PortfolioApplication.Api.Extensions
 {
-    internal static class IHostingEnvironmentExtensions
+    internal static class HostingEnvironmentExtensions
     {
         private const string developmentEnvironment = "Development";
 
