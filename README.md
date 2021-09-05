@@ -1,4 +1,4 @@
-# Portfolio application
+# REST CQRS API
 
 ### Keywords:
 - nlog
